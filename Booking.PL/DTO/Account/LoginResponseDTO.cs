@@ -1,5 +1,4 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
 
 
 namespace Booking.PL.DTO.Account;

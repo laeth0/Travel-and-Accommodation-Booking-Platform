@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using Booking.BLL.Enums;
-using Booking.BLL.Interfaces;
-using Booking.BLL.IService;
-using Booking.DAL.Entities;
-using Booking.PL.CustomizeResponses;
-using Booking.PL.DTO.City;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
+﻿
 
 namespace Booking.PL.Controllers
 {
@@ -15,25 +6,22 @@ namespace Booking.PL.Controllers
     [ApiController]
     public class CityController : ControllerBase
     {
-        private readonly ITokenService _tokenService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<CityController> _logger;
-        private readonly IFileService _fileService;
+        private readonly IServiceManager _serviceManager;
 
         public CityController(
-            ITokenService tokenService,
             IUnitOfWork unitOfWork,
+            IServiceManager serviceManager,
             IMapper mapper,
-            ILogger<CityController> logger,
-            IFileService fileService
+            ILogger<CityController> logger
             )
         {
-            _tokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
         }
 
 
@@ -166,7 +154,7 @@ namespace Booking.PL.Controllers
                     return BadRequest(validationResponse);
                 }
 
-                var userRole = _tokenService.GetValueFromToken(Authorization, "Role");
+                var userRole = _serviceManager.TokenService.GetValueFromToken(Authorization, "Role");
                 if (userRole != nameof(UserRoles.Admin) && userRole != nameof(UserRoles.Manager))
                 {
                     var errorresponse = new ErrorResponse
@@ -179,7 +167,7 @@ namespace Booking.PL.Controllers
 
 
                 var city = _mapper.Map<City>(model);
-                city.ImageName = (await _fileService.UploadFile(model.Image))!;
+                city.ImageName = (await _serviceManager.FileService.UploadFile(model.Image))!;
                 try
                 {
                     await _unitOfWork.CityRepository.AddAsync(city);
@@ -195,7 +183,7 @@ namespace Booking.PL.Controllers
                     };
 
                     if (!string.IsNullOrEmpty(city.ImageName))
-                        _fileService.DeleteFile(city.ImageName);
+                        _serviceManager.FileService.DeleteFile(city.ImageName);
 
                     return BadRequest(errorresponse);
                 }
@@ -266,7 +254,7 @@ namespace Booking.PL.Controllers
                     return BadRequest(validationResponse);
                 }
 
-                var userRole = _tokenService.GetValueFromToken(Authorization, "Role");
+                var userRole = _serviceManager.TokenService.GetValueFromToken(Authorization, "Role");
                 if (userRole != nameof(UserRoles.Admin) && userRole != nameof(UserRoles.Manager))
                 {
                     var errorresponse = new ErrorResponse
@@ -293,13 +281,13 @@ namespace Booking.PL.Controllers
                 City = _mapper.Map(model, City);
 
                 if (model.Image is { })
-                    City.ImageName = (await _fileService.UploadFile(model.Image))!;
+                    City.ImageName = (await _serviceManager.FileService.UploadFile(model.Image))!;
 
                 try
                 {
                     _unitOfWork.CityRepository.Update(City);
                     await _unitOfWork.SaveChangesAsync();
-                    _fileService.DeleteFile(OldImageName);
+                    _serviceManager.FileService.DeleteFile(OldImageName);
 
                     return Ok(new SuccessResponse
                     {
@@ -311,7 +299,7 @@ namespace Booking.PL.Controllers
                 catch (Exception ex)
                 {
                     _logger.LogError(ex.Message);
-                    _fileService.DeleteFile(City.ImageName);
+                    _serviceManager.FileService.DeleteFile(City.ImageName);
 
                     var errorresponse = new ErrorResponse
                     {
@@ -320,7 +308,7 @@ namespace Booking.PL.Controllers
                     };
 
                     if (!string.IsNullOrEmpty(City.ImageName))
-                        _fileService.DeleteFile(City.ImageName);
+                        _serviceManager.FileService.DeleteFile(City.ImageName);
 
                     return BadRequest(errorresponse);
                 }
@@ -378,7 +366,7 @@ namespace Booking.PL.Controllers
                     return BadRequest(Response);
                 }
 
-                var userRole = _tokenService.GetValueFromToken(Authorization, "Role");
+                var userRole = _serviceManager.TokenService.GetValueFromToken(Authorization, "Role");
                 if (userRole != nameof(UserRoles.Admin) && userRole != nameof(UserRoles.Manager))
                 {
                     var errorresponse = new ErrorResponse
@@ -409,7 +397,7 @@ namespace Booking.PL.Controllers
 
                 _unitOfWork.CityRepository.Delete(City);
                 await _unitOfWork.SaveChangesAsync();
-                _fileService.DeleteFile(City.ImageName);
+                _serviceManager.FileService.DeleteFile(City.ImageName);
 
                 _logger.LogInformation($"City with id {City.Id} is deleted");
                 return Ok(SuccessResponse);

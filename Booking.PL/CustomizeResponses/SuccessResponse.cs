@@ -1,10 +1,6 @@
 ﻿
 
 
-
-
-using System.Net;
-
 namespace Booking.PL.CustomizeResponses;
 public class SuccessResponse : ApiResponse
 {

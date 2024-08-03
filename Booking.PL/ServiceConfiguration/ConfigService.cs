@@ -2,10 +2,8 @@
 
 
 
-using Booking.DAL.ConfigModels;
 
 namespace Booking.PL.ServiceConfiguration;
-
 public static class ConfigService // Extension methods must be created in a non-generic static class
 {
 
@@ -14,6 +12,7 @@ public static class ConfigService // Extension methods must be created in a non-
     {
 
         services.AddOptions<JWT>().Bind(config.GetSection("JWT")); // this way is better than => services.Configure<JWT>(config.GetSection("JWT"));
+        services.AddOptions<Email>().Bind(config.GetSection("Email")); 
 
         return services;
     }

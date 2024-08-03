@@ -153,3 +153,5 @@ C:\Users\BisanCo\Desktop\Booking.PL\Booking.PL\bin\Debug\net8.0\ru\Microsoft.Cod
 C:\Users\BisanCo\Desktop\Booking.PL\Booking.PL\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\BisanCo\Desktop\Booking.PL\Booking.PL\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\BisanCo\Desktop\Booking.PL\Booking.PL\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.PL\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.PL\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll

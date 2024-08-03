@@ -1,6 +1,7 @@
-﻿using Microsoft.OpenApi.Models;
+﻿
 
 
+using Microsoft.OpenApi.Models;
 
 namespace Booking.PL.ServiceConfiguration;
 public static class JWTConfigurationForSwaggerServiceCollection // Extension methods must be created in a non-generic static class

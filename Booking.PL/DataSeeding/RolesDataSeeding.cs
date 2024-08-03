@@ -1,6 +1,4 @@
-﻿using Booking.BLL.Enums;
-using Microsoft.AspNetCore.Identity;
-
+﻿
 
 namespace Booking.PL.DataSeeding;
 public static class RolesDataSeeding

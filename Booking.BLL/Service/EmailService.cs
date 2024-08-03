@@ -1,64 +1,61 @@
 ﻿using Booking.BLL.IService;
+using Booking.DAL.ConfigModels;
 using MailKit.Net.Smtp;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using MimeKit;
 
 
-namespace Ecommerce.Presentation.Service
+namespace Booking.BLL.Service;
+public class EmailService(IOptions<Email> email) : IEmailService
 {
-    public class EmailService : IEmailService
+
+    private readonly Email _email = email.Value;
+
+
+    private MimeMessage CreateEmailMessage(string toEmail, string subject, string message)
     {
-        private readonly IConfiguration _configuration;
-
-        public EmailService(IConfiguration configuration)
+        var emailMessage = new MimeMessage();
+        emailMessage.From.Add(new MailboxAddress("Booking Admin", _email.FromEmail));
+        emailMessage.To.Add(new MailboxAddress(toEmail.Split('@')[0], toEmail));
+        emailMessage.Subject = subject;
+        emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text)
         {
-            _configuration = configuration;
+            Text = message
+        };
+
+        return emailMessage;
+    }
+
+
+    public async Task SendEmailAsync(string toEmail, string subject, string message)
+    {
+
+        using var client = new SmtpClient();
+
+        try
+        {
+            await client.ConnectAsync(_email.SmtpServer, _email.Port, _email.UseSSl);
+            //client.AuthenticationMechanisms.Remove("XOAUTH2");
+            await client.AuthenticateAsync(_email.FromEmail, _email.Password);
+
+            await client.SendAsync(CreateEmailMessage(toEmail, subject, message));
         }
-        public async Task SendEmailAsync(string toEmail, string subject, string message)
+        catch (Exception ex)
         {
 
-            var FromEmail = _configuration["EmailSettings:FromEmail"];
-            var SmtpServer = _configuration["EmailSettings:SmtpServer"];
-            var Port = int.Parse(_configuration["EmailSettings:Port"]!); // i add ! to suppress nullable warning
-            var UseSSl = bool.Parse(_configuration["EmailSettings:UseSSl"]!); // i add ! to told the compiler that this value is not null
-            var Password = _configuration["EmailSettings:Password"];
-
-
-            var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("Ecommerce Admin", FromEmail));
-            emailMessage.To.Add(new MailboxAddress("", toEmail));
-            emailMessage.Subject = subject;
-            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text)
-            {
-                Text = message
-            };
-
-            using (var client = new SmtpClient())
-            {
-                try
-                {
-                    await client.ConnectAsync(SmtpServer, Port, UseSSl);
-                    //client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    await client.AuthenticateAsync(FromEmail, Password);
-                    await client.SendAsync(emailMessage);
-                }
-                catch (Exception ex)
-                {
-
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.WriteLine($"---Error----->: {message}");
-                    throw;
-                }
-                finally
-                {
-                    await client.DisconnectAsync(true);
-                    client.Dispose();
-                }
-            }
-
-
-
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine($"---Error----->: {ex.Message}");
+            throw;
         }
+        finally
+        {
+            await client.DisconnectAsync(true);
+            client.Dispose();
+        }
+
+
+
+
     }
 }

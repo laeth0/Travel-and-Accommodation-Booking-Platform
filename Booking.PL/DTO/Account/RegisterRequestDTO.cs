@@ -1,8 +1,5 @@
 ﻿
 
-using Booking.DAL.Validators;
-using System.ComponentModel.DataAnnotations;
-
 namespace Booking.PL.DTO.Account;
 public class RegisterRequestDTO
 {

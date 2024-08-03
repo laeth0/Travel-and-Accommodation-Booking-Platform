@@ -1,12 +1,5 @@
 ﻿
 
-
-using Booking.PL.CustomizeResponses;
-using Booking.PL.DataSeeding;
-using Booking.PL.ServiceConfiguration;
-using Ecommerce.Presentation.DataSeeding;
-using Microsoft.AspNetCore.Identity;
-
 namespace Booking.PL;
 public class Program
 {

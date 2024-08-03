@@ -1,18 +1,16 @@
-﻿using AutoMapper;
-using Booking.DAL.Entities;
-using Booking.PL.DTO.City;
+﻿
 
-namespace Booking.PL.MappingProfiles
+
+
+namespace Booking.PL.MappingProfiles;
+public class CityProfile : Profile
 {
-    public class CityProfile : Profile
+    public CityProfile()
     {
-        public CityProfile()
-        {
-            CreateMap<City, CityResponseDTO>();
+        CreateMap<City, CityResponseDTO>();
 
-            CreateMap<CityCreateRequestDTO, City>();
+        CreateMap<CityCreateRequestDTO, City>();
 
-            CreateMap<CityUpdateRequestDTO, City>();
-        }
+        CreateMap<CityUpdateRequestDTO, City>();
     }
 }

@@ -217,7 +217,7 @@ namespace Booking.DAL.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("EmailAddress", true);
 
-                    b.Property<int>("FloorNumber")
+                    b.Property<int>("FloorsNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageName")

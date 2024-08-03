@@ -10,5 +10,5 @@ public class Flight
     public DateTime ArrivalTime { get; set; }
     public int Price { get; set; }
     public int AvailableSeats { get; set; }
-    public ICollection<UserFlight> UserFlight { get; set; } = new HashSet<UserFlight>();
+    public virtual ICollection<UserFlight> UserFlight { get; set; } = new HashSet<UserFlight>();
 }

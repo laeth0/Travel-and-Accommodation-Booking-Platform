@@ -9,10 +9,10 @@ public class UserFlight
     public DateTime UpdatedAt { get; set; }
 
     public string UserId { get; set; } = null!;
-    public ApplicationUser User { get; set; } = null!;
+    public virtual ApplicationUser User { get; set; } = null!;
 
     public Guid FlightId { get; set; }
-    public Flight Flight { get; set; } = null!;
+    public virtual Flight Flight { get; set; } = null!;
 
 }
 

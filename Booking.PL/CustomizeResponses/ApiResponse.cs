@@ -1,5 +1,4 @@
-﻿using System.Net;
-
+﻿
 
 namespace Booking.PL.CustomizeResponses;
 public abstract class ApiResponse

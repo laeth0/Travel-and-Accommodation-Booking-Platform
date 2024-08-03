@@ -12,8 +12,8 @@ public class Room
     public string ImageName { get; set; } = null!;
 
     public Guid ResidenceId { get; set; }
-    public Residence Residence { get; set; } = null!;
+    public virtual Residence Residence { get; set; } = null!;
 
 
-    public ICollection<GuestRoom> GuestRooms { get; set; } = new HashSet<GuestRoom>();
+    public virtual ICollection<GuestRoom> GuestRooms { get; set; } = new HashSet<GuestRoom>();
 }

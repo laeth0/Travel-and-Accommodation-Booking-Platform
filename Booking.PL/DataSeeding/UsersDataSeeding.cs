@@ -1,7 +1,6 @@
-﻿using Booking.DAL.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿
 
-namespace Ecommerce.Presentation.DataSeeding;
+namespace Booking.PL.DataSeeding;
 public static class UsersDataSeeding
 {
     public static async Task SeedUsers(IApplicationBuilder applicationBuilder)

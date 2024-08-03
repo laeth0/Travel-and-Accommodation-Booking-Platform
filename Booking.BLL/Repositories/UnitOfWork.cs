@@ -58,8 +58,8 @@ namespace Booking.BLL.Repositories
         {
             //Rolls back the underlying store transaction
             await _objTran?.RollbackAsync();
-            //The Dispose Method will clean up this transaction object and ensures Entity Framework
-            //is no longer using that transaction.
+            
+            //The Dispose Method will clean up this transaction object and ensures Entity Framework is no longer using that transaction.
             _objTran?.DisposeAsync();
         }
 

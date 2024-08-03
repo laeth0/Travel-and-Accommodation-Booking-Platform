@@ -12,12 +12,12 @@ public class GuestRoom
 
 
     public Guid RoomId { get; set; }
-    public Room Room { get; set; } = null!;
+    public virtual Room Room { get; set; } = null!;
 
     public string GuestId { get; set; } = null!;
-    public ApplicationUser Guest { get; set; } = null!;
+    public virtual ApplicationUser Guest { get; set; } = null!;
 
-    public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+    public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
 
 
 }

@@ -1,14 +1,4 @@
-﻿using Booking.BLL.Interfaces;
-using Booking.BLL.IService;
-using Booking.BLL.Repositories;
-using Booking.DAL.Data;
-using Booking.DAL.Entities;
-using Booking.PL.MappingProfiles;
-using Ecommerce.Presentation.MappingProfiles;
-using Ecommerce.Presentation.Service;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
+﻿
 
 
 namespace Booking.PL.ServiceConfiguration;
@@ -21,18 +11,16 @@ public static class DependencyInjectionService // Extension methods must be crea
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlServer(connectionString, o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+            options.UseLazyLoadingProxies().UseSqlServer(connectionString, o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
 
             options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);// sets the default query tracking behavior is NoTracking
         });
 
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<ITokenService, TokenService>();
-        services.AddScoped<IEmailService, EmailService>();
-        services.AddScoped<IFileService, FileService>();
+        services.AddScoped<IServiceManager, ServiceManager>();
 
-        services.AddAutoMapper(typeof(ApplicationUserProfile), typeof(CityProfile));
+        services.AddAutoMapper(typeof(ApplicationUserProfile), typeof(CityProfile), typeof(ResidenceProfile));
 
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {

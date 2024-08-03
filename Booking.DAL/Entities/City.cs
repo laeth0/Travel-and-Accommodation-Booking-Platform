@@ -9,5 +9,5 @@ public class City
     public string Country { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string ImageName { get; set; } = null!;
-    public ICollection<Residence> Residences { get; set; } = new HashSet<Residence>();
+    public virtual ICollection<Residence> Residences { get; set; } = new HashSet<Residence>();
 }

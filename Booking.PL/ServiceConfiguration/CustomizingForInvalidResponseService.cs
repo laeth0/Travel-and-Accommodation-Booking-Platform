@@ -1,7 +1,4 @@
-﻿using Booking.PL.CustomizeResponses;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-
+﻿
 
 namespace Booking.PL.ServiceConfiguration;
 public static class CustomizingForInvalidResponseService // Extension methods must be created in a non-generic static class
