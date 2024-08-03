@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "lAfVSQ3QtWBRqAFclNDUizE97vBl4twRivUXVKFgeRM=",
+  "Source": "Booking.PL",
+  "BasePath": "_content/Booking.PL",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Booking.PL\\wwwroot",
+      "Source": "Booking.PL",
+      "ContentRoot": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\",
+      "BasePath": "_content/Booking.PL",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\dde7721e-62b1-4ba1-864c-4d9b1b3932e644.png",
+      "SourceId": "Booking.PL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\",
+      "BasePath": "_content/Booking.PL",
+      "RelativePath": "files/images/dde7721e-62b1-4ba1-864c-4d9b1b3932e644.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\images\\dde7721e-62b1-4ba1-864c-4d9b1b3932e644.png"
+    }
+  ]
+}
