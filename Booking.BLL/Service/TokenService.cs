@@ -68,11 +68,11 @@ public class TokenService(IOptions<JWT> jwt, UserManager<ApplicationUser> userMa
     }
 
 
-    public string GetValueFromToken(string token, string key)
+    public string GetValueFromToken(string token, string key= "Roles")
     {
-        var JwtToken = token.Replace("Bearer ", ""); //  or use => var jwt = token[7..]; remove "Bearer " from the token
+        //var JwtToken = token.Replace("Bearer ", ""); //  or use => var jwt = token[7..]; remove "Bearer " from the token
         var handler = new JwtSecurityTokenHandler();
-        var jsonToken = handler.ReadToken(JwtToken) as JwtSecurityToken;
+        var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
         var value = jsonToken.Claims.First(claim => claim.Type == key).Value;
         return value;
     }

@@ -1,5 +1,7 @@
 ﻿
 
+using Booking.BLL.Repositories;
+
 namespace Booking.BLL.Interfaces
 {
     public interface IUnitOfWork
@@ -7,8 +9,10 @@ namespace Booking.BLL.Interfaces
         ICityRepository CityRepository { get; }
         IFlightRepository FlightRepository { get; }
         IResidenceRepository ResidenceRepository { get; }
-        IReviewRepository ReviewRepository{ get; }
+        IReviewRepository ReviewRepository { get; }
         IRoomRepository RoomRepository { get; }
+        ICountryRepository CountryRepository { get; }
+        IRoomBookingRepository RoomBookingRepository { get; }
 
         Task<int> SaveChangesAsync();
         Task BeginTransactionAsync();

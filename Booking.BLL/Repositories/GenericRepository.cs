@@ -17,7 +17,6 @@ namespace Booking.BLL.Repositories
             if (filterCondition is { })
                 query = query.Where(filterCondition);
 
-
             if (includeProperty is { })
             {
                 foreach (var include in includeProperty)
@@ -26,11 +25,11 @@ namespace Booking.BLL.Repositories
             }
 
 
-            if (PageSize != 0 && PageNumber != 0)
-                query = query.Take(((PageNumber - 1) * PageSize)..(PageNumber * PageSize));  // query = query.Skip((PageNumber - 1) * PageSize).Take(PageSize);  // the same query but using slice operator
+            if (PageSize > 0 && PageNumber > 0)
+                query = query.Skip((PageNumber - 1) * PageSize).Take(PageSize);
 
 
-            return await query.ToListAsync() ?? []; // instead of returning null, return empty list => return await query.ToListAsync() ?? new List<T>();
+            return await query.ToListAsync() ?? []; // instead of returning null, return empty list => return await query.ToListAsync() ?? Enumerable.Empty<T>(); 
         }
 
 
@@ -43,12 +42,17 @@ namespace Booking.BLL.Repositories
             return entityEntry.Entity;
         }
 
-        public void Update(T entity) => _DbContext.Set<T>().Update(entity);
-
-        public void Delete(T entity)
+        public T Update(T entity)
         {
-            _DbContext.Set<T>().Remove(entity);
-            //_DbContext.Set<T>().ExecuteDelete(entity);
+            var entityEntry = _DbContext.Set<T>().Update(entity);
+            return entityEntry.Entity;
+        }
+
+        public T Delete(T entity)
+        {
+            var entityEntry = _DbContext.Set<T>().Remove(entity);
+            return entityEntry.Entity;
+            //_DbContext.Set<T>().ExecuteDelete(entity); // bulk delete
         }
 
     }

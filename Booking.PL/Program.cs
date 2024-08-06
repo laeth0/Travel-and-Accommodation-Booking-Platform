@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace Booking.PL;
 public class Program
 {
@@ -12,11 +13,13 @@ public class Program
         builder.Services.AddConfigService(builder.Configuration);
         builder.Services.AddConfigureApiForJWTService(builder.Configuration);
         builder.Services.AddCustomizingForInvalidResponseService();
-        builder.Services.AddDependencyInjectionService(builder.Configuration);
-        builder.Services.AddJWTConfigurationForSwaggerService();
+        builder.Services.AddDependencyInjectionService();
+        builder.Services.AddConfigurationForSwaggerService();
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddBookingContextService(builder.Configuration);
+
         builder.Logging.AddDefaultLoggingService();
 
 
@@ -25,36 +28,24 @@ public class Program
             options.TokenLifespan = TimeSpan.FromHours(3);
         });
 
-        var app = builder.Build();
 
+        var app = builder.Build();
 
         app.UseStaticFiles();
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(options =>
+        {
+            options.DocumentTitle = "Booking Platform";
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Platform");            
+        });
+        app.UseRouting();//  ⇒ This line configures the middleware to enable routing. Routing determines how URLs are mapped to controllers and actions.
         app.UseCors();
-        app.MapControllers();
         app.UseAuthentication();
         app.UseAuthorization();//⇒ This line configures the middleware to enable authorization. It indicates that the application should process authorization requirements.
-        app.UseRouting();//  ⇒ This line configures the middleware to enable routing. Routing determines how URLs are mapped to controllers and actions.
         app.UseHttpsRedirection();// ⇒ This line configures the application to automatically redirect HTTP requests to HTTPS. This is a common practice for improving security.
+        app.MapControllers();
         await RolesDataSeeding.SeedRoles(app);
         await UsersDataSeeding.SeedUsers(app);
-        app.MapGet("/", () => "Hello World!");
-        app.MapGet("Images/{ImageName}", (string ImageName) =>
-        {
-            var Imagepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\files", "images", ImageName);
-            if (File.Exists(Imagepath))
-            {
-                //using var FileStream = new FileStream(Imagepath, FileMode.Open);
-                var fileStream = new FileStream(Imagepath, FileMode.Open, FileAccess.Read, FileShare.Read);
-
-                return Results.File(fileStream, "image/png");
-            }
-            return Results.NotFound(new ErrorResponse
-            {
-                Errors = new List<string> { "Image Not Found" }
-            });
-        });
         app.Run();
     }
 }

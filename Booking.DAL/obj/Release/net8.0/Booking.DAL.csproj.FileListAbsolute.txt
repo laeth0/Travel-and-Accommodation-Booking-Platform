@@ -1,0 +1,15 @@
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\bin\Release\net8.0\Booking.DAL.deps.json
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\bin\Release\net8.0\Booking.DAL.runtimeconfig.json
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\bin\Release\net8.0\Booking.DAL.dll
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\bin\Release\net8.0\Booking.DAL.pdb
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.csproj.AssemblyReference.cache
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.AssemblyInfoInputs.cache
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.AssemblyInfo.cs
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.csproj.CoreCompileInputs.cache
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.sourcelink.json
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.dll
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\refint\Booking.DAL.dll
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.pdb
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\Booking.DAL.genruntimeconfig.cache
+C:\Users\BisanCo\Desktop\Booking.PL\Booking.DAL\obj\Release\net8.0\ref\Booking.DAL.dll

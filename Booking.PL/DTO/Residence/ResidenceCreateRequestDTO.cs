@@ -4,19 +4,26 @@
 namespace Booking.PL.DTO.Residence;
 public class ResidenceCreateRequestDTO
 {
-    public string Name { get; set; } = null!;
-    public string Description { get; set; } = null!;
-    public string Address { get; set; } = null!;
-    public IFormFile Image { get; set; } = null!;
-
+    [Required]
+    public string Name { get; set; }
+    [Required]
+    public string Description { get; set; }
+    [Required]
+    public string Address { get; set; }
+    [Required]
+    public IFormFile Image { get; set; } 
     [Phone]
-    public string PhoneNumber { get; set; } = null!;
-
+    [Required]
+    public string PhoneNumber { get; set; }
+    [Required]
     [EmailAddress]
-    public string Email { get; set; } = null!;
-
+    public string Email { get; set; }
+    [Required]
     public int FloorsNumber { get; set; }
-    public int Rating { get; set; }
+    [Required]
+    public string Type { get; set; }
+    [Required]
     public Guid CityId { get; set; }
-    public string OwnerId { get; set; } = null!;
+    [Required]
+    public string OwnerId { get; set; } 
 }

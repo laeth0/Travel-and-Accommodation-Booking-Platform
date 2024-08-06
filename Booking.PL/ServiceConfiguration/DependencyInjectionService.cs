@@ -4,23 +4,19 @@
 namespace Booking.PL.ServiceConfiguration;
 public static class DependencyInjectionService // Extension methods must be created in a non-generic static class
 {
-    public static IServiceCollection AddDependencyInjectionService(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddDependencyInjectionService(this IServiceCollection services)
     {
-
-        var connectionString = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string is not found in appsettings.json file");
-
-        services.AddDbContext<ApplicationDbContext>(options =>
-        {
-            options.UseLazyLoadingProxies().UseSqlServer(connectionString, o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
-
-            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);// sets the default query tracking behavior is NoTracking
-        });
-
-
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IServiceManager, ServiceManager>();
 
-        services.AddAutoMapper(typeof(ApplicationUserProfile), typeof(CityProfile), typeof(ResidenceProfile));
+        services.AddAutoMapper(typeof(ApplicationUserProfile),
+            typeof(CityProfile),
+            typeof(ResidenceProfile),
+            typeof(CountryProfile),
+            typeof(RoomProfile),
+            typeof(RoomBookingProfile),
+            typeof(ReviewProfile)
+            );
 
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {

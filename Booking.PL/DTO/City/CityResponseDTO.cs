@@ -3,9 +3,17 @@
 namespace Booking.PL.DTO.City;
 public class CityResponseDTO
 {
+    [Required]
     public Guid Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Country { get; set; } = null!;
-    public string Description { get; set; } = null!;
-    public string ImageName { get; set; } = null!;
+    [Required]
+    public string Name { get; set; } 
+    [Required]
+    public string Description { get; set; } 
+    [Required]
+    public string ImageName { get; set; } 
+
+    [Required]
+    public Guid CountryId { get; set; }
+    [Required]
+    public string Country { get; set; } 
 }

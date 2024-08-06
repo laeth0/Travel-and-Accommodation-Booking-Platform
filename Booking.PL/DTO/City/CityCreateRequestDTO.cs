@@ -3,8 +3,13 @@
 namespace Booking.PL.DTO.City;
 public class CityCreateRequestDTO
 {
-    public string Name { get; set; } = null!;
-    public string Country { get; set; } = null!;
-    public string Description { get; set; } = null!;
-    public IFormFile Image { get; set; } = null!;
+    [Required]
+    public string Name { get; set; } 
+    [Required]
+    public string Description { get; set; }
+    [Required]
+    public IFormFile Image { get; set; }
+
+    [Required]
+    public Guid CountryId { get; set; }
 }

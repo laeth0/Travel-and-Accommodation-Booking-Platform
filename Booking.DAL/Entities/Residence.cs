@@ -12,7 +12,7 @@ public class Residence
     public string PhoneNumber { get; set; } = null!;
     public string Email { get; set; } = null!;
     public int FloorsNumber { get; set; }
-    public int Rating { get; set; }
+    public string Type { get; set; } = null!;
 
     public Guid CityId { get; set; }
     public virtual City City { get; set; } = null!;

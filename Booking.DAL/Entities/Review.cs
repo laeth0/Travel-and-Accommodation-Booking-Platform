@@ -9,11 +9,10 @@ public class Review
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public Guid GuestRoomId { get; set; }
-    public virtual GuestRoom GuestRoom { get; set; } = null!;
+    public Guid RoomBookingId { get; set; }
+    public virtual RoomBooking RoomBooking { get; set; } = null!;
 
 
     public string UserId { get; set; } = null!;
-
     public virtual ApplicationUser User { get; set; } = null!;
 }

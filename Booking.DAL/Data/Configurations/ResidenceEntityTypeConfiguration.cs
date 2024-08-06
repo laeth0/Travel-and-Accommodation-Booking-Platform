@@ -4,11 +4,11 @@
 
 
 using Booking.DAL.Entities;
+using Booking.DAL.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Booking.DAL.Data.Configurations;
-
 internal class ResidenceEntityTypeConfiguration : IEntityTypeConfiguration<Residence>
 {
     public void Configure(EntityTypeBuilder<Residence> builder)
@@ -27,5 +27,6 @@ internal class ResidenceEntityTypeConfiguration : IEntityTypeConfiguration<Resid
             .WithOne(e => e.Residence)
             .HasForeignKey(e => e.ResidenceId)
             .OnDelete(DeleteBehavior.Cascade);
+
     }
 }

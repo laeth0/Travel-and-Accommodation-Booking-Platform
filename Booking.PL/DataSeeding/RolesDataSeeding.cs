@@ -8,7 +8,7 @@ public static class RolesDataSeeding
         using var serviceScope = applicationBuilder.ApplicationServices.CreateScope();
         var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        var roles = Enum.GetNames(typeof(UserRoles));
+        var roles = Enum.GetNames<UserRoles>(); // another way => Enum.GetNames(typeof(UserRoles));
 
         foreach (var role in roles)
             if (!await roleManager.RoleExistsAsync(role))

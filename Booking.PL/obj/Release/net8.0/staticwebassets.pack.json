@@ -1,0 +1,81 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\32ca84ef-8d40-4dfb-b643-eefed2e89e51Screenshot 2024-08-03 224623.png",
+      "PackagePath": "staticwebassets\\files\\images\\32ca84ef-8d40-4dfb-b643-eefed2e89e51Screenshot 2024-08-03 224623.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\407fbf93-29ed-4626-a169-9ca4c0484864ERD.png",
+      "PackagePath": "staticwebassets\\files\\images\\407fbf93-29ed-4626-a169-9ca4c0484864ERD.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\46845d34-04f1-424b-8a71-e7d36f428e38ERD.png",
+      "PackagePath": "staticwebassets\\files\\images\\46845d34-04f1-424b-8a71-e7d36f428e38ERD.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\5370124d-0b10-4528-be3c-4421398f475dERD.png",
+      "PackagePath": "staticwebassets\\files\\images\\5370124d-0b10-4528-be3c-4421398f475dERD.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\5d28452e-51bd-4991-9981-3b22bb9b8dd444.png",
+      "PackagePath": "staticwebassets\\files\\images\\5d28452e-51bd-4991-9981-3b22bb9b8dd444.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\65459424-0f66-445d-8303-37cf3c84cb1eScreenshot 2024-08-03 224623.png",
+      "PackagePath": "staticwebassets\\files\\images\\65459424-0f66-445d-8303-37cf3c84cb1eScreenshot 2024-08-03 224623.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\714124d9-d1d2-48b2-af3f-534ac682c5b3Screenshot 2024-08-03 224623.png",
+      "PackagePath": "staticwebassets\\files\\images\\714124d9-d1d2-48b2-af3f-534ac682c5b3Screenshot 2024-08-03 224623.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\7a89bdbf-7593-4eab-ab1d-fde288dfd676Screenshot 2024-08-03 224623.png",
+      "PackagePath": "staticwebassets\\files\\images\\7a89bdbf-7593-4eab-ab1d-fde288dfd676Screenshot 2024-08-03 224623.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\82a4a0b2-d22c-42a2-b25b-46e7015934e344.png",
+      "PackagePath": "staticwebassets\\files\\images\\82a4a0b2-d22c-42a2-b25b-46e7015934e344.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\94408faf-6e9c-41f4-b148-ad8c50816e7eScreenshot 2024-08-03 224623.png",
+      "PackagePath": "staticwebassets\\files\\images\\94408faf-6e9c-41f4-b148-ad8c50816e7eScreenshot 2024-08-03 224623.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\a7a81e00-ed67-4d6b-abbe-957ab8120fc0Screenshot 2024-08-03 224623.png",
+      "PackagePath": "staticwebassets\\files\\images\\a7a81e00-ed67-4d6b-abbe-957ab8120fc0Screenshot 2024-08-03 224623.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\b188a899-e872-4aa4-b1d8-4ecb5e50cd60ERD.png",
+      "PackagePath": "staticwebassets\\files\\images\\b188a899-e872-4aa4-b1d8-4ecb5e50cd60ERD.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\b20472dd-83b9-4f19-8b7f-827fe6f9d41fERD.png",
+      "PackagePath": "staticwebassets\\files\\images\\b20472dd-83b9-4f19-8b7f-827fe6f9d41fERD.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\dde7721e-62b1-4ba1-864c-4d9b1b3932e644.png",
+      "PackagePath": "staticwebassets\\files\\images\\dde7721e-62b1-4ba1-864c-4d9b1b3932e644.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.PL\\wwwroot\\files\\images\\e681bf91-256a-436a-9c35-60162bcb8743ERD.png",
+      "PackagePath": "staticwebassets\\files\\images\\e681bf91-256a-436a-9c35-60162bcb8743ERD.png"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.Booking.PL.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.Booking.PL.props",
+      "PackagePath": "build\\Booking.PL.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Booking.PL.props",
+      "PackagePath": "buildMultiTargeting\\Booking.PL.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.Booking.PL.props",
+      "PackagePath": "buildTransitive\\Booking.PL.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

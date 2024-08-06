@@ -16,13 +16,12 @@ internal class CityEntityTypeConfiguration : IEntityTypeConfiguration<City>
 
         builder.Property(e => e.Name).IsRequired().HasMaxLength(50);
 
-        builder.Property(e => e.Country).IsRequired().HasMaxLength(50);
-
         builder.Property(e => e.Description).IsRequired().HasMaxLength(500);
 
         builder.HasMany(e => e.Residences)
             .WithOne(e => e.City)
             .HasForeignKey(e => e.CityId)
             .OnDelete(DeleteBehavior.Cascade);
+
     }
 }

@@ -14,25 +14,32 @@ namespace Booking.BLL.Repositories
         private IDbContextTransaction? _objTran = null;
 
         private readonly Lazy<ICityRepository> _cityRepository;
+        private readonly Lazy<ICountryRepository> _countryRepository;
         private readonly Lazy<IFlightRepository> _flightRepository;
         private readonly Lazy<IResidenceRepository> _residenceRepository;
         private readonly Lazy<IReviewRepository> _reviewRepository;
         private readonly Lazy<IRoomRepository> _roomRepository;
+        private readonly Lazy<IRoomBookingRepository> _roomBookingRepository;
+
 
         public ICityRepository CityRepository => _cityRepository.Value;
+        public ICountryRepository CountryRepository => _countryRepository.Value;
         public IFlightRepository FlightRepository => _flightRepository.Value;
         public IResidenceRepository ResidenceRepository => _residenceRepository.Value;
         public IReviewRepository ReviewRepository => _reviewRepository.Value;
         public IRoomRepository RoomRepository => _roomRepository.Value;
+        public IRoomBookingRepository RoomBookingRepository => _roomBookingRepository.Value;
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _DbContext = context;
             _cityRepository = new Lazy<ICityRepository>(() => new CityRepository(_DbContext));
+            _countryRepository = new Lazy<ICountryRepository>(() => new CountryRepository(_DbContext));
             _flightRepository = new Lazy<IFlightRepository>(() => new FlightRepository(_DbContext));
             _residenceRepository = new Lazy<IResidenceRepository>(() => new ResidenceRepository(_DbContext));
             _reviewRepository = new Lazy<IReviewRepository>(() => new ReviewRepository(_DbContext));
             _roomRepository = new Lazy<IRoomRepository>(() => new RoomRepository(_DbContext));
+            _roomBookingRepository = new Lazy<IRoomBookingRepository>(() => new RoomBookingRepository(_DbContext));
         }
 
 
@@ -58,7 +65,7 @@ namespace Booking.BLL.Repositories
         {
             //Rolls back the underlying store transaction
             await _objTran?.RollbackAsync();
-            
+
             //The Dispose Method will clean up this transaction object and ensures Entity Framework is no longer using that transaction.
             _objTran?.DisposeAsync();
         }

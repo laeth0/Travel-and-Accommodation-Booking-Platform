@@ -19,8 +19,6 @@ internal class RoomEntityTypeConfiguration : IEntityTypeConfiguration<Room>
 
         builder.Property(e => e.Price).IsRequired();
 
-        builder.Property(e => e.Rating).IsRequired();
-
         builder.Property(e => e.Description).IsRequired();
 
         builder.HasMany(e => e.GuestRooms)

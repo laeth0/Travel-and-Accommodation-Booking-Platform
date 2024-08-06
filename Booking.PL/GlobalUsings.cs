@@ -8,12 +8,18 @@ global using Booking.DAL.Entities;
 global using Booking.DAL.Validators;
 global using Booking.DAL.ConfigModels;
 global using Booking.DAL.Data;
+global using Booking.DAL.Enums;
 
 global using Booking.PL.MappingProfiles;
 global using Booking.PL.CustomizeResponses;
 global using Booking.PL.DTO.Account;
 global using Booking.PL.DTO.City;
 global using Booking.PL.DTO.Residence;
+global using Booking.PL.DTO.Country;
+global using Booking.PL.DTO.Room;
+global using Booking.PL.DTO.RoomBooking;
+global using Booking.PL.DTO.Review;
+global using Booking.PL.DTO;
 global using Booking.PL.DataSeeding;
 global using Booking.PL.ServiceConfiguration;
 
@@ -29,3 +35,8 @@ global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.IdentityModel.Tokens;
 
 global using Microsoft.EntityFrameworkCore;
+
+
+
+
+

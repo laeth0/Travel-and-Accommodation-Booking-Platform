@@ -17,6 +17,10 @@ public class ApplicationUserProfile : Profile
 
         CreateMap<IdentityRole, RolesResponseDTO>();
 
+        CreateMap<UpdateProfileRequestDTO, ApplicationUser>()
+                    .ForMember(dest => dest.ImageName,
+                    opt => opt.Ignore()); // Example of ignoring a property
+
 
 
     }

@@ -18,6 +18,9 @@ namespace Booking.DAL.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -45,6 +48,9 @@ namespace Booking.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -103,10 +109,8 @@ namespace Booking.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<Guid>("CountryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -124,7 +128,32 @@ namespace Booking.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CountryId");
+
                     b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("Booking.DAL.Entities.Country", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Flight", b =>
@@ -156,43 +185,6 @@ namespace Booking.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Flights");
-                });
-
-            modelBuilder.Entity("Booking.DAL.Entities.GuestRoom", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CheckIn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CheckOut")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GuestId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("RoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("TotalPrice")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GuestId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("GuestRooms");
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Residence", b =>
@@ -237,8 +229,9 @@ namespace Booking.DAL.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("PhoneNumber", true);
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -262,11 +255,11 @@ namespace Booking.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("GuestRoomId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Rating")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("RoomBookingId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -277,7 +270,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GuestRoomId");
+                    b.HasIndex("RoomBookingId");
 
                     b.HasIndex("UserId");
 
@@ -304,8 +297,8 @@ namespace Booking.DAL.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("ResidenceId")
                         .HasColumnType("uniqueidentifier");
@@ -315,6 +308,43 @@ namespace Booking.DAL.Migrations
                     b.HasIndex("ResidenceId");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("Booking.DAL.Entities.RoomBooking", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CheckIn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckOut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GuestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GuestId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("GuestRooms");
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.UserFlight", b =>
@@ -478,23 +508,15 @@ namespace Booking.DAL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Booking.DAL.Entities.GuestRoom", b =>
+            modelBuilder.Entity("Booking.DAL.Entities.City", b =>
                 {
-                    b.HasOne("Booking.DAL.Entities.ApplicationUser", "Guest")
-                        .WithMany("GuestRooms")
-                        .HasForeignKey("GuestId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                    b.HasOne("Booking.DAL.Entities.Country", "Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Booking.DAL.Entities.Room", "Room")
-                        .WithMany("GuestRooms")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Guest");
-
-                    b.Navigation("Room");
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Residence", b =>
@@ -518,9 +540,9 @@ namespace Booking.DAL.Migrations
 
             modelBuilder.Entity("Booking.DAL.Entities.Review", b =>
                 {
-                    b.HasOne("Booking.DAL.Entities.GuestRoom", "GuestRoom")
+                    b.HasOne("Booking.DAL.Entities.RoomBooking", "RoomBooking")
                         .WithMany("Reviews")
-                        .HasForeignKey("GuestRoomId")
+                        .HasForeignKey("RoomBookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -530,7 +552,7 @@ namespace Booking.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("GuestRoom");
+                    b.Navigation("RoomBooking");
 
                     b.Navigation("User");
                 });
@@ -544,6 +566,25 @@ namespace Booking.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Residence");
+                });
+
+            modelBuilder.Entity("Booking.DAL.Entities.RoomBooking", b =>
+                {
+                    b.HasOne("Booking.DAL.Entities.ApplicationUser", "Guest")
+                        .WithMany("GuestRooms")
+                        .HasForeignKey("GuestId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Booking.DAL.Entities.Room", "Room")
+                        .WithMany("GuestRooms")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Guest");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.UserFlight", b =>
@@ -632,14 +673,14 @@ namespace Booking.DAL.Migrations
                     b.Navigation("Residences");
                 });
 
+            modelBuilder.Entity("Booking.DAL.Entities.Country", b =>
+                {
+                    b.Navigation("Cities");
+                });
+
             modelBuilder.Entity("Booking.DAL.Entities.Flight", b =>
                 {
                     b.Navigation("UserFlight");
-                });
-
-            modelBuilder.Entity("Booking.DAL.Entities.GuestRoom", b =>
-                {
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Residence", b =>
@@ -650,6 +691,11 @@ namespace Booking.DAL.Migrations
             modelBuilder.Entity("Booking.DAL.Entities.Room", b =>
                 {
                     b.Navigation("GuestRooms");
+                });
+
+            modelBuilder.Entity("Booking.DAL.Entities.RoomBooking", b =>
+                {
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

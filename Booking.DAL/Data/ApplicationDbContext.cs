@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Booking.DAL.Data;
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
+    public ApplicationDbContext()
+    {
+    }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
@@ -16,8 +19,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         new ApplicationUserEntityTypeConfiguration().Configure(builder.Entity<ApplicationUser>()); // Other Way to do it => builder.ApplyConfigurationsFromAssembly(typeof(ProductEntityTypeConfiguration).Assembly);  
         new CityEntityTypeConfiguration().Configure(builder.Entity<City>());
+        new CountryEntityTypeConfiguration().Configure(builder.Entity<Country>());
         new FlightEntityTypeConfiguration().Configure(builder.Entity<Flight>());
-        new GuestRoomEntityTypeConfiguration().Configure(builder.Entity<GuestRoom>());
+        new RoomBookingEntityTypeConfiguration().Configure(builder.Entity<RoomBooking>());
         new ResidenceEntityTypeConfiguration().Configure(builder.Entity<Residence>());
         new ReviewEntityTypeConfiguration().Configure(builder.Entity<Review>());
         new RoomEntityTypeConfiguration().Configure(builder.Entity<Room>());
@@ -27,8 +31,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     }
 
     public DbSet<City> Cities { get; set; }
+    public DbSet<Country> Country { get; set; }
     public DbSet<Flight> Flights { get; set; }
-    public DbSet<GuestRoom> GuestRooms { get; set; }
+    public DbSet<RoomBooking> GuestRooms { get; set; }
     public DbSet<Residence> Residences { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<Room> Rooms { get; set; }
