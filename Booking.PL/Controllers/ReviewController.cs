@@ -2,7 +2,7 @@
 
 namespace Booking.PL.Controllers;
 
-[ApiController, Route("api/[controller]")]
+[ApiController, Route("[controller]")]
 public class ReviewController : ControllerBase
 {
 
@@ -87,22 +87,15 @@ public class ReviewController : ControllerBase
 
 
 
-    [HttpGet("[action]")]
+    [HttpGet("[action]/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Details([FromQuery] string id, [FromHeader] string Authorization)
+    public async Task<ActionResult> Details(Guid id, [FromHeader] string Authorization)
     {
         try
         {
-            if (!Guid.TryParse(id, out Guid ReviewId))
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { "Invalid Review Id" }
-                });
-
             if (string.IsNullOrEmpty(Authorization))
                 return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
                 {
@@ -119,7 +112,7 @@ public class ReviewController : ControllerBase
                     Errors = new List<string> { "Invalid token" }
                 });
 
-            var Review = await _unitOfWork.ReviewRepository.GetByIdAsync(ReviewId);
+            var Review = await _unitOfWork.ReviewRepository.GetByIdAsync(id);
 
             if (Review is null)
                 return NotFound(new ErrorResponse

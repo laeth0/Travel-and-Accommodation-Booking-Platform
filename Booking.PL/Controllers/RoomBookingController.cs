@@ -2,7 +2,7 @@
 
 namespace Booking.PL.Controllers;
 
-[ApiController, Route("api/[controller]")]
+[ApiController, Route("[controller]")]
 public class RoomBookingController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -93,23 +93,16 @@ public class RoomBookingController : ControllerBase
 
 
 
-    [HttpGet("[action]")]
+    [HttpGet("[action]/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Details([FromQuery] string id)
+    public async Task<ActionResult> Details(Guid id)
     {
         try
         {
-            if (!Guid.TryParse(id, out Guid BookingId))
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { "Invalid Booking Id" }
-                });
-
-            var Booking = await _unitOfWork.RoomBookingRepository.GetByIdAsync(BookingId);
+            var Booking = await _unitOfWork.RoomBookingRepository.GetByIdAsync(id);
 
             if (Booking is null)
                 return NotFound(new ErrorResponse
@@ -209,9 +202,9 @@ public class RoomBookingController : ControllerBase
             var RoomBooking = _mapper.Map<RoomBooking>(model);//   8/8/2024 10:00:00 AM
             RoomBooking.GuestId = _serviceManager.TokenService.GetValueFromToken(Authorization, "Id");
 
-            TimeSpan differenceTime = RoomBooking.CheckIn - RoomBooking.CheckOut;
-            RoomBooking.TotalPrice = differenceTime.Days * room.Price;
-
+            //TimeSpan differenceTime = RoomBooking.CheckOut -  RoomBooking.CheckIn ;
+            //RoomBooking.TotalPrice = differenceTime.Days * room.Price;
+            RoomBooking.TotalPrice = RoomBooking.CheckOut.Subtract(RoomBooking.CheckIn).Days * room.Price;
 
 
             var createdBookingRoom = await _unitOfWork.RoomBookingRepository.AddAsync(RoomBooking);

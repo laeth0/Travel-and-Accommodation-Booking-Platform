@@ -1,8 +1,11 @@
 ﻿
 
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+
 namespace Booking.PL.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class CityController : ControllerBase
 {
@@ -22,6 +25,28 @@ public class CityController : ControllerBase
         _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+
+        // this ( User.Identity.Name ) return the User Name
+
+        /*
+         manager token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2ZGEzYTU0Zi1iY2E3LTQyN2QtYTMyMC0yNmRiNTNlZWZkNDciLCJ1bmlxdWVfbmFtZSI6Ik1hbmFnZXIiLCJlbWFpbCI6Im1hbmFnZXJAZ21haWwuY29tIiwianRpIjoiNjlkMmZhZDItMzlmNi00ODBkLWFmOWUtN2FmMDJhN2Q5ZjY3IiwiUm9sZXMiOiJNYW5hZ2VyIiwibmJmIjoxNzIzMDk5MjA3LCJleHAiOjE3MjU2OTEyMDcsImlhdCI6MTcyMzA5OTIwNywiaXNzIjoiU2VjdXJlQXBpIiwiYXVkIjoiU2VjdXJlQXBpVXNlciJ9.URdXGGDwmbwV7E_33zdN8ANO6MpRuEYCKiK7e9zbYwU
+
+         user token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJlY2RhODViMS0zMDY2LTQ3OWUtOTY5ZS03NmY2ZDA1YTM0ODEiLCJ1bmlxdWVfbmFtZSI6IlN0cmluZ1N0cmluZyIsImVtYWlsIjoidXNlckBleGFtcGxlLmNvbSIsImp0aSI6Ijc3NzhjMGE5LTRkNDctNDQ4MC1iYzc5LTExMmJmYWI4YzliZCIsIlJvbGVzIjoiVXNlciIsIm5iZiI6MTcyMzA5OTM5NCwiZXhwIjoxNzI1NjkxMzk0LCJpYXQiOjE3MjMwOTkzOTQsImlzcyI6IlNlY3VyZUFwaSIsImF1ZCI6IlNlY3VyZUFwaVVzZXIifQ.Ebjky8GkH8xlKsXpkMEa4uWW8Z2M9qRDz9cfLVwZ82s
+         */
+
+        //var claimsIdentity = User.Identity as ClaimsIdentity;
+        //var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        //var userId = userIdClaim?.Value;
+        //return Ok(userId);
+        //-------------------------------------------------------------------------------------
+        //var claimsIdentity = User.Claims.FirstOrDefault(x=>x.Type== ClaimTypes.NameIdentifier);
+        //var userId = claimsIdentity?.Value;
+        //return Ok(userId);
+
+
     }
 
 
@@ -36,7 +61,7 @@ public class CityController : ControllerBase
         try
         {
             Guid GuidCountryId = Guid.Empty;
-            if (CountryId is { } && !Guid.TryParse(CountryId, out GuidCountryId))
+            if (!string.IsNullOrEmpty(CountryId) && !Guid.TryParse(CountryId, out GuidCountryId))
                 return BadRequest(new ErrorResponse
                 {
                     StatusCode = HttpStatusCode.BadRequest,
@@ -57,6 +82,8 @@ public class CityController : ControllerBase
                 Message = "Cities are retrieved successfully",
                 Result = _mapper.Map<IReadOnlyList<CityResponseDTO>>(cities)
             });
+
+
         }
         catch (Exception ex)
         {
@@ -73,24 +100,16 @@ public class CityController : ControllerBase
 
 
 
-
-    [HttpGet("[action]")]
+    [HttpGet("[action]/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Details([FromQuery] string id)
+    public async Task<ActionResult> Details(Guid id)
     {
         try
         {
-            if (!Guid.TryParse(id, out Guid GuidId))
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { "Invalid City Id" }
-                });
-
-            var city = await _unitOfWork.CityRepository.GetByIdAsync(GuidId);
+            var city = await _unitOfWork.CityRepository.GetByIdAsync(id);
 
             if (city is null)
                 return NotFound(new ErrorResponse
@@ -122,8 +141,16 @@ public class CityController : ControllerBase
 
 
 
+    /*
+    when putting
+    [Authorize(Roles ="Manager")]
+    [Authorize(Roles = "Admin")]
+    this mean that the user should have the two roles to access this method (كانو اند)
 
-
+    but when putting
+    [Authorize(Roles = "Manager,Admin")]
+    this mean that the user should have one of the two roles to access this method (كانو اور)
+     */
     [HttpPost("[action]")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SuccessResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]

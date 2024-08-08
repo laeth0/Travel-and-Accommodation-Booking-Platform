@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "19TTh+zFDGrcYWEurI39PUk5joJndAFgXqmwP25NYfWIPbxA2yFWaWXhLpQY8ro7vHkBd5VtbzPonghBqPYWvQ==",
+  "dgSpecHash": "Z7I5RCnxN+DRoE9ajfPTjktnbiiS5tDbpLKVnl/LGoLKw6a1Xk2bxhR4Ea2rsZrF4nnacoZNXJhZGVDdrbVeBw==",
   "success": true,
   "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\Booking.PL\\Booking.DAL\\Booking.DAL.csproj",
   "expectedPackageFiles": [
@@ -126,8 +126,6 @@
     "C:\\Users\\BisanCo\\.nuget\\packages\\nuget.projectmodel\\6.9.1\\nuget.projectmodel.6.9.1.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\nuget.protocol\\6.9.1\\nuget.protocol.6.9.1.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\nuget.versioning\\6.9.1\\nuget.versioning.6.9.1.nupkg.sha512",
-    "C:\\Users\\BisanCo\\.nuget\\packages\\runtime.any.system.runtime\\4.3.0\\runtime.any.system.runtime.4.3.0.nupkg.sha512",
-    "C:\\Users\\BisanCo\\.nuget\\packages\\runtime.any.system.text.encoding\\4.3.0\\runtime.any.system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.codedom\\5.0.0\\system.codedom.5.0.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.collections.immutable\\7.0.0\\system.collections.immutable.7.0.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.composition\\7.0.0\\system.composition.7.0.0.nupkg.sha512",
@@ -148,7 +146,6 @@
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Users\\BisanCo\\.nuget\\packages\\system.private.uri\\4.3.0\\system.private.uri.4.3.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.reflection.metadata\\7.0.0\\system.reflection.metadata.7.0.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.reflection.metadataloadcontext\\7.0.0\\system.reflection.metadataloadcontext.7.0.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",

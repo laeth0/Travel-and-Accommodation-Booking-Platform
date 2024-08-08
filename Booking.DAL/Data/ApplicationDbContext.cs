@@ -11,9 +11,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public ApplicationDbContext()
     {
     }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
+
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -30,12 +32,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(builder);// This is important => we should call the base method to avoid the error
     }
 
+
+    // if i Dont Use this Objects I Can't write _context.Rooms.toList() in the controller
+    // i Should write _context.Set<Room>().toList() instead (this used in fluent api)
     public DbSet<City> Cities { get; set; }
-    public DbSet<Country> Country { get; set; }
+    public DbSet<Country> Countries { get; set; }
     public DbSet<Flight> Flights { get; set; }
-    public DbSet<RoomBooking> GuestRooms { get; set; }
     public DbSet<Residence> Residences { get; set; }
     public DbSet<Review> Reviews { get; set; }
+    public DbSet<RoomBooking> RoomBookings { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<UserFlight> UserFlights { get; set; }
 

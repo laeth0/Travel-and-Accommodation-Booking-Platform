@@ -13,6 +13,7 @@ internal class ResidenceEntityTypeConfiguration : IEntityTypeConfiguration<Resid
 {
     public void Configure(EntityTypeBuilder<Residence> builder)
     {
+        builder.ToTable("Residences");
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id).ValueGeneratedOnAdd();

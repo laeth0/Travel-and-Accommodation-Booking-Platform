@@ -21,7 +21,7 @@ public static class UsersDataSeeding
                 FirstName = "Manager",
                 LastName = "Manager",
                 UserName = "Manager",
-                Email = "Manager@gmail.com",
+                Email = "manager@gmail.com",
                 EmailConfirmed = true,// Assuming email is confirmed for seeding purposes
                 PhoneNumber = "059988776655",
                 PhoneNumberConfirmed = true,
@@ -29,14 +29,20 @@ public static class UsersDataSeeding
             };
 
             // Create the user with a password
-            var result = await userManager.CreateAsync(user, "Manager@123");
+            var result = await userManager.CreateAsync(user, "string");
 
             // If the user was successfully created, add them to the Manager role
             if (result.Succeeded)
                 await userManager.AddToRoleAsync(user, "Manager");
             else
-                throw new Exception("Failed to create the manager user");  // Handle the case where the user couldn't be created
+            {
+                foreach (var error in result.Errors)
+                    Console.WriteLine(error.Description);
+                throw new Exception("Failed to create the manager user");
+            }
         }
+
+
 
     }
 }

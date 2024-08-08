@@ -17,6 +17,16 @@
       "applicationUrl": "http://localhost:5207",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+        /*
+        the asp is search for this name ASPNETCORE_ENVIRONMENT mean this name is Predefined name and this name is determine the environment of the application
+        environment of the application is :-
+          1- Development :  بيئة التطوير
+          2- Staging : Pre-Production : بيئة التجريب
+          3- Production : بيئة الانتاج
+          4- Testing : بيئة الاختبار
+
+        the default value of ASPNETCORE_ENVIRONMENT is Production
+        */
       }
     },
     "IIS Express": {

@@ -12,6 +12,8 @@ internal class RoomBookingEntityTypeConfiguration : IEntityTypeConfiguration<Roo
 {
     public void Configure(EntityTypeBuilder<RoomBooking> builder)
     {
+        builder.ToTable("RoomBookings");
+
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id).ValueGeneratedOnAdd();
 

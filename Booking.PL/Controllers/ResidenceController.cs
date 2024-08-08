@@ -3,7 +3,7 @@
 
 namespace Booking.PL.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class ResidenceController : ControllerBase
 {
@@ -81,23 +81,16 @@ public class ResidenceController : ControllerBase
 
 
 
-    [HttpGet("[action]")]
+    [HttpGet("[action]/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Details([FromQuery] string id)
+    public async Task<ActionResult> Details(Guid id)
     {
         try
         {
-            if (!Guid.TryParse(id, out Guid GuidId))
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { "Invalid Residence Id" }
-                });
-
-            var Residence = await _unitOfWork.ResidenceRepository.GetByIdAsync(GuidId);
+            var Residence = await _unitOfWork.ResidenceRepository.GetByIdAsync(id);
 
             if (Residence is null)
                 return NotFound(new ErrorResponse

@@ -10,6 +10,7 @@ internal class UserFlightEntityTypeConfiguration : IEntityTypeConfiguration<User
 {
     public void Configure(EntityTypeBuilder<UserFlight> builder)
     {
+        builder.ToTable("UserFlights");
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id).ValueGeneratedOnAdd();

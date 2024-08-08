@@ -18,24 +18,20 @@ public class TokenService(IOptions<JWT> jwt, UserManager<ApplicationUser> userMa
 
     private async Task<IEnumerable<Claim>> GetClams(ApplicationUser user)
     {
+
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Id), //ClaimTypes.NameIdentifier  is unique name for the user (لليوزر id عادة بكون  ) => it appear as nameid
+            new Claim( ClaimTypes.Name, user.UserName!), // it appear as unique_name
+            new Claim( ClaimTypes.Email, user.Email!), // it appear as email
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        };
+
         var userClams = await _userManager.GetClaimsAsync(user);
         var userRoles = await _userManager.GetRolesAsync(user);
 
-
-        StringBuilder RolesOfUser = new StringBuilder();
-        foreach (var role in userRoles)
-            RolesOfUser.Append(role + ',');
-
-
-        var claims = new[]
-        {
-            new Claim("Id", user.Id),
-            new Claim("Name", user.UserName!),
-            new Claim("Email", user.Email!),//ClaimTypes.Email
-            new Claim("Roles", RolesOfUser.ToString()[..^1]),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        }.Union(userClams);
-
+        claims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
+        claims.AddRange(userClams);
 
         return claims;
     }
@@ -48,13 +44,15 @@ public class TokenService(IOptions<JWT> jwt, UserManager<ApplicationUser> userMa
         var symmetricSecurityKey = new SymmetricSecurityKey(key);
         var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
 
+        //  services هو يلي بيحمل معلومات التوكن ومعلومات اليوزر عشان لما اخلق توكن اخلقها بنفس المعلومات يلي حددتها في SecurityTokenDescriptor ال     
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddDays(_jwt.DurationInDays),
-            SigningCredentials = signingCredentials,
+            SigningCredentials = signingCredentials, //  توقيع أوراق الاعتماد
             Audience = _jwt.Audience,
             Issuer = _jwt.Issuer,
+            Expires = DateTime.UtcNow.AddDays(_jwt.DurationInDays),
+            // لحد هون انا حددت معلومات التوكن ولكن ما وضعت فيها معلومات عن اليوزر
+            Subject = new ClaimsIdentity(claims),
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -68,9 +66,10 @@ public class TokenService(IOptions<JWT> jwt, UserManager<ApplicationUser> userMa
     }
 
 
-    public string GetValueFromToken(string token, string key= "Roles")
+    public string GetValueFromToken(string token, string key = "Roles")
     {
-        //var JwtToken = token.Replace("Bearer ", ""); //  or use => var jwt = token[7..]; remove "Bearer " from the token
+        //  var JwtToken = token.Replace("Bearer ", "");
+        // or ure=> var JwtToken = token["Bearer ".Length..]; // remove "Bearer " from the token
         var handler = new JwtSecurityTokenHandler();
         var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
         var value = jsonToken.Claims.First(claim => claim.Type == key).Value;

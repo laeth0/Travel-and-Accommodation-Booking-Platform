@@ -10,6 +10,8 @@ internal class FlightEntityTypeConfiguration : IEntityTypeConfiguration<Flight>
 {
     public void Configure(EntityTypeBuilder<Flight> builder)
     {
+        builder.ToTable("Flights");
+
         builder.HasKey(f => f.Id);
         builder.Property(f => f.Id).ValueGeneratedOnAdd();
 

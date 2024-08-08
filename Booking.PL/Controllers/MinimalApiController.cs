@@ -5,9 +5,8 @@
 namespace Booking.PL.Controllers;
 
 [ApiController, Route("/")]
-public class GeneralController : ControllerBase
+public class MinimalApiController : ControllerBase
 {
-
 
     [HttpGet]
     public ActionResult Index()

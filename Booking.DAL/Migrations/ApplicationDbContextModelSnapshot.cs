@@ -130,7 +130,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Country", b =>
@@ -153,7 +153,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country");
+                    b.ToTable("Countries", (string)null);
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Flight", b =>
@@ -184,7 +184,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Flights");
+                    b.ToTable("Flights", (string)null);
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Residence", b =>
@@ -239,7 +239,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Residences");
+                    b.ToTable("Residences", (string)null);
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Review", b =>
@@ -274,7 +274,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.Room", b =>
@@ -307,7 +307,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasIndex("ResidenceId");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Rooms", (string)null);
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.RoomBooking", b =>
@@ -344,7 +344,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("GuestRooms");
+                    b.ToTable("RoomBookings", (string)null);
                 });
 
             modelBuilder.Entity("Booking.DAL.Entities.UserFlight", b =>
@@ -372,7 +372,7 @@ namespace Booking.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserFlights");
+                    b.ToTable("UserFlights", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

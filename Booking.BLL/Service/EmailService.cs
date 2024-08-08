@@ -8,7 +8,26 @@ using MimeKit;
 namespace Booking.BLL.Service;
 public class EmailService(IOptions<Email> email) : IEmailService
 {
+    /*
+    Options pattern is a design pattern in .NET that allows you to bind the configuration settings :-
 
+    1. IOptions is registered as singleton 
+
+    2. IOptionsSnapshot is registered as scoped
+    
+    3. IOptionsMonitor is registered as singleton,
+        but it is used to monitor the changes in the configuration and when the configuration changes,
+        it will update the options object.
+        Emample:-
+                public class MyService
+                {
+                    private readonly Email _email;
+                    public MyService(IOptionsMonitor<Email> email)
+                    {
+                        _email =  email.CurrentValue;
+                    }
+                }
+    */
     private readonly Email _email = email.Value;
 
 

@@ -1,6 +1,7 @@
 ﻿
 
 
+
 namespace Booking.PL.ServiceConfiguration;
 public static class ConfigureApiForJWTService // Extension methods must be created in a non-generic static class
 {
@@ -8,25 +9,44 @@ public static class ConfigureApiForJWTService // Extension methods must be creat
     {
         // watch this vedio https://www.youtube.com/watch?v=yEQoDNHWzlE&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=74
 
+
+
+        //   على هاي التوكن Validate وكيف يعمل jwt هون انا بقول للسستم تاعي انو يدعم ال 
+        // اما عملية انشاء التوكن والتحقق منها بتكون في الكلاس اللي بعمل فيه السيرفس
+
+        var jwtSettings = config.GetSection("JWT").Get<JWT>();
+
+
         services.AddAuthentication(options =>
         {
+            // here i put JwtBearer as the default authentication scheme
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(b =>
+
+
+
+
+            // if the jwt is not default authentication scheme, we should writre => AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, b =>
+        }).AddJwtBearer(jwtBearerOptions =>
         {
-            b.RequireHttpsMetadata = false;
-            b.SaveToken = true;
-            b.TokenValidationParameters = new TokenValidationParameters
+            jwtBearerOptions.RequireHttpsMetadata = false;
+            jwtBearerOptions.SaveToken = true;
+            jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuerSigningKey = true,
                 ValidateIssuer = false,
+                ValidIssuer = jwtSettings.Issuer,
                 ValidateAudience = false,
+                ValidAudience = jwtSettings.Audience,
+
+                ValidateIssuerSigningKey = true,
+
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Key)),// SymmetricSecurityKey is accept only byte array, so we need to convert the key to byte array
+
                 ValidateLifetime = true,
-                ValidIssuer = config["JWT:Issuer"],
-                ValidAudience = config["JWT:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config["JWT:Key"])),
             };
         });
+
+
 
         return services;
     }
