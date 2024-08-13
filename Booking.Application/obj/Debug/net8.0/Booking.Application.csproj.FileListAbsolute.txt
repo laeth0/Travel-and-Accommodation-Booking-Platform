@@ -1,0 +1,5 @@
+C:\Users\BisanCo\Desktop\Booking\Booking.Application\obj\Debug\net8.0\Booking.Application.csproj.AssemblyReference.cache
+C:\Users\BisanCo\Desktop\Booking\Booking.Application\obj\Debug\net8.0\Booking.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BisanCo\Desktop\Booking\Booking.Application\obj\Debug\net8.0\Booking.Application.AssemblyInfoInputs.cache
+C:\Users\BisanCo\Desktop\Booking\Booking.Application\obj\Debug\net8.0\Booking.Application.AssemblyInfo.cs
+C:\Users\BisanCo\Desktop\Booking\Booking.Application\obj\Debug\net8.0\Booking.Application.csproj.CoreCompileInputs.cache

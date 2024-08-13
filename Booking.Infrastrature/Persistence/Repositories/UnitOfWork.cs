@@ -1,0 +1,98 @@
+﻿
+
+using Booking.BLL.Interfaces;
+using Booking.DAL.Data;
+using Booking.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
+
+namespace Booking.BLL.Repositories
+{
+    public class UnitOfWork : IUnitOfWork, IDisposable
+    {
+        private readonly ApplicationDbContext _DbContext;
+
+        private readonly Lazy<ICityRepository> _cityRepository;
+        private readonly Lazy<ICountryRepository> _countryRepository;
+        private readonly Lazy<IFlightRepository> _flightRepository;
+        private readonly Lazy<IResidenceRepository> _residenceRepository;
+        private readonly Lazy<IReviewRepository> _reviewRepository;
+        private readonly Lazy<IRoomRepository> _roomRepository;
+        private readonly Lazy<IRoomBookingRepository> _roomBookingRepository;
+
+
+        public ICityRepository CityRepository => _cityRepository.Value;
+        public ICountryRepository CountryRepository => _countryRepository.Value;
+        public IFlightRepository FlightRepository => _flightRepository.Value;
+        public IResidenceRepository ResidenceRepository => _residenceRepository.Value;
+        public IReviewRepository ReviewRepository => _reviewRepository.Value;
+        public IRoomRepository RoomRepository => _roomRepository.Value;
+        public IRoomBookingRepository RoomBookingRepository => _roomBookingRepository.Value;
+
+        public UnitOfWork(ApplicationDbContext context)
+        {
+            _DbContext = context;
+            _cityRepository = new Lazy<ICityRepository>(() => new CityRepository(_DbContext));
+            _countryRepository = new Lazy<ICountryRepository>(() => new CountryRepository(_DbContext));
+            _flightRepository = new Lazy<IFlightRepository>(() => new FlightRepository(_DbContext));
+            _residenceRepository = new Lazy<IResidenceRepository>(() => new ResidenceRepository(_DbContext));
+            _reviewRepository = new Lazy<IReviewRepository>(() => new ReviewRepository(_DbContext));
+            _roomRepository = new Lazy<IRoomRepository>(() => new RoomRepository(_DbContext));
+            _roomBookingRepository = new Lazy<IRoomBookingRepository>(() => new RoomBookingRepository(_DbContext));
+        }
+
+
+
+        public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+        {
+            //It will Begin the transaction on the underlying connection
+            await _DbContext.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
+        }
+
+        //If all the Transactions are completed successfully then we need to call this Commit() 
+        //method to Save the changes permanently in the database
+        public async Task CommitAsync(CancellationToken cancellationToken = default)
+        {
+            //Commits the underlying store transaction
+            if (_DbContext.Database.CurrentTransaction is null) return;
+
+            await _DbContext.Database.CommitTransactionAsync(cancellationToken);
+        }
+
+        //If at least one of the Transaction is Failed then we need to call this Rollback() 
+        //method to Rollback the database changes to its previous state
+        public async Task RollbackAsync(CancellationToken cancellationToken = default)
+        {
+            if (_DbContext.Database.CurrentTransaction is null) return;
+
+            //Rolls back the underlying store transaction
+            await _DbContext.Database.RollbackTransactionAsync(cancellationToken);
+
+            //_DbContext.Database.CurrentTransaction.Dispose(); //The Dispose method is already called on the transaction object when you call RollbackTransactionAsync, so you don't need to call it again.
+
+        }
+
+
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            _DbContext.ChangeTracker.DetectChanges();
+
+            foreach (var entry in _DbContext.ChangeTracker.Entries<IAuditableEntity>())
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedAtUtc = DateTime.UtcNow;
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.ModifiedAtUtc = DateTime.UtcNow;
+                        break;
+                }
+
+            return await _DbContext.SaveChangesAsync(cancellationToken);
+        }
+
+
+        public void Dispose() => _DbContext.Dispose();
+
+    }
+}
