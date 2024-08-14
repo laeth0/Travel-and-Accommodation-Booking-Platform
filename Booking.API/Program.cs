@@ -19,9 +19,10 @@ public class Program
         builder.Logging.AddDefaultLoggingService();
 
 
-        builder.Services.AddApplication()
-            .AddWebComponents()
-            .AddInfrastructure(builder.Configuration);
+        builder.Services.AddWebComponents()
+            .AddInfrastructure(builder.Configuration)
+            .AddApplication();
+
 
 
 

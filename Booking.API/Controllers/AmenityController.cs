@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Booking.API.Controllers
 {
 
-
     public class AmenityController : BaseController
     {
 
@@ -19,7 +18,6 @@ namespace Booking.API.Controllers
             : base(mapper, logger, mediator)
         {
         }
-
 
 
 
