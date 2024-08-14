@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MNU9XMn4p8PpBtHA+NXyUI8ynKYZfPlPQt/HMWdnQNWgbm2cLSCMblzHtQ7TYGgxYFXVLJ+CK0DyTed1scXu4Q==",
+  "dgSpecHash": "0IILdmOs/hMASP+Le4Ky6CUDSRr0FQAGjxfX+OwVksKiVPNkYga4HgyiDq5OyRwLF240Xl1O+uRR8Me7qRwPew==",
   "success": true,
   "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.Application\\Booking.Application.csproj",
   "expectedPackageFiles": [
@@ -26,7 +26,9 @@
     "C:\\Users\\BisanCo\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
-    "C:\\Users\\BisanCo\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+    "C:\\Users\\BisanCo\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\BisanCo\\.nuget\\packages\\sharpgrip.fluentvalidation.autovalidation.mvc\\1.4.0\\sharpgrip.fluentvalidation.autovalidation.mvc.1.4.0.nupkg.sha512",
+    "C:\\Users\\BisanCo\\.nuget\\packages\\sharpgrip.fluentvalidation.autovalidation.shared\\1.4.0\\sharpgrip.fluentvalidation.autovalidation.shared.1.4.0.nupkg.sha512"
   ],
   "logs": []
 }

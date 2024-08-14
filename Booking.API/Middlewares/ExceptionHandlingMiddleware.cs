@@ -1,6 +1,9 @@
 ﻿
-using System.Net.Mime;
-using System.Text.Json;
+
+
+using Booking.Domain.Exceptions;
+using Booking.PL.CustomExceptions;
+
 
 namespace Booking.API.Middlewares;
 public class ExceptionHandlingMiddleware
@@ -26,33 +29,31 @@ public class ExceptionHandlingMiddleware
         }
     }
 
+
+
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         _logger.LogError(exception, exception.Message);
-        context.Response.ContentType = MediaTypeNames.Application.Json;
 
-        ErrorResponse? ResponseModel = default;
-
-        if (exception is NotFoundException)
+        var StatusCode = exception switch
         {
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            BadRequestException => StatusCodes.Status400BadRequest,
+            ConflictException => StatusCodes.Status409Conflict,
+            ForbiddenException => StatusCodes.Status403Forbidden,
+            NotFoundException => StatusCodes.Status404NotFound,
+            UnauthorizedException => StatusCodes.Status401Unauthorized,
+            ValidationException => StatusCodes.Status422UnprocessableEntity,
+            _ => StatusCodes.Status500InternalServerError
+        };
 
-            ResponseModel = new()
-            {
-                Status = context.Response.StatusCode,
-                Error = exception.Message,
-                Instance = $"{context.Request.Method} {context.Request.Path}",
-                Title = "Not Found",
-                Type = context.TraceIdentifier,
-                Detail = "The specified resource was not found"
-            };
 
-        }
+        await Results.Problem(exception.Message,
+            statusCode: StatusCode,
+            instance: $"{context.Request.Method} {context.Request.Path}"
+            ).ExecuteAsync(context);
 
-        var Options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-        var Json = JsonSerializer.Serialize(ResponseModel, Options);
-        await context.Response.WriteAsync(Json);
 
-        return;
     }
+
+
 }

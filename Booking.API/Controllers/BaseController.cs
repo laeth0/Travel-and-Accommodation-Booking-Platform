@@ -1,26 +1,21 @@
 ﻿
 
-
-
+using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Booking.PL.Controllers
+namespace Booking.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BaseController : ControllerBase
     {
-        protected readonly IUnitOfWork _unitOfWork;
         protected readonly IMapper _mapper;
         protected readonly ILogger<BaseController> _logger;
         protected readonly IMediator _mediator;
 
-        public BaseController(IUnitOfWork unitOfWork,
-            IMapper mapper,
-            ILogger<BaseController> logger,
-            IMediator mediator)
+        public BaseController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
         {
-            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
             _mediator = mediator;

@@ -7,6 +7,7 @@ using Booking.Infrastrature.Data;
 using Booking.Infrastrature.DbContexts;
 using Booking.Infrastrature.Persistence;
 using Booking.Infrastrature.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,11 @@ public static class InfrastructionConfiguration
             options.Password.RequireNonAlphanumeric = false;
         }).AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+
+
+        services.AddValidatorsFromAssembly(typeof(InfrastructionConfiguration).Assembly, ServiceLifetime.Transient);
+        // the lifetime of the validators is scoped by default
 
 
         return services;

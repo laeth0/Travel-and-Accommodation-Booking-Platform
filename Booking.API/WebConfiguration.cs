@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Net;
 using System.Reflection;
 using System.Text.Json.Serialization;
@@ -9,6 +12,62 @@ namespace Booking.API
 {
     public static class WebConfiguration
     {
+        public static IServiceCollection AddWebComponents(this IServiceCollection services)
+        {
+
+            var assembly = Assembly.GetExecutingAssembly();
+            services.AddSwaggerAuthorizeOption();
+            services.AddCustomizingForInvalidResponse();
+            services.AddConfigCORS();
+            services.AddCacheProfileService();
+            services.AddEndpointsApiExplorer(); // Adds the default API explorer service just for minimal api.(EndPoint for minimal api يعني بضفلي سيرفيس انو يبحث جوا المشروع تاعي على )
+
+
+            services.AddAutoMapper(assembly);
+
+
+            services.AddValidatorsFromAssembly(assembly);
+            services.AddFluentValidationAutoValidation();
+
+
+
+
+
+
+
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromHours(3);
+            });
+
+
+
+
+
+            services.AddProblemDetails(options =>
+            {
+                options.CustomizeProblemDetails = (context) =>
+                {
+                    context.ProblemDetails.Extensions["isSuccess"] = false;
+                    context.ProblemDetails.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
+                };
+            });
+
+
+            /*
+            // Register the IExceptionHandler service with dependency injection
+            services.AddExceptionHandler<GlobalExceptionHandler>(); //  It's registered with a singleton lifetime. 
+            services.AddExceptionHandler<BadRequestExceptionHandler>();
+            services.AddExceptionHandler<NotFoundExceptionHandler>(); // The BadRequestExceptionHandler will execute first and try to handle the exception. If the exception isn't handled, NotFoundExceptionHandler will execute next and attempt to handle the exception.
+            services.AddProblemDetails();
+            */
+
+            return services;
+        }
+
+
+
+
 
         public static IServiceCollection AddSwaggerAuthorizeOption(this IServiceCollection services)
         {
@@ -16,6 +75,14 @@ namespace Booking.API
             // this configuration is for swagger to use JWT token for authorization
             // enable swagger authorize option
             // watch this vedio https://www.youtube.com/watch?v=aHR_E-nwGPs&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=78
+
+
+            /*
+            AddSwaggerGen :-
+            1.	Swagger Document Generation: Adds services required to generate Swagger documents.
+            2.	UI Integration: Integrates the Swagger UI, which is a web-based interface that allows you to explore and test your API endpoints interactively. This is particularly useful for developers and testers.
+            3.	Customization: Provides options to customize the generated Swagger document and UI. You can add descriptions, summaries, and other metadata to enhance the documentation.
+            */
             services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -35,22 +102,22 @@ namespace Booking.API
 
 
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
                 {
-                    new OpenApiSecurityScheme
                     {
-                        Reference = new OpenApiReference
+                        new OpenApiSecurityScheme
                         {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header
                         },
-                        Scheme = "oauth2",
-                        Name = "Bearer",
-                        In = ParameterLocation.Header
-                    },
-                    new List<string>()
-                }
-            });
+                        new List<string>()
+                    }
+                });
 
 
 
@@ -107,6 +174,9 @@ namespace Booking.API
 
                     return result;
                 };
+
+
+
             });
 
             return services;

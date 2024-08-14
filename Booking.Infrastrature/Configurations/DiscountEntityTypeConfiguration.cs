@@ -16,18 +16,17 @@ public class DiscountEntityTypeConfiguration : IEntityTypeConfiguration<Discount
     {
 
         builder.ToTable("Discounts", buildAction: x =>
-            x.HasCheckConstraint("CK_StartAndEndDate", "[EndDateUtc] > [StartDateUtc]"));
+        {
+            x.HasCheckConstraint("CK_StartAndEndDate", "[EndDateUtc] > [StartDateUtc]");
+
+            x.HasCheckConstraint("CK_Percentage", $"[Percentage] >= {DiscountConstants.PercentageMinValue} AND [Percentage] <= {DiscountConstants.PercentageMaxValue}");
+        });
 
 
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-        builder.Property(x => x.Percentage)
-            .HasAnnotation("Range", new
-            {
-                Min = DiscountConstants.PercentageMinValue,
-                Max = DiscountConstants.PercentageMaxValue
-            }).IsRequired();
+        builder.Property(x => x.Percentage).IsRequired();
 
         builder.Property(x => x.Description).IsRequired();
 

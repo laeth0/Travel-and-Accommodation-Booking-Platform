@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.API\\wwwroot\\files\\images\\d061410d-d2db-4cc6-b49c-046daba57cddScreenshot 2024-08-08 160120.png",
+      "PackagePath": "staticwebassets\\files\\images\\d061410d-d2db-4cc6-b49c-046daba57cddScreenshot 2024-08-08 160120.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Booking.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Booking.API.props",
+      "PackagePath": "build\\Booking.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Booking.API.props",
+      "PackagePath": "buildMultiTargeting\\Booking.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Booking.API.props",
+      "PackagePath": "buildTransitive\\Booking.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

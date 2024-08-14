@@ -1,29 +1,18 @@
 ﻿
 
 
-namespace Booking.PL.Controllers;
+using AutoMapper;
+using MediatR;
 
-[Route("[controller]")]
-[ApiController]
-public class ResidenceController : ControllerBase
+namespace Booking.API.Controllers;
+
+public class ResidenceController : BaseController
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IServiceManager _serviceManager;
-    private readonly IMapper _mapper;
-    private readonly ILogger<ResidenceController> _logger;
-
-    public ResidenceController(
-        IUnitOfWork unitOfWork,
-        IServiceManager serviceManager,
-        IMapper mapper,
-        ILogger<ResidenceController> logger
-        )
+    public ResidenceController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
+: base(mapper, logger, mediator)
     {
-        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
-        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
+
 
     /*
 

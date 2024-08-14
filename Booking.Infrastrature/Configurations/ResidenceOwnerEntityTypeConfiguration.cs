@@ -11,7 +11,12 @@ internal class ResidenceOwnerEntityTypeConfiguration : IEntityTypeConfiguration<
     public void Configure(EntityTypeBuilder<ResidenceOwner> builder)
     {
         builder.ToTable("ResidenceOwners", x =>
-            x.HasCheckConstraint("CK_PurchaseAndSaleDates", "[SaleDate] > [PurchaseDate]"));
+        {
+            x.HasCheckConstraint("CK_PurchaseAndSaleDates", "[SaleDate] > [PurchaseDate]");
+       
+            x.HasCheckConstraint("CK_OwnershipPercentage", $"[OwnershipPercentage] >= {ResidenceOwnerConstants.OwnershipPercentageMinValue} AND [OwnershipPercentage] <= {ResidenceOwnerConstants.OwnershipPercentageMaxValue}");
+        });
+
 
 
         builder.HasKey(e => new { e.UserId, e.ResidenceId, e.Id });
@@ -23,12 +28,7 @@ internal class ResidenceOwnerEntityTypeConfiguration : IEntityTypeConfiguration<
         builder.Property(e => e.CreatedAtUtc).IsRequired();
 
 
-        builder.Property(e => e.OwnershipPercentage)
-            .HasAnnotation("Range", new
-            {
-                Min = ResidenceOwnerConstants.OwnershipPercentageMinValue,
-                Max = ResidenceOwnerConstants.OwnershipPercentageMaxValue
-            }).IsRequired();
+        builder.Property(e => e.OwnershipPercentage).IsRequired();
 
     }
 }

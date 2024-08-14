@@ -3,8 +3,8 @@
 using Booking.Domain.Interfaces.Services;
 using Booking.Infrastrature.Services.Email;
 using Booking.Infrastrature.Services.Files;
+using Booking.Infrastrature.Services.JwtToken;
 using Microsoft.Extensions.DependencyInjection;
-using TABP.Infrastructure.Auth.Jwt;
 
 
 namespace Booking.Infrastrature.Services;

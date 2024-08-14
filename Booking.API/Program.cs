@@ -4,7 +4,7 @@
 using Booking.API.Middlewares;
 using Booking.Application;
 using Booking.Infrastrature;
-using Microsoft.AspNetCore.Identity;
+using Booking.Infrastrature.DataSeeding;
 
 namespace Booking.API;
 public class Program
@@ -16,52 +16,12 @@ public class Program
         //dependency injection  هو عبارة عن وعاء بضع فيه الخدمات يلي رح تكون متاحة في المشروع تاعي عشان استعملها فيما بعد عن طريق  Services object  ال 
 
 
-
-        builder.Services.AddSwaggerAuthorizeOption();
-        builder.Services.AddCustomizingForInvalidResponse();
-        builder.Services.AddConfigCORS();
-        builder.Services.AddCacheProfileService();
         builder.Logging.AddDefaultLoggingService();
-        builder.Services.AddEndpointsApiExplorer(); // Adds the default API explorer service just for minimal api.(EndPoint for minimal api يعني بضفلي سيرفيس انو يبحث جوا المشروع تاعي على )
-
-
-        /*
-            AddSwaggerGen :-
-            1.	Swagger Document Generation: Adds services required to generate Swagger documents.
-            2.	UI Integration: Integrates the Swagger UI, which is a web-based interface that allows you to explore and test your API endpoints interactively. This is particularly useful for developers and testers.
-            3.	Customization: Provides options to customize the generated Swagger document and UI. You can add descriptions, summaries, and other metadata to enhance the documentation.
-        */
-        builder.Services.AddSwaggerGen();
-
-
-        builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
-        {
-            options.TokenLifespan = TimeSpan.FromHours(3);
-        });
 
 
         builder.Services.AddApplication()
+            .AddWebComponents()
             .AddInfrastructure(builder.Configuration);
-
-
-        builder.Services.AddProblemDetails(options =>
-        {
-            options.CustomizeProblemDetails = (context) =>
-            {
-                context.ProblemDetails.Extensions["isSuccess"] = false;
-                context.ProblemDetails.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
-            };
-        });
-
-
-        /*
-        // Register the IExceptionHandler service with dependency injection
-        builder.Services.AddExceptionHandler<GlobalExceptionHandler>(); //  It's registered with a singleton lifetime. 
-        builder.Services.AddExceptionHandler<BadRequestExceptionHandler>();
-        builder.Services.AddExceptionHandler<NotFoundExceptionHandler>(); // The BadRequestExceptionHandler will execute first and try to handle the exception. If the exception isn't handled, NotFoundExceptionHandler will execute next and attempt to handle the exception.
-        builder.Services.AddProblemDetails();
-        */
-
 
 
 
@@ -113,6 +73,8 @@ public class Program
 
         await app.SeedRoles();
         await app.SeedUsers();
+        await app.SeedAmenity();
+        await app.SeedRoomType();
 
         app.Run();// بتشغل البرنامج وبضلو البرنامج واقف هون لحتى ينتهي البرنامج وبس اطفأ البرنامج بروح ينفذ الاسطر يلي بعد هاد السطر
         /*

@@ -2,204 +2,90 @@
 
 
 
-namespace Booking.PL.Controllers;
+using AutoMapper;
+using Booking.API.CustomizeResponses;
+using Booking.API.DTOs.City;
+using Booking.Application.Mediatr;
+using Booking.Domain.Messages;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
-[ApiController, Route("[controller]")]
-public class CityController : ControllerBase
+namespace Booking.API.Controllers;
+
+public class CityController : BaseController
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-    private readonly ILogger<CityController> _logger;
-    private readonly IServiceManager _serviceManager;
 
-    public CityController(
-        IUnitOfWork unitOfWork,
-        IServiceManager serviceManager,
-        IMapper mapper,
-        ILogger<CityController> logger
-        )
+    public CityController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
+        : base(mapper, logger, mediator)
     {
-        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
-        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
 
-    
+
+
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     //[ResponseCache(CacheProfileName = "Default60Sec")] //[ResponseCache(Duration =60,Location =ResponseCacheLocation.Client)]
-    public async Task<ActionResult> Index(CancellationToken cancellationToken,
-        [FromQuery] int PageSize = 0,
-        [FromQuery] int PageNumber = 0,
-        [FromQuery] string? CountryId = null)
+    public async Task<ActionResult> Index(CancellationToken cancellationToken = default)
     {
 
-        Guid GuidCountryId = Guid.Empty;
-        if (!string.IsNullOrEmpty(CountryId) && !Guid.TryParse(CountryId, out GuidCountryId))
-            return BadRequest(new ErrorResponse
-            {
-                Status = (int)HttpStatusCode.BadRequest,
-                Error = "Invalid Country Id"
-            });
-
-
-        IReadOnlyList<City> cities;
-        if (string.IsNullOrEmpty(CountryId))
-            cities = await _unitOfWork.CityRepository.GetAllAsync(PageSize, PageNumber, cancellationToken: cancellationToken);
-        else
-            cities = await _unitOfWork.CityRepository.GetAllAsync(PageSize, PageNumber, x => x.CountryId == GuidCountryId, cancellationToken: cancellationToken);
-
-
-        return Ok(new SuccessResponse
+        var response = new SuccessResponse
         {
-            StatusCode = HttpStatusCode.OK,
-            Message = "Cities are retrieved successfully",
-            Result = _mapper.Map<IReadOnlyList<CityResponseDTO>>(cities)
-        });
+            data = await _mediator.Send(new GetAllCityQuery(), cancellationToken)
+        };
 
-
+        return Ok(response);
 
     }
 
-    /*
 
-    
-
-    [HttpGet("[action]/{id:Guid}")]
+    [HttpGet("[action]/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Details(Guid id, CancellationToken cancellationToken)
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> Details(Guid id, CancellationToken cancellationToken = default)
     {
-        try
+
+        var response = new SuccessResponse
         {
-            var city = await _unitOfWork.CityRepository.GetByIdAsync(id, cancellationToken);
+            data = await _mediator.Send(new GetSpecificCityQuery(id), cancellationToken)
+        };
 
-            if (city is null)
-                return NotFound(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Errors = new List<string> { "City not found" }
-                });
+        return Ok(response);
 
-
-            return Ok(new SuccessResponse
-            {
-                IsSuccess = true,
-                StatusCode = HttpStatusCode.OK,
-                Message = "City is retrieved successfully",
-                Result = _mapper.Map<CityResponseDTO>(city)
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
     }
-    */
 
 
 
-    /*
-    when putting
-    [Authorize(Roles ="Manager")]
-    [Authorize(Roles = "Admin")]
-    this mean that the user should have the two roles to access this method (كانو اند)
 
-    but when putting
-    [Authorize(Roles = "Manager,Admin")]
-    this mean that the user should have one of the two roles to access this method (كانو اور)
-     */
 
-    /*
     [HttpPost("[action]")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrorResponse))]// if the user role is not Admin or Manager
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrorResponse))] // if there is no token(no role)
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Ctrate([FromForm] CityCreateRequestDTO model,
-        [FromHeader] string Authorization,
-        CancellationToken cancellationToken)
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]// if the user role is not Admin or Manager
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))] // if there is no token(no role)
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> Create([FromForm] CityCreateRequest model, CancellationToken cancellationToken = default)
     {
         // show this vedio https://www.youtube.com/watch?v=pDtDEVbEDdQ&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=16
-        try
+
+        var cityCommand = _mapper.Map<CreateCityCommand>(model);
+
+        var CityResponse = await _mediator.Send(cityCommand, cancellationToken);
+
+        var response = new SuccessResponse
         {
-            if (string.IsNullOrEmpty(Authorization))
-                return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Forbidden,
-                    Errors = new List<string> { "You should send a token" }
-                });
+            StatusCode = HttpStatusCode.Created,
+            data = CityResponse,
+            Message = CityMessages.CityCreated
+        };
 
-            if (!ModelState.IsValid)
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = ModelState.Values
-                                .SelectMany(x => x.Errors)
-                                .Select(x => x.ErrorMessage)
-                                .ToList()
-                });
+        return CreatedAtAction(nameof(Details), new { id = CityResponse.Id }, response);
 
-            var userRoles = _serviceManager.TokenService.GetValueFromToken(Authorization).Split(',');
-            if (!userRoles.Any(x => x == nameof(UserRoles.Manager) || x == nameof(UserRoles.Admin)))
-                return Unauthorized(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Unauthorized,
-                    Errors = new List<string> { "You are not authorized to create a city" }
-                });
-
-            var city = _mapper.Map<City>(model);
-            city.ImageName = (await _serviceManager.FileService.UploadFile(model.Image))!;
-            try
-            {
-                await _unitOfWork.CityRepository.AddAsync(city, cancellationToken);
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-
-                if (!string.IsNullOrEmpty(city.ImageName))
-                    _serviceManager.FileService.DeleteFile(city.ImageName);
-
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { ex.Message }
-                });
-            }
-
-            _logger.LogInformation($"City with id {city.Id} is created");
-
-            return CreatedAtAction(nameof(Details), new { id = city.Id }, new SuccessResponse
-            {
-                StatusCode = HttpStatusCode.Created,
-                Message = "City is created successfully",
-                Result = _mapper.Map<CityResponseDTO>(city)
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-
-        }
     }
 
 
@@ -207,172 +93,54 @@ public class CityController : ControllerBase
 
 
 
-
-    [HttpPut("[action]/{Id}")]
+    [HttpPut("[action]/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Update(Guid Id,
-        [FromForm] CityCreateRequestDTO model,
-        [FromHeader] string Authorization,
-        CancellationToken cancellationToken)
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> Update(Guid id, [FromForm] CityCreateRequest model, CancellationToken cancellationToken = default)
     {
-        try
+        var command = _mapper.Map<UpdateCityCommand>(model,
+            opts => opts.AfterMap((src, dest) => dest.Id = id));
+
+        var response = new SuccessResponse
         {
-            if (string.IsNullOrEmpty(Authorization))
-                return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Forbidden,
-                    Errors = new List<string> { "You should send a valid token" }
-                });
+            data = await _mediator.Send(command, cancellationToken),
+            Message = CityMessages.CityUpdated
+        };
 
-            if (!ModelState.IsValid)
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = ModelState.Values
-                                .SelectMany(x => x.Errors)
-                                .Select(x => x.ErrorMessage)
-                                .ToList()
-                });
+        return Ok(response);
 
-            var userRoles = _serviceManager.TokenService.GetValueFromToken(Authorization).Split(',');
-            if (!userRoles.Any(x => x == nameof(UserRoles.Manager) || x == nameof(UserRoles.Admin)))
-                return Unauthorized(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Unauthorized,
-                    Errors = new List<string> { "You are not authorized to update a city" }
-                });
-
-
-            var City = await _unitOfWork.CityRepository.GetByIdAsync(Id);
-
-            if (City is null)
-                return NotFound(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Errors = new List<string> { "City not found" }
-                });
-
-            var OldImageName = City.ImageName;
-            City = _mapper.Map(model, City);
-
-            if (model.Image is { })
-                City.ImageName = (await _serviceManager.FileService.UploadFile(model.Image))!;
-
-            try
-            {
-                _unitOfWork.CityRepository.Update(City);
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
-                _serviceManager.FileService.DeleteFile(OldImageName);
-
-                return Ok(new SuccessResponse
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Message = "City is updated successfully",
-                    Result = _mapper.Map<CityResponseDTO>(City)
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                _serviceManager.FileService.DeleteFile(City.ImageName);
-
-                if (!string.IsNullOrEmpty(City.ImageName))
-                    _serviceManager.FileService.DeleteFile(City.ImageName);
-
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { ex.Message }
-                });
-            }
-
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
     }
 
 
 
-
-
-
-
-
-    [HttpDelete("[action]/{id}")]
+    [HttpDelete("[action]/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Delete(Guid id,
-        [FromHeader] string Authorization,
-        CancellationToken cancellationToken)
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> Delete(Guid id, CancellationToken cancellationToken = default)
     {
-        try
+
+        await _mediator.Send(new DeleteCityCommand(id), cancellationToken);
+
+        var response = new SuccessResponse
         {
-            if (string.IsNullOrEmpty(Authorization))
-                return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Forbidden,
-                    Errors = new List<string> { "You should send a valid token" }
-                });
+            Message = CityMessages.CityDeleted
+        };
 
-            var userRoles = _serviceManager.TokenService.GetValueFromToken(Authorization).Split(',');
-            if (!userRoles.Any(x => x == nameof(UserRoles.Manager) || x == nameof(UserRoles.Admin)))
-                return Unauthorized(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Unauthorized,
-                    Errors = new List<string> { "You are not authorized to change user role" }
-                });
+        return Ok(response);
 
-
-            var City = await _unitOfWork.CityRepository.GetByIdAsync(id);
-            if (City is null)
-                return NotFound(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Errors = new List<string> { "City not found" }
-                });
-
-
-            _unitOfWork.CityRepository.Delete(City);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
-            _serviceManager.FileService.DeleteFile(City.ImageName);
-
-            return Ok(new SuccessResponse
-            {
-                StatusCode = HttpStatusCode.OK,
-                Message = "City is deleted successfully",
-                Result = _mapper.Map<CityResponseDTO>(City)
-            });
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
     }
 
 
 
-    */
+
+
 }

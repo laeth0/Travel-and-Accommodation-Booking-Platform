@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "qbwiGfN99dx5+xnWpo2hw49Ciwm5h7bizjxEYmn8hv0=",
+  "Source": "Booking.API",
+  "BasePath": "_content/Booking.API",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Booking.API\\wwwroot",
+      "Source": "Booking.API",
+      "ContentRoot": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.API\\wwwroot\\",
+      "BasePath": "_content/Booking.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

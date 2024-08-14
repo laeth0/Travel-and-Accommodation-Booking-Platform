@@ -1,31 +1,44 @@
 ﻿
 
-namespace Booking.PL.Controllers;
 
-[ApiController, Route("[controller]")]
-public class RoomController : ControllerBase
+using AutoMapper;
+using Booking.API.CustomizeResponses;
+using Booking.Application.Mediatr;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Booking.API.Controllers;
+
+public class RoomController : BaseController
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-    private readonly ILogger<RoomController> _logger;
-    private readonly IServiceManager _serviceManager;
-
-    public RoomController(
-        IUnitOfWork unitOfWork,
-        IServiceManager serviceManager,
-        IMapper mapper,
-        ILogger<RoomController> logger
-        )
+    public RoomController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
+     : base(mapper, logger, mediator)
     {
-        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
-        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
 
-    /*
 
+
+    [HttpGet("[action]")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    //[ResponseCache(CacheProfileName = "Default60Sec")] //[ResponseCache(Duration =60,Location =ResponseCacheLocation.Client)]
+    public async Task<ActionResult> GetAllRoomType(CancellationToken cancellationToken = default)
+    {
+
+        var query = new GetAllRoomTypeQuery();
+
+        var RoomTypes = await _mediator.Send(query, cancellationToken);
+
+        var response = new SuccessResponse { data = RoomTypes };
+
+        return Ok(response);
+
+    }
+
+
+
+    /*
     /// <summary>
     ///  get all rooms with optional pagination 
     /// </summary>

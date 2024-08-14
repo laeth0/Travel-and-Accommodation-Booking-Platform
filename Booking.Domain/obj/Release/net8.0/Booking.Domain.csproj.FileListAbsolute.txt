@@ -1,0 +1,13 @@
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\bin\Release\net8.0\Booking.Domain.deps.json
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\bin\Release\net8.0\Booking.Domain.dll
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\bin\Release\net8.0\Booking.Domain.pdb
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\Booking.Domain.csproj.AssemblyReference.cache
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\Booking.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\Booking.Domain.AssemblyInfoInputs.cache
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\Booking.Domain.AssemblyInfo.cs
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\Booking.Domain.csproj.CoreCompileInputs.cache
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\Booking.Domain.sourcelink.json
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\Booking.Domain.dll
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\refint\Booking.Domain.dll
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\Booking.Domain.pdb
+C:\Users\BisanCo\Desktop\Booking\Booking.Domain\obj\Release\net8.0\ref\Booking.Domain.dll

@@ -12,7 +12,7 @@ public interface IRepository<TEntity> where TEntity : class
             CancellationToken cancellationToken = default
             );
 
-    Task<TEntity?> GetByPrimaryKeysAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<TEntity?> FindAsync(Guid id, CancellationToken cancellationToken = default);
     Task<TEntity?> GetByPrimaryKeysAsync(
            CancellationToken cancellationToken = default,
            params object?[]? keyValues

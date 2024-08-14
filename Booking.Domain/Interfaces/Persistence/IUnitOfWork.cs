@@ -2,6 +2,7 @@
 
 
 using Booking.Domain.Interfaces.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Booking.Core.Interfaces.Persistence;
 public interface IUnitOfWork
@@ -20,7 +21,7 @@ public interface IUnitOfWork
     IRoomRepository RoomRepository { get; }
     IRoomTypeRepository RoomTypeRepository { get; }
 
-    Task BeginTransactionAsync(CancellationToken cancellationToken = default);
+    Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitAsync(CancellationToken cancellationToken = default);
     Task RollbackAsync(CancellationToken cancellationToken = default);
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

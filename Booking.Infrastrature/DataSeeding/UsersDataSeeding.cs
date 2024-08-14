@@ -40,7 +40,7 @@ public static class UsersDataSeeding
         };
 
         // Create the user with a password
-        var result = await userManager.CreateAsync(user, "string");
+        var result = await userManager.CreateAsync(user, "Manager@123");
 
 
         // If the user was successfully created, add them to the Manager role

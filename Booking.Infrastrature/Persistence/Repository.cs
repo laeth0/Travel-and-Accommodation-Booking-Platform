@@ -39,7 +39,7 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
     }
 
 
-    public async Task<TEntity?> GetByPrimaryKeysAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<TEntity?> FindAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _DbContext.Set<TEntity>().FindAsync(id, cancellationToken);
 

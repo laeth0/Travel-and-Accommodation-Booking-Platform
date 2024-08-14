@@ -6,6 +6,7 @@ using Booking.Domain.Interfaces.Persistence.Repositories;
 using Booking.Infrastrature.Data;
 using Booking.Infrastrature.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 
 namespace Booking.Infrastrature.Persistence;
@@ -62,10 +63,10 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 
 
-    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
     {
         //It will Begin the transaction on the underlying connection
-        await _DbContext.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
+       return await _DbContext.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
     }
 
     //If all the Transactions are completed successfully then we need to call this Commit() 
@@ -106,7 +107,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
                     entry.Entity.ModifiedAtUtc = DateTime.UtcNow;
                     break;
             }
-
+        
         return await _DbContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -119,7 +120,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
          */
         _DbContext.Dispose();
         GC.SuppressFinalize(this);
-
     }
 }
 

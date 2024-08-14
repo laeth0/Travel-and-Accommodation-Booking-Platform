@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "ifSBVDW/v6f7WMf5OM25V8bguMF+RzqWgVVoQoU5j/j5BPwPREd2quw+dwNU6WY0GGQwRVRUgIVBZwm1AUG9jQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.Shared\\Booking.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\BisanCo\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",
+    "C:\\Users\\BisanCo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\BisanCo\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
+    "C:\\Users\\BisanCo\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

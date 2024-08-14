@@ -3,15 +3,15 @@
 
 
 using Booking.Domain.Interfaces.Services;
-using Booking.Infrastrature.Services.JwtToken;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Booking.Shared.OptionsValidation;
 
-namespace TABP.Infrastructure.Auth.Jwt;
 
+namespace Booking.Infrastrature.Services.JwtToken;
 public static class AuthConfiguration // Extension methods must be created in a non-generic static class
 {
     // to learn more about this topic, visit => https://www.linkedin.com/posts/anton-martyniuk-93980994_csharp-dotnet-programming-activity-7220699033999208448-W80r?utm_source=share&utm_medium=member_desktop
@@ -20,19 +20,9 @@ public static class AuthConfiguration // Extension methods must be created in a 
       this IServiceCollection services)
     {
 
-
-
-
-        services.AddOptions<JwtAuthConfig>()
-          .BindConfiguration(nameof(JwtAuthConfig));
-        //services.AddOptions<JwtAuthConfig>().Bind(config.GetSection("JwtAuthConfig"));
-        // this way is better than => services.Configure<JwtAuthConfig>(config.GetSection("JwtAuthConfig"));
-        // Note : .Bind() method is return OptionsBuilder<TOptions> object, se it used Builder Design Pattern
-
-
+        services.AddOptionsWithFIuentVatidation<JwtAuthConfig>(nameof(JwtAuthConfig));
 
         services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
-
 
 
 

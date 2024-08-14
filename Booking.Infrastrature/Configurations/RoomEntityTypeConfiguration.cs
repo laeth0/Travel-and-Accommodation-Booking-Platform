@@ -34,7 +34,7 @@ internal class RoomEntityTypeConfiguration : IEntityTypeConfiguration<Room>
         builder.HasMany(e => e.RoomBookings)
             .WithOne(e => e.Room)
             .HasForeignKey(e => e.RoomId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(e => e.Discounts)
             .WithOne(e => e.Room)

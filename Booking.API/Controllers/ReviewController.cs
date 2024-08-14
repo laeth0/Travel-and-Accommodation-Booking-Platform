@@ -1,36 +1,16 @@
 ﻿
 
-namespace Booking.PL.Controllers;
+using AutoMapper;
+using MediatR;
 
-[ApiController, Route("[controller]")]
-public class ReviewController : ControllerBase
+namespace Booking.API.Controllers;
+
+public class ReviewController : BaseController
 {
 
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IServiceManager _serviceManager;
-    private readonly IMapper _mapper;
-    private readonly ILogger<ReviewController> _logger;
-    private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
-
-    public ReviewController(
-        UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager,
-        RoleManager<IdentityRole> roleManager,
-        IUnitOfWork unitOfWork,
-        IServiceManager serviceManager,
-        IMapper mapper,
-        ILogger<ReviewController> logger
-        )
+    public ReviewController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
+        : base(mapper, logger, mediator)
     {
-        _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
-        _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-        _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
-        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
-        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
 

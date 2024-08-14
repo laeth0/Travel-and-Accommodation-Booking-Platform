@@ -24,11 +24,13 @@ public static class RolesDataSeeding
         var type = typeof(ApplicationRoles);
         FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Static);
 
-        var roles = fields.Select(x => x.GetValue(null).ToString() );
+        var roles = fields.Select(x => x.GetValue(null).ToString());
 
 
         foreach (var role in roles)
             await roleManager.CreateAsync(new IdentityRole(role!));
+
+        return;
 
     }
 }

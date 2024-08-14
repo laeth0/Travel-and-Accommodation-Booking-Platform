@@ -47,7 +47,7 @@ public static class ContextConfiguration
                     .UseSqlServer(connectionString, optionsBuilder =>
                     {
                         optionsBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-                        optionsBuilder.EnableRetryOnFailure(5);
+                        //optionsBuilder.EnableRetryOnFailure(5);// read this https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
                     });
         });
 

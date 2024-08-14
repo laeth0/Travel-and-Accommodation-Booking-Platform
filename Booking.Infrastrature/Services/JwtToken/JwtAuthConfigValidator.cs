@@ -1,22 +1,26 @@
-﻿using FluentValidation;
+﻿
 
-namespace TABP.Infrastructure.Auth.Jwt;
 
+
+using FluentValidation;
+
+namespace Booking.Infrastrature.Services.JwtToken;
 public class JwtAuthConfigValidator : AbstractValidator<JwtAuthConfig>
 {
-  public JwtAuthConfigValidator()
-  {
-    RuleFor(x => x.Key)
-      .NotEmpty();
+    public JwtAuthConfigValidator()
+    {
+        RuleFor(x => x.Key)
+          .NotEmpty();
 
-    RuleFor(x => x.Issuer)
-      .NotEmpty();
+        RuleFor(x => x.Issuer)
+          .NotEmpty();
 
-    RuleFor(x => x.Audience)
-      .NotEmpty();
+        RuleFor(x => x.Audience)
+          .NotEmpty();
 
-    RuleFor(x => x.LifetimeMinutes)
-      .NotEmpty()
-      .GreaterThan(0);
-  }
+        RuleFor(x => x.DurationInDays)
+          .NotEmpty()
+          .GreaterThan(0);
+
+    }
 }

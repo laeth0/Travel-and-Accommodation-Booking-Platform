@@ -2,7 +2,9 @@
 
 
 
-namespace Booking.PL.Controllers;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Booking.API.Controllers;
 
 [ApiController, Route("/")]
 public class MinimalApiController : ControllerBase
