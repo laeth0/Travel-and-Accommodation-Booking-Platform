@@ -2,9 +2,11 @@
 
 
 
+
+
 using AutoMapper;
 using Booking.API.CustomizeResponses;
-using Booking.API.DTOs.City;
+using Booking.API.DTOs;
 using Booking.Application.Mediatr;
 using Booking.Domain.Messages;
 using MediatR;
@@ -59,6 +61,25 @@ public class CityController : BaseController
 
     }
 
+
+
+    [HttpGet("[action]/{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> GetResidenceForSpecificCity(Guid id, CancellationToken cancellationToken = default)
+    {
+
+        var query = new GetResidenceForSpecificCityQuery(id);
+
+        var data = await _mediator.Send(query, cancellationToken);
+
+        var response = new SuccessResponse { data = data };
+
+        return Ok(response);
+
+    }
 
 
 

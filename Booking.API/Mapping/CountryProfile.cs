@@ -12,8 +12,14 @@ public class CountryProfile : Profile
     {
         CreateMap<CountryCreateRequest, CreateCountryCommand>();
         CreateMap<CountryCreateRequest, UpdateCountryCommand>();
-        CreateMap<UpdateCountryCommand, Country>().ForMember(x => x.ImageName,
+
+        CreateMap<UpdateCountryCommand, Country>()
+            .ForMember(x => x.ImagePublicId,
+            opt => opt.Ignore())
+            .ForMember(x => x.ImageUrl,
             opt => opt.Ignore());
+
+
         CreateMap<CreateCountryCommand, Country>();
         CreateMap<Country, CountryResponse>();
 

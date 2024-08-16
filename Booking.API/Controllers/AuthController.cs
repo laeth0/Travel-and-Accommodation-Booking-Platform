@@ -5,8 +5,7 @@
 using AutoMapper;
 using Booking.API.CustomizeResponses;
 using Booking.API.DTOs;
-using Booking.Application.Mediatr.Users.Login;
-using Booking.Application.Mediatr.Users.Register;
+using Booking.Application.Mediatr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

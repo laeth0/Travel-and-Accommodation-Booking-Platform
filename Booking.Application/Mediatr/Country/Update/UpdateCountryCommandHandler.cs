@@ -12,14 +12,14 @@ public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand,
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IFileService _fileService;
+    private readonly ICloudinaryService _cloudinaryService;
 
-    public UpdateCountryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IFileService fileService)
+    public UpdateCountryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
     {
 
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _fileService = fileService;
+        _cloudinaryService = cloudinaryService;
     }
 
 
@@ -39,10 +39,7 @@ public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand,
 
         _unitOfWork.CountryRepository.Update(Country);
 
-        _fileService.DeleteFile(Country.ImageName);
-
-        Country.ImageName = await _fileService.UploadFileAsync(request.Image) ?? "";
-
+        (Country.ImagePublicId, Country.ImageUrl) = await _cloudinaryService.ReplaceImageAsync(Country.ImagePublicId, request.Image, cancellationToken);
 
         return _mapper.Map<CountryResponse>(Country);
     }

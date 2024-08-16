@@ -5,6 +5,7 @@
 using AutoMapper;
 using Booking.API.CustomizeResponses;
 using Booking.Application.Mediatr;
+using Booking.Domain.Interfaces.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ namespace Booking.API.Controllers
     public class AmenityController : BaseController
     {
 
-        public AmenityController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
+        public AmenityController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator, ICloudinaryService cloudinaryService)
             : base(mapper, logger, mediator)
         {
         }
@@ -37,10 +38,6 @@ namespace Booking.API.Controllers
             return Ok(response);
 
         }
-
-
-
-
 
 
     }

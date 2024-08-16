@@ -8,12 +8,12 @@ namespace Booking.Application.Mediatr;
 public class DeleteCityCommandHandler : IRequestHandler<DeleteCityCommand, Unit>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IFileService _fileService;
+    private readonly ICloudinaryService _cloudinaryService;
 
-    public DeleteCityCommandHandler(IUnitOfWork unitOfWork, IFileService fileService)
+    public DeleteCityCommandHandler(IUnitOfWork unitOfWork, ICloudinaryService cloudinaryService)
     {
         _unitOfWork = unitOfWork;
-        _fileService = fileService;
+        _cloudinaryService = cloudinaryService;
     }
 
     public async Task<Unit> Handle(DeleteCityCommand request, CancellationToken cancellationToken)
@@ -22,7 +22,7 @@ public class DeleteCityCommandHandler : IRequestHandler<DeleteCityCommand, Unit>
             ?? throw new NotFoundException(CityMessages.NotFound);
 
         _unitOfWork.CityRepository.Delete(city);
-        _fileService.DeleteFile(city.ImageName);
+        await _cloudinaryService.DeleteImageAsync(city.ImagePublicId);
 
         return Unit.Value;
 

@@ -76,6 +76,9 @@ public class Program
         await app.SeedUsers();
         await app.SeedAmenity();
         await app.SeedRoomType();
+        await app.SeedResidenceType();
+
+        app.MapGet("/", () => "Hello World!");
 
         app.Run();// بتشغل البرنامج وبضلو البرنامج واقف هون لحتى ينتهي البرنامج وبس اطفأ البرنامج بروح ينفذ الاسطر يلي بعد هاد السطر
         /*

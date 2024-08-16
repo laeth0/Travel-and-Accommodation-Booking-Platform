@@ -9,6 +9,7 @@ C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\O
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\Azure.Identity.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\BouncyCastle.Cryptography.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\Castle.Core.dll
+C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\CloudinaryDotNet.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\FluentValidation.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\MailKit.dll
@@ -40,6 +41,7 @@ C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\O
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.SqlServer.Server.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\MimeKit.dll
+C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\SharpGrip.FluentValidation.AutoValidation.Mvc.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\SharpGrip.FluentValidation.AutoValidation.Shared.dll
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\win-x86\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll

@@ -1,8 +1,12 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.API\\wwwroot\\files\\images\\d061410d-d2db-4cc6-b49c-046daba57cddScreenshot 2024-08-08 160120.png",
-      "PackagePath": "staticwebassets\\files\\images\\d061410d-d2db-4cc6-b49c-046daba57cddScreenshot 2024-08-08 160120.png"
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.API\\wwwroot\\files\\images\\bac6a9eb-f848-4459-828b-a0bcf78f5ac0Screenshot 2024-08-08 160120.png",
+      "PackagePath": "staticwebassets\\files\\images\\bac6a9eb-f848-4459-828b-a0bcf78f5ac0Screenshot 2024-08-08 160120.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.API\\wwwroot\\files\\images\\ed2228df-923d-4863-a031-9e49af4e2573Screenshot 2024-08-08 160120.png",
+      "PackagePath": "staticwebassets\\files\\images\\ed2228df-923d-4863-a031-9e49af4e2573Screenshot 2024-08-08 160120.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Booking.API.Microsoft.AspNetCore.StaticWebAssets.props",

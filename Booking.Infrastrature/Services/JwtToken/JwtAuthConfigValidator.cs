@@ -4,7 +4,7 @@
 
 using FluentValidation;
 
-namespace Booking.Infrastrature.Services.JwtToken;
+namespace Booking.Infrastrature.Services;
 public class JwtAuthConfigValidator : AbstractValidator<JwtAuthConfig>
 {
     public JwtAuthConfigValidator()

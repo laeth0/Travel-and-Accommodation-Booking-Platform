@@ -1,7 +1,7 @@
 ﻿using Booking.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 
-namespace Booking.Infrastrature.Services.Files;
+namespace Booking.Infrastrature.Services;
 public class FileService : IFileService
 {
     public async Task<string?> UploadFileAsync(IFormFile file, string FolderName = "images")// => IFormFile is the type of the file that we want to upload

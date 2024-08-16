@@ -69,7 +69,10 @@ namespace Booking.Infrastrature.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<string>("ImageName")
+                    b.Property<string>("ImagePublicId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -137,7 +140,11 @@ namespace Booking.Infrastrature.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("ImageName")
+                    b.Property<string>("ImagePublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -164,7 +171,11 @@ namespace Booking.Infrastrature.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("ImageName")
+                    b.Property<string>("ImagePublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -243,7 +254,11 @@ namespace Booking.Infrastrature.Migrations
                     b.Property<int>("FloorsNumber")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageName")
+                    b.Property<string>("ImagePublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -269,48 +284,6 @@ namespace Booking.Infrastrature.Migrations
                     b.HasIndex("ResidenceTypeId");
 
                     b.ToTable("Residences", (string)null);
-                });
-
-            modelBuilder.Entity("Booking.Domain.Entities.ResidenceBooking", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("ResidenceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateOnly>("CheckInDateUtc")
-                        .HasColumnType("date");
-
-                    b.Property<DateOnly>("CheckOutDateUtc")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GuestRemarks")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasPrecision(9, 2)
-                        .HasColumnType("decimal(9,2)");
-
-                    b.HasKey("UserId", "ResidenceId", "Id");
-
-                    b.HasIndex("ResidenceId");
-
-                    b.ToTable("ResidenceBookings", null, t =>
-                        {
-                            t.HasCheckConstraint("CK_CorrectDates", "[CheckOutDateUtc] > [CheckInDateUtc]");
-                        });
                 });
 
             modelBuilder.Entity("Booking.Domain.Entities.ResidenceOwner", b =>
@@ -373,41 +346,6 @@ namespace Booking.Infrastrature.Migrations
                     b.ToTable("ResidenceTypes", (string)null);
                 });
 
-            modelBuilder.Entity("Booking.Domain.Entities.Review", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ResidenceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResidenceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Reviews", (string)null);
-                });
-
             modelBuilder.Entity("Booking.Domain.Entities.Room", b =>
                 {
                     b.Property<Guid>("Id")
@@ -424,7 +362,11 @@ namespace Booking.Infrastrature.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageName")
+                    b.Property<string>("ImagePublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -473,26 +415,43 @@ namespace Booking.Infrastrature.Migrations
 
             modelBuilder.Entity("Booking.Domain.Entities.RoomBooking", b =>
                 {
-                    b.Property<Guid>("RoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ResidenceBookingId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ResidenceBookingResidenceId")
+                    b.Property<DateTime>("CheckInDateUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckOutDateUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ResidenceBookingUserId")
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("RoomId", "ResidenceBookingId", "Id");
+                    b.Property<string>("UserRemarks")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("ResidenceBookingUserId", "ResidenceBookingResidenceId", "ResidenceBookingId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("RoomBookings", (string)null);
                 });
@@ -654,7 +613,7 @@ namespace Booking.Infrastrature.Migrations
                     b.HasOne("Booking.Domain.Entities.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -690,25 +649,6 @@ namespace Booking.Infrastrature.Migrations
                     b.Navigation("ResidenceType");
                 });
 
-            modelBuilder.Entity("Booking.Domain.Entities.ResidenceBooking", b =>
-                {
-                    b.HasOne("Booking.Domain.Entities.Residence", "Residence")
-                        .WithMany("ResidenceBookings")
-                        .HasForeignKey("ResidenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Booking.Domain.Entities.ApplicationUser", "User")
-                        .WithMany("ResidenceBookings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Residence");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Booking.Domain.Entities.ResidenceOwner", b =>
                 {
                     b.HasOne("Booking.Domain.Entities.Residence", "Residence")
@@ -719,25 +659,6 @@ namespace Booking.Infrastrature.Migrations
 
                     b.HasOne("Booking.Domain.Entities.ApplicationUser", "User")
                         .WithMany("ResidenceOwners")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Residence");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Booking.Domain.Entities.Review", b =>
-                {
-                    b.HasOne("Booking.Domain.Entities.Residence", "Residence")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ResidenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Booking.Domain.Entities.ApplicationUser", "User")
-                        .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -793,15 +714,15 @@ namespace Booking.Infrastrature.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Booking.Domain.Entities.ResidenceBooking", "ResidenceBooking")
-                        .WithMany()
-                        .HasForeignKey("ResidenceBookingUserId", "ResidenceBookingResidenceId", "ResidenceBookingId")
+                    b.HasOne("Booking.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("RoomBookings")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ResidenceBooking");
-
                     b.Navigation("Room");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -862,11 +783,9 @@ namespace Booking.Infrastrature.Migrations
 
             modelBuilder.Entity("Booking.Domain.Entities.ApplicationUser", b =>
                 {
-                    b.Navigation("ResidenceBookings");
-
                     b.Navigation("ResidenceOwners");
 
-                    b.Navigation("Reviews");
+                    b.Navigation("RoomBookings");
                 });
 
             modelBuilder.Entity("Booking.Domain.Entities.City", b =>
@@ -881,11 +800,7 @@ namespace Booking.Infrastrature.Migrations
 
             modelBuilder.Entity("Booking.Domain.Entities.Residence", b =>
                 {
-                    b.Navigation("ResidenceBookings");
-
                     b.Navigation("ResidenceOwners");
-
-                    b.Navigation("Reviews");
 
                     b.Navigation("Rooms");
                 });

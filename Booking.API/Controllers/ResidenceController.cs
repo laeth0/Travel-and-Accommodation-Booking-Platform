@@ -2,207 +2,130 @@
 
 
 using AutoMapper;
+using Booking.API.CustomizeResponses;
+using Booking.API.DTOs;
+using Booking.Application.Mediatr;
+using Booking.Domain.Messages;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Booking.API.Controllers;
 
 public class ResidenceController : BaseController
 {
     public ResidenceController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
-: base(mapper, logger, mediator)
+            : base(mapper, logger, mediator)
     {
     }
 
 
-    /*
+
+
+
+    [HttpGet("[action]")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    //[ResponseCache(CacheProfileName = "Default60Sec")] //[ResponseCache(Duration =60,Location =ResponseCacheLocation.Client)]
+    public async Task<ActionResult> GetAllResidenceType(CancellationToken cancellationToken = default)
+    {
+
+        var query = new GetAllResidenceTypeQuery();
+
+        var ResidenceTypes = await _mediator.Send(query, cancellationToken);
+
+        var response = new SuccessResponse { data = ResidenceTypes };
+
+        return Ok(response);
+    }
+
+
+
+
 
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     //[ResponseCache(CacheProfileName = "Default60Sec")] //[ResponseCache(Duration =60,Location =ResponseCacheLocation.Client)]
-    public async Task<ActionResult> Index([FromQuery] string? ResidenceType,
-        [FromQuery] string? CityId,
-        [FromQuery] string? OwnerId,
-        [FromQuery] int PageSize = 0,
-        [FromQuery] int PageNumber = 0,
-        CancellationToken cancellationToken = default)
+    public async Task<ActionResult> Index(CancellationToken cancellationToken = default)
     {
-        try
+
+        var response = new SuccessResponse
         {
-            IEnumerable<Residence> Residences = await _unitOfWork.ResidenceRepository.GetAllAsync(PageSize, PageNumber);
+            data = await _mediator.Send(new GetAllResidenceQuery(), cancellationToken)
+        };
 
+        return Ok(response);
 
-            if (!string.IsNullOrEmpty(ResidenceType))
-                Residences = Residences.Where(x => x.Type == ResidenceType);
-
-
-            if (!string.IsNullOrEmpty(CityId))
-            {
-                if (!Guid.TryParse(CityId, out Guid GuidCityId))
-                    return BadRequest(new ErrorResponse
-                    {
-                        StatusCode = HttpStatusCode.BadRequest,
-                        Errors = new List<string> { "Invalid City Id" }
-                    });
-                Residences = Residences.Where(x => x.CityId == GuidCityId);
-            }
-
-
-            if (!string.IsNullOrEmpty(OwnerId))
-                Residences = Residences.Where(x => x.OwnerId == OwnerId);
-
-
-            return Ok(new SuccessResponse
-            {
-                StatusCode = HttpStatusCode.OK,
-                Message = "Residence are retrieved successfully",
-                Result = _mapper.Map<IReadOnlyList<ResidenceResponseDTO>>(Residences.ToList())
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
     }
 
 
-
-
-
-    [HttpGet("[action]/{id}")]
+    [HttpGet("[action]/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<ActionResult> Details(Guid id, CancellationToken cancellationToken = default)
     {
-        try
+
+        var response = new SuccessResponse
         {
-            var Residence = await _unitOfWork.ResidenceRepository.GetByIdAsync(id);
+            data = await _mediator.Send(new GetSpecificResidenceQuery(id), cancellationToken)
+        };
 
-            if (Residence is null)
-                return NotFound(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Errors = new List<string> { "Residence not found" }
-                });
+        return Ok(response);
 
-            return Ok(new SuccessResponse
-            {
-                IsSuccess = true,
-                StatusCode = HttpStatusCode.OK,
-                Message = "Citiy is retrieved successfully",
-                Result = _mapper.Map<ResidenceResponseDTO>(Residence)
-            });
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
     }
+
+
+
+
+    [HttpGet("[action]/{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> GetRoomForSpecificResidence(Guid id, CancellationToken cancellationToken = default)
+    {
+
+        var query = new GetRoomForSpecificResidenceQuery(id);
+
+        var data = await _mediator.Send(query, cancellationToken);
+
+        var response = new SuccessResponse { data = data };
+
+        return Ok(response);
+
+    }
+
 
 
 
 
     [HttpPost("[action]")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrorResponse))]// if the user role is not Admin or Manager
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrorResponse))] // if there is no token(no role)
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Ctrate([FromForm] ResidenceCreateRequestDTO model,
-        [FromHeader] string Authorization,
-        CancellationToken cancellationToken = default)
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]// if the user role is not Admin or Manager
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))] // if there is no token(no role)
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> Create([FromForm] ResidenceCreateRequest model, CancellationToken cancellationToken = default)
     {
         // show this vedio https://www.youtube.com/watch?v=pDtDEVbEDdQ&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=16
-        try
+
+        var ResidenceCommand = _mapper.Map<CreateResidenceCommand>(model);
+
+        var ResidenceResponse = await _mediator.Send(ResidenceCommand, cancellationToken);
+
+        var response = new SuccessResponse
         {
-            if (string.IsNullOrEmpty(Authorization))
-                return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Forbidden,
-                    Errors = new List<string> { "You should send a token" }
-                });
+            StatusCode = HttpStatusCode.Created,
+            data = ResidenceResponse,
+            Message = ResidenceMessages.ResidenceCreated
+        };
 
-            if (!ModelState.IsValid)
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = ModelState.Values
-                                .SelectMany(x => x.Errors)
-                                .Select(x => x.ErrorMessage)
-                                .ToList()
-                });
+        return CreatedAtAction(nameof(Details), new { id = ResidenceResponse.Id }, response);
 
-            var userRoles = _serviceManager.TokenService.GetValueFromToken(Authorization).Split(',');
-            if (!userRoles.Any(x => x == nameof(UserRoles.Manager) || x == nameof(UserRoles.Admin)))
-                return Unauthorized(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Unauthorized,
-                    Errors = new List<string> { "You are not authorized to create a residence" }
-                });
-
-            if (!Enum.GetNames<ResidencesTypes>().Contains(model.Type))
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { "Invalid Residence Type" }
-                });
-
-            var Residence = _mapper.Map<Residence>(model);
-            Residence.ImageName = (await _serviceManager.FileService.UploadFile(model.Image))!;
-            try
-            {
-                await _unitOfWork.ResidenceRepository.AddAsync(Residence);
-                await _unitOfWork.SaveChangesAsync();
-
-                _logger.LogInformation($"Residence with id {Residence.Id} is created");
-
-                return CreatedAtAction(nameof(Details), new { id = Residence.Id }, new SuccessResponse
-                {
-                    StatusCode = HttpStatusCode.Created,
-                    Message = "Residence is created successfully",
-                    Result = _mapper.Map<ResidenceResponseDTO>(Residence)
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-
-                if (!string.IsNullOrEmpty(Residence.ImageName))
-                    _serviceManager.FileService.DeleteFile(Residence.ImageName);
-
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { ex.Message }
-                });
-            }
-
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-
-        }
     }
 
 
@@ -210,190 +133,51 @@ public class ResidenceController : BaseController
 
 
 
-
-    [HttpPut("[action]")]
+    [HttpPut("[action]/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Update([FromForm] ResidenceUpdateRequestDTO model,
-        [FromHeader] string Authorization,
-        CancellationToken cancellationToken = default)
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> Update(Guid id, [FromForm] ResidenceCreateRequest model, CancellationToken cancellationToken = default)
     {
-        try
+        var command = _mapper.Map<UpdateResidenceCommand>(model,
+            opts => opts.AfterMap((src, dest) => dest.Id = id));
+
+        var response = new SuccessResponse
         {
-            if (string.IsNullOrEmpty(Authorization))
-                return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Forbidden,
-                    Errors = new List<string> { "You should send a valid token" }
-                });
+            data = await _mediator.Send(command, cancellationToken),
+            Message = ResidenceMessages.ResidenceUpdated
+        };
 
-            if (!ModelState.IsValid)
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = ModelState.Values
-                                .SelectMany(x => x.Errors)
-                                .Select(x => x.ErrorMessage)
-                                .ToList()
-                });
+        return Ok(response);
 
-            var userRoles = _serviceManager.TokenService.GetValueFromToken(Authorization).Split(',');
-            if (!userRoles.Any(x => x == nameof(UserRoles.Manager) || x == nameof(UserRoles.Admin)))
-                return Unauthorized(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Unauthorized,
-                    Errors = new List<string> { "You are not authorized to update a residence" }
-                });
-
-            if (!Enum.GetNames<ResidencesTypes>().Contains(model.Type))
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { "Invalid Residence Type" }
-                });
-
-            var Residence = await _unitOfWork.ResidenceRepository.GetByIdAsync(model.Id);
-
-            if (Residence is null)
-                return NotFound(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Errors = new List<string> { "Residence not found" }
-                });
-
-            var OldImageName = Residence.ImageName;
-            Residence = _mapper.Map(model, Residence);
-
-            if (model.Image is { })
-                Residence.ImageName = (await _serviceManager.FileService.UploadFile(model.Image))!;
-
-            try
-            {
-                var ResidenceResponse = _unitOfWork.ResidenceRepository.Update(Residence);
-                await _unitOfWork.SaveChangesAsync();
-                _serviceManager.FileService.DeleteFile(OldImageName);
-
-                return Ok(new SuccessResponse
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Message = "Residence is updated successfully",
-                    Result = _mapper.Map<ResidenceResponseDTO>(ResidenceResponse)
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                _serviceManager.FileService.DeleteFile(Residence.ImageName);
-
-                if (!string.IsNullOrEmpty(Residence.ImageName))
-                    _serviceManager.FileService.DeleteFile(Residence.ImageName);
-
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { ex.Message }
-                });
-            }
-
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
     }
 
 
 
-
-
-
-
-
-    [HttpDelete("[action]")]
+    [HttpDelete("[action]/{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult> Delete([FromQuery] string id,
-        [FromHeader] string Authorization,
-        CancellationToken cancellationToken = default)
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> Delete(Guid id, CancellationToken cancellationToken = default)
     {
-        try
+
+        await _mediator.Send(new DeleteResidenceCommand(id), cancellationToken);
+
+        var response = new SuccessResponse
         {
-            if (string.IsNullOrEmpty(Authorization))
-                return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Forbidden,
-                    Errors = new List<string> { "You should send a valid token" }
-                });
+            Message = ResidenceMessages.ResidenceDeleted
+        };
 
-            if (!Guid.TryParse(id, out Guid GuidId))
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = new List<string> { "Invalid Residence Id" }
-                });
+        return Ok(response);
 
-            var userRoles = _serviceManager.TokenService.GetValueFromToken(Authorization).Split(',');
-            if (!userRoles.Any(x => x == nameof(UserRoles.Manager) || x == nameof(UserRoles.Admin)))
-                return Unauthorized(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Unauthorized,
-                    Errors = new List<string> { "You are not authorized to change user role" }
-                });
-
-
-            var Residence = await _unitOfWork.ResidenceRepository.GetByIdAsync(GuidId);
-            if (Residence is null)
-                return NotFound(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Errors = new List<string> { "Residence not found" }
-                });
-
-
-            var ResidenceResponse = _unitOfWork.ResidenceRepository.Delete(Residence);
-            await _unitOfWork.SaveChangesAsync();
-            _serviceManager.FileService.DeleteFile(Residence.ImageName);
-
-            return Ok(new SuccessResponse
-            {
-                StatusCode = HttpStatusCode.OK,
-                Message = "Residence is deleted successfully",
-                Result = _mapper.Map<ResidenceResponseDTO>(ResidenceResponse)
-            });
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
     }
-
-
-
-
-
-
-
-    */
 
 
 }

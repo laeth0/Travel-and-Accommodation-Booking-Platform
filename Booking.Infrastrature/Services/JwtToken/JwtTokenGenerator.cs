@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 
 
-namespace Booking.Infrastrature.Services.JwtToken;
+namespace Booking.Infrastrature.Services;
 public class JwtTokenGenerator(IOptions<JwtAuthConfig> jwt, UserManager<ApplicationUser> userManager) : IJwtTokenGenerator
 {
 

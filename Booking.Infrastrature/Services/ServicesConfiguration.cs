@@ -1,9 +1,6 @@
 ﻿
 
 using Booking.Domain.Interfaces.Services;
-using Booking.Infrastrature.Services.Email;
-using Booking.Infrastrature.Services.Files;
-using Booking.Infrastrature.Services.JwtToken;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -16,6 +13,7 @@ public static class ServicesConfiguration
 
         services.AddEmailService()
             .AddJwtAuthServices()
+            .AddCloudinaryService()
             .AddTransient<IFileService, FileService>();
 
         return services;

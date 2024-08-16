@@ -1,4 +1,4 @@
-﻿namespace Booking.API.DTOs.City;
+﻿namespace Booking.API.DTOs;
 public class CityCreateRequest
 {
     public string Name { get; set; }

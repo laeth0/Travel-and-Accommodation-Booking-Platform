@@ -13,8 +13,15 @@ internal class RoomBookingEntityTypeConfiguration : IEntityTypeConfiguration<Roo
     {
         builder.ToTable("RoomBookings");
 
-        builder.HasKey(e => new { e.RoomId, e.ResidenceBookingId, e.Id });
-        builder.Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.HasKey(rb => rb.Id);
+        builder.Property(rb => rb.Id).ValueGeneratedOnAdd();
+
+
+        builder.Property(rb => rb.TotalPrice).IsRequired();
+        builder.Property(rb => rb.CheckInDateUtc).IsRequired();
+        builder.Property(rb => rb.CheckOutDateUtc).IsRequired();
+        builder.Property(rb => rb.UserRemarks).IsRequired(false);
+
 
     }
 }

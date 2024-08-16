@@ -4,7 +4,7 @@
         <name>Booking.API</name>
     </assembly>
     <members>
-        <member name="M:Booking.API.Controllers.AuthController.Login(Booking.API.DTOs.Auth.LoginRequest,System.Threading.CancellationToken)">
+        <member name="M:Booking.API.Controllers.AuthController.Login(Booking.API.DTOs.LoginRequest,System.Threading.CancellationToken)">
             <summary>
              Login the application ( this just for user login )
             </summary>
@@ -12,7 +12,7 @@
             
             sample request:
             
-                POST /api/Account/Login
+                POST /Account/Login
                 {
                     "email" : "Manager@gmail.com",
                     "password":  "Manager@123"
@@ -26,7 +26,7 @@
             <response code="404">if the email not found</response>
             <response code="500">if there is an internal server error</response>
         </member>
-        <member name="M:Booking.API.Controllers.AuthController.Register(Booking.API.DTOs.Auth.RegisterRequest,System.Threading.CancellationToken)">
+        <member name="M:Booking.API.Controllers.AuthController.Register(Booking.API.DTOs.RegisterRequest,System.Threading.CancellationToken)">
             <summary>
               Processes registering a guest request.
             </summary>
@@ -34,7 +34,7 @@
             
             sample request:
             
-                POST /api/Account/Login
+                POST /Account/Register
                 {
                     "firstName": "Laeth",
                     "lastName": "Nueirat",

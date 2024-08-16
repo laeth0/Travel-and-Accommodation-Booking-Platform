@@ -8,12 +8,12 @@ namespace Booking.Application.Mediatr;
 public class DeleteCountryCommandHandler : IRequestHandler<DeleteCountryCommand, Unit>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IFileService _fileService;
+    private readonly ICloudinaryService _cloudinaryService;
 
-    public DeleteCountryCommandHandler(IUnitOfWork unitOfWork, IFileService fileService)
+    public DeleteCountryCommandHandler(IUnitOfWork unitOfWork, ICloudinaryService cloudinaryService)
     {
         _unitOfWork = unitOfWork;
-        _fileService = fileService;
+        _cloudinaryService = cloudinaryService;
     }
 
     public async Task<Unit> Handle(DeleteCountryCommand request, CancellationToken cancellationToken)
@@ -25,7 +25,7 @@ public class DeleteCountryCommandHandler : IRequestHandler<DeleteCountryCommand,
         //    throw new DependentsExistException(CityMessages.DependentsExist);
 
         _unitOfWork.CountryRepository.Delete(country);
-        _fileService.DeleteFile(country.ImageName);
+        await _cloudinaryService.DeleteImageAsync(country.ImagePublicId);
 
         return Unit.Value;
 

@@ -12,14 +12,14 @@ public class UpdateCityCommandHandler : IRequestHandler<UpdateCityCommand, CityR
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IFileService _fileService;
+    private readonly ICloudinaryService _cloudinaryService;
 
-    public UpdateCityCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IFileService fileService)
+    public UpdateCityCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
     {
 
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _fileService = fileService;
+        _cloudinaryService = cloudinaryService;
     }
 
 
@@ -32,16 +32,11 @@ public class UpdateCityCommandHandler : IRequestHandler<UpdateCityCommand, CityR
             throw new BadRequestException(CityMessages.CityExist(request.Name));
 
 
-
-
         _mapper.Map(request, City);
 
         _unitOfWork.CityRepository.Update(City);
 
-        _fileService.DeleteFile(City.ImageName);
-
-        City.ImageName = await _fileService.UploadFileAsync(request.Image) ?? "";
-
+        (City.ImagePublicId, City.ImageUrl) = await _cloudinaryService.ReplaceImageAsync(City.ImagePublicId, request.Image, cancellationToken);
 
         return _mapper.Map<CityResponse>(City);
     }

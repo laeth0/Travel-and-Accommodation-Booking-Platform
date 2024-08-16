@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.API\\wwwroot\\files\\images\\bac6a9eb-f848-4459-828b-a0bcf78f5ac0Screenshot 2024-08-08 160120.png",
+      "PackagePath": "staticwebassets\\files\\images\\bac6a9eb-f848-4459-828b-a0bcf78f5ac0Screenshot 2024-08-08 160120.png"
+    },
+    {
+      "Id": "C:\\Users\\BisanCo\\Desktop\\Booking\\Booking.API\\wwwroot\\files\\images\\ed2228df-923d-4863-a031-9e49af4e2573Screenshot 2024-08-08 160120.png",
+      "PackagePath": "staticwebassets\\files\\images\\ed2228df-923d-4863-a031-9e49af4e2573Screenshot 2024-08-08 160120.png"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.Booking.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.Booking.API.props",
+      "PackagePath": "build\\Booking.API.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Booking.API.props",
+      "PackagePath": "buildMultiTargeting\\Booking.API.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.Booking.API.props",
+      "PackagePath": "buildTransitive\\Booking.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

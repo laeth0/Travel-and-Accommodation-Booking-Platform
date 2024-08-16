@@ -23,7 +23,6 @@ internal class ResidenceEntityTypeConfiguration : IEntityTypeConfiguration<Resid
 
         builder.Property(e => e.Address).IsRequired();
 
-        builder.Property(e => e.ImageName).IsRequired();
 
 
         builder.Property(e => e.Email)
@@ -43,21 +42,11 @@ internal class ResidenceEntityTypeConfiguration : IEntityTypeConfiguration<Resid
             .HasForeignKey(e => e.ResidenceId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasMany(e => e.Reviews)
-            .WithOne(e => e.Residence)
-            .HasForeignKey(e => e.ResidenceId)
-            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(e => e.ResidenceOwners)
             .WithOne(e => e.Residence)
             .HasForeignKey(e => e.ResidenceId)
             .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasMany(e => e.ResidenceBookings)
-            .WithOne(e => e.Residence)
-            .HasForeignKey(e => e.ResidenceId)
-            .OnDelete(DeleteBehavior.Cascade);
-
 
     }
 }

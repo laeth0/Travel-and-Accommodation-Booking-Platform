@@ -11,11 +11,9 @@ public interface IUnitOfWork
     ICityRepository CityRepository { get; }
     ICountryRepository CountryRepository { get; }
     IDiscountRepository DiscountRepository { get; }
-    IResidenceBookingRepository ResidenceBookingRepository { get; }
     IResidenceOwnerRepository ResidenceOwnerRepository { get; }
     IResidenceRepository ResidenceRepository { get; }
     IResidenceTypeRepository ResidenceTypeRepository { get; }
-    IReviewRepository ReviewRepository { get; }
     IRoomAmenityRepository RoomAmenityRepository { get; }
     IRoomBookingRepository RoomBookingRepository { get; }
     IRoomRepository RoomRepository { get; }

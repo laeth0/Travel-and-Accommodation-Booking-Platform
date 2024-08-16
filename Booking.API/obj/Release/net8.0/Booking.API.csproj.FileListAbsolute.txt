@@ -167,3 +167,5 @@ C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\Booking.API.xml
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\Booking.API.pdb
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\Booking.API.genruntimeconfig.cache
 C:\Users\BisanCo\Desktop\Booking\Booking.API\obj\Release\net8.0\ref\Booking.API.dll
+C:\Users\BisanCo\Desktop\Booking\Booking.API\bin\Release\net8.0\CloudinaryDotNet.dll
+C:\Users\BisanCo\Desktop\Booking\Booking.API\bin\Release\net8.0\Newtonsoft.Json.dll

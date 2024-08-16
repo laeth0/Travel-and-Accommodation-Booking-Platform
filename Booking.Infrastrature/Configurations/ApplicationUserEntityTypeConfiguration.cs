@@ -20,21 +20,15 @@ internal class ApplicationUserEntityTypeConfiguration : IEntityTypeConfiguration
             .HasMaxLength(UserConstants.LastNameMaxLength)
             .IsRequired();
 
-        builder.HasMany(e => e.ResidenceBookings)
-            .WithOne(e => e.User)
-            .HasForeignKey(e => e.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         builder.HasMany(e => e.ResidenceOwners)
            .WithOne(e => e.User)
            .HasForeignKey(e => e.UserId)
            .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasMany(e => e.Reviews)
-           .WithOne(e => e.User)
-           .HasForeignKey(e => e.UserId)
-           .OnDelete(DeleteBehavior.Cascade);
-
+        builder.HasMany(e => e.RoomBookings)
+            .WithOne(e => e.User)
+              .HasForeignKey(e => e.UserId)
+              .OnDelete(DeleteBehavior.Cascade);
 
 
 

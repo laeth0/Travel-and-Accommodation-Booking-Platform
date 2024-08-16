@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 
 
-namespace Booking.Infrastrature.Services.Email;
+namespace Booking.Infrastrature.Services;
 public class EmailService(IOptions<EmailConfig> email) : IEmailService
 {
     /*

@@ -7,14 +7,13 @@ public class ApplicationUser : IdentityUser
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string? ImageName { get; set; }
 
+    public string? ImagePublicId { get; set; }
+    public string? ImageUrl { get; set; }
 
     public virtual ICollection<ResidenceOwner> ResidenceOwners { get; set; } = new HashSet<ResidenceOwner>();
 
-    public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
-
-    public virtual ICollection<ResidenceBooking> ResidenceBookings { get; set; } = new HashSet<ResidenceBooking>();
+    public virtual ICollection<RoomBooking> RoomBookings{ get; set; } = new HashSet<RoomBooking>();
 
 
 }

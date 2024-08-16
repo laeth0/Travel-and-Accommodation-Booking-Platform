@@ -17,11 +17,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private readonly Lazy<ICityRepository> _cityRepository;
     private readonly Lazy<ICountryRepository> _countryRepository;
     private readonly Lazy<IDiscountRepository> _discountRepository;
-    private readonly Lazy<IResidenceBookingRepository> _residenceBookingRepository;
     private readonly Lazy<IResidenceOwnerRepository> _residenceOwnerRepository;
     private readonly Lazy<IResidenceRepository> _residenceRepository;
     private readonly Lazy<IResidenceTypeRepository> _residenceTypeRepository;
-    private readonly Lazy<IReviewRepository> _reviewRepository;
     private readonly Lazy<IRoomAmenityRepository> _roomAmenityRepository;
     private readonly Lazy<IRoomBookingRepository> _roomBookingRepository;
     private readonly Lazy<IRoomRepository> _roomRepository;
@@ -32,11 +30,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     public ICityRepository CityRepository => _cityRepository.Value;
     public ICountryRepository CountryRepository => _countryRepository.Value;
     public IDiscountRepository DiscountRepository => _discountRepository.Value;
-    public IResidenceBookingRepository ResidenceBookingRepository => _residenceBookingRepository.Value;
     public IResidenceOwnerRepository ResidenceOwnerRepository => _residenceOwnerRepository.Value;
     public IResidenceRepository ResidenceRepository => _residenceRepository.Value;
     public IResidenceTypeRepository ResidenceTypeRepository => _residenceTypeRepository.Value;
-    public IReviewRepository ReviewRepository => _reviewRepository.Value;
     public IRoomAmenityRepository RoomAmenityRepository => _roomAmenityRepository.Value;
     public IRoomBookingRepository RoomBookingRepository => _roomBookingRepository.Value;
     public IRoomRepository RoomRepository => _roomRepository.Value;
@@ -50,11 +46,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         _cityRepository = new Lazy<ICityRepository>(() => new CityRepository(_DbContext));
         _countryRepository = new Lazy<ICountryRepository>(() => new CountryRepository(_DbContext));
         _discountRepository = new Lazy<IDiscountRepository>(() => new DiscountRepository(_DbContext));
-        _residenceBookingRepository = new Lazy<IResidenceBookingRepository>(() => new ResidenceBookingRepository(_DbContext));
         _residenceOwnerRepository = new Lazy<IResidenceOwnerRepository>(() => new ResidenceOwnerRepository(_DbContext));
         _residenceRepository = new Lazy<IResidenceRepository>(() => new ResidenceRepository(_DbContext));
         _residenceTypeRepository = new Lazy<IResidenceTypeRepository>(() => new ResidenceTypeRepository(_DbContext));
-        _reviewRepository = new Lazy<IReviewRepository>(() => new ReviewRepository(_DbContext));
         _roomAmenityRepository = new Lazy<IRoomAmenityRepository>(() => new RoomAmenityRepository(_DbContext));
         _roomBookingRepository = new Lazy<IRoomBookingRepository>(() => new RoomBookingRepository(_DbContext));
         _roomRepository = new Lazy<IRoomRepository>(() => new RoomRepository(_DbContext));

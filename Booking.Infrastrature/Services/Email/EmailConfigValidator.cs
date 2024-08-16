@@ -3,7 +3,7 @@
 
 using FluentValidation;
 
-namespace Booking.Infrastrature.Services.Email;
+namespace Booking.Infrastrature.Services;
 
 public sealed class EmailConfigValidator : AbstractValidator<EmailConfig>
 {

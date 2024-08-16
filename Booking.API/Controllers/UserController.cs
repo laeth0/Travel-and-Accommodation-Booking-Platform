@@ -2,7 +2,12 @@
 
 
 using AutoMapper;
+using Booking.API.CustomizeResponses;
+using Booking.API.DTOs;
+using Booking.Application.Mediatr;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Booking.API.Controllers;
 
@@ -12,6 +17,52 @@ public class UserController : BaseController
         : base(mapper, logger, mediator)
     {
     }
+
+
+
+
+    [HttpGet("[action]")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> Profile()
+    {
+
+        var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+        var Query = new GetUserProfileQuery(userId);
+        var result = await _mediator.Send(Query);
+        var response = new SuccessResponse { Message = "User Profile", data = result };
+        return Ok(response);
+
+
+    }
+
+
+    [HttpPut("[action]")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> UpdateUserProfile([FromForm] UpdateProfileRequest model)
+    {
+        var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+        var command = _mapper.Map<UpdateUserProfileCommand>(model,
+  opts => opts.AfterMap((src, dest) => dest.UserId = userId));
+
+        var result = await _mediator.Send(command);
+
+        var response = new SuccessResponse { Message = "User Profile Updated", data = result };
+
+        return Ok(response);
+
+    }
+
+
+
+
+
 
 
 
@@ -63,130 +114,6 @@ public class UserController : BaseController
         }
     }
 
-
-
-
-
-
-    [HttpGet("[action]")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult<ApiResponse>> Profile([FromHeader] string Authorization)
-    {
-        try
-        {
-            if (string.IsNullOrEmpty(Authorization))
-                return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Forbidden,
-                    Errors = new List<string> { "You should send a valid token" }
-                });
-
-            var userId = _serviceManager.TokenService.GetValueFromToken(Authorization, "Id");
-
-            var user = await _userManager.FindByIdAsync(userId);
-
-            if (user is null)
-                return NotFound(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Errors = new List<string> { "User not found" }
-                });
-
-            return Ok(new SuccessResponse
-            {
-                StatusCode = HttpStatusCode.OK,
-                Message = "User Found",
-                Result = _mapper.Map<UserResponseDTO>(user)
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
-    }
-
-
-
-    // update user profile
-    [HttpPut("[action]")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
-    public async Task<ActionResult<ApiResponse>> UpdateProfile([FromForm] UpdateProfileRequestDTO model, [FromHeader] string Authorization)
-    {
-        try
-        {
-            if (string.IsNullOrEmpty(Authorization))
-                return StatusCode(StatusCodes.Status403Forbidden, new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.Forbidden,
-                    Errors = new List<string> { "You should send a valid token" }
-                });
-
-            var userId = _serviceManager.TokenService.GetValueFromToken(Authorization, "Id");
-
-            var user = await _userManager.FindByIdAsync(userId);
-
-            if (user is null)
-                return NotFound(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Errors = new List<string> { "User not found" }
-                });
-
-            var oldUserImage = user.ImageName;
-            user = _mapper.Map(model, user);
-
-            if (model.Image is { })
-                user.ImageName = await _serviceManager.FileService.UploadFile(model.Image);
-
-            var result = await _userManager.UpdateAsync(user);
-            await _unitOfWork.SaveChangesAsync();
-
-            if (!result.Succeeded)
-            {
-                if (model.Image is { })
-                    _serviceManager.FileService.DeleteFile(user.ImageName);
-
-                return BadRequest(new ErrorResponse
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Errors = result.Errors.Select(x => x.Description).ToList()
-                });
-            }
-
-            if (model.Image is { })
-                _serviceManager.FileService.DeleteFile(oldUserImage);
-
-            return Ok(new SuccessResponse
-            {
-                StatusCode = HttpStatusCode.OK,
-                Message = "User Updated Successfully",
-                Result = _mapper.Map<UserResponseDTO>(user)
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                Errors = new List<string> { "Internal Server Error", ex.Message }
-            });
-        }
-    }
 
 
 

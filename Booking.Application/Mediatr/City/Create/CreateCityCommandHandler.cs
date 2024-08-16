@@ -13,14 +13,14 @@ public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, CityR
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IFileService _fileService;
+    private readonly ICloudinaryService _cloudinaryService;
 
 
-    public CreateCityCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IFileService fileService)
+    public CreateCityCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _fileService = fileService;
+        _cloudinaryService = cloudinaryService;
     }
 
 
@@ -34,7 +34,7 @@ public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, CityR
 
         var createdCity = await _unitOfWork.CityRepository.AddAsync(city, cancellationToken);
 
-        createdCity.ImageName = await _fileService.UploadFileAsync(request.Image) ?? "";
+        (createdCity.ImagePublicId, createdCity.ImageUrl) = await _cloudinaryService.UploadImageAsync(request.Image, cancellationToken);
 
         return _mapper.Map<CityResponse>(createdCity);
 

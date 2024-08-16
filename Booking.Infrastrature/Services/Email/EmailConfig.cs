@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace Booking.Infrastrature.Services.Email;
+namespace Booking.Infrastrature.Services;
 public class EmailConfig
 {
     // in the option classes the property must be public and have a getter and setter 

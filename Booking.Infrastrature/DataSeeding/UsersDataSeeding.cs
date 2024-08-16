@@ -36,7 +36,6 @@ public static class UsersDataSeeding
             EmailConfirmed = true,// Assuming email is confirmed for seeding purposes
             PhoneNumber = "059988776655",
             PhoneNumberConfirmed = true,
-            ImageName = default
         };
 
         // Create the user with a password

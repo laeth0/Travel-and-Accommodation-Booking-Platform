@@ -26,7 +26,6 @@ internal class RoomEntityTypeConfiguration : IEntityTypeConfiguration<Room>
 
         builder.Property(e => e.Description).IsRequired();
 
-        builder.Property(e => e.ImageName).IsRequired();
 
         builder.Property(e => e.Rating).IsRequired();
 
@@ -45,6 +44,7 @@ internal class RoomEntityTypeConfiguration : IEntityTypeConfiguration<Room>
             .WithOne(e => e.Room)
             .HasForeignKey(e => e.RoomId)
             .OnDelete(DeleteBehavior.Cascade);
+
 
     }
 }

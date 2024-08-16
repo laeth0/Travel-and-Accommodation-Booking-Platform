@@ -47,15 +47,32 @@ public class CountryController : BaseController
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<ActionResult> Details(Guid id, CancellationToken cancellationToken = default)
     {
+        var data = await _mediator.Send(new GetSpecificCountryQuery(id), cancellationToken);
 
-        var response = new SuccessResponse
-        {
-            data = await _mediator.Send(new GetSpecificCountryQuery(id), cancellationToken)
-        };
+        var response = new SuccessResponse { data = data };
 
         return Ok(response);
 
     }
+
+
+
+    [HttpGet("[action]/{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<ActionResult> GetCitiesForSpecificCountry(Guid id, CancellationToken cancellationToken = default)
+    {
+
+        var query = await _mediator.Send(new GetCitiesForSpecificCountryQuery(id), cancellationToken);
+
+        var response = new SuccessResponse { data = query };
+
+        return Ok(response);
+
+    }
+
 
 
 

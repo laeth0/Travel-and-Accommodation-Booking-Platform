@@ -3,7 +3,7 @@
 using Booking.API.DTOs;
 using FluentValidation;
 
-namespace Booking.API.Validators.Auth;
+namespace Booking.API.Validators;
 
 public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
 {

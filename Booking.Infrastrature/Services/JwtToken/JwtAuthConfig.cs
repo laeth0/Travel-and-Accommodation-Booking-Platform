@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace Booking.Infrastrature.Services.JwtToken;
+namespace Booking.Infrastrature.Services;
 public class JwtAuthConfig
 {
     public required string Key { get; set; }

@@ -11,14 +11,14 @@ public static class CityMessages
     public const string CityUpdated = "City Updated Successfully";
     public const string CityDeleted = "City Deleted  Successfully";
 
-    public static string CityExist(string countryName = "")
+    public static string CityExist(string CityName = "")
     {
-        return $"the {countryName} City is Exist in the system";
+        return $"the {CityName} City is Exist in the system";
     }
 
-    public static string CityNotExist(string countryName = "")
+    public static string CityNotExist(string CityName = "")
     {
-        return $"the {countryName} City is not Exist in the system";
+        return $"the {CityName} City is not Exist in the system";
     }
 
 
