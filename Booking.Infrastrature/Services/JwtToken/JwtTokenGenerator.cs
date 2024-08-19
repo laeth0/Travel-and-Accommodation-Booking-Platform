@@ -34,6 +34,10 @@ public class JwtTokenGenerator(IOptions<JwtAuthConfig> jwt, UserManager<Applicat
         return claims;
     }
 
+
+    // this is value tuple (implicit type) => (string, DateTime)
+    // if you want to use explicit type you can use => ValueTuple<string, DateTime>
+    // or explicit names => (string token, DateTime expiration)
     public async Task<(string, DateTime)> GenerateToken(ApplicationUser user)
     {
         var claims = await GetClams(user);
