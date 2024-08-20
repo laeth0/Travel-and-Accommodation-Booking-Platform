@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VRMUsYQu2l2K/LbHaUUvqzu8/YZkleXLSEnM2whS9Tg4fQPLZ33ulk3kF1o5+jlWQ5MeBlEQ64qLPquHpUsXOA==",
+  "dgSpecHash": "sI+Fvnp4515W+FO9Ep3ZPZraMqyKPuZULSXS7lUNvCr8AyI/6VDLHhXvryaA+sJx7fetu62VYiuNqVDv5uM+oA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Infrastrature\\Booking.Infrastrature.csproj",
+  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Infrastrature\\Booking.Infrastrature.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BisanCo\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

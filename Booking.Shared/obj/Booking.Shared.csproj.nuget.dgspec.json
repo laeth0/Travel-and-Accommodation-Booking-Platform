@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\Booking.Shared.csproj": {}
+    "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\Booking.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\Booking.Shared.csproj": {
+    "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\Booking.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\Booking.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\Booking.Shared.csproj",
         "projectName": "Booking.Shared",
-        "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\Booking.Shared.csproj",
+        "projectPath": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\Booking.Shared.csproj",
         "packagesPath": "C:\\Users\\BisanCo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\obj\\",
+        "outputPath": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AZeoXlSVsT076O28XvWL7JIS8lbgQDwPRe8X/R+Fc8uE9mWL0WUSSJsez0x8HQhkAPTZS2QV+T5GeC3UIX7rww==",
+  "dgSpecHash": "gd52CXrB8aupLa9sku5qHCvygvDpo0V/XqdhxB4ycVi4Oj84ANIQ4xbYd6UuF/tUlsDZBRIbbtf5KTWYblkepA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Application\\Booking.Application.csproj",
+  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Application\\Booking.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BisanCo\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",

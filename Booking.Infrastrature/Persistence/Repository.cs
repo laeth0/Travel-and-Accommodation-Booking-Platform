@@ -35,42 +35,20 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
             query = query.Skip((PageNumber - 1) * PageSize).Take(PageSize);
 
 
-        return await query.ToListAsync(cancellationToken) ?? []; // instead of returning null, return empty list => return await query.ToListAsync() ?? Enumerable.Empty<T>(); 
+        return await query.ToListAsync(cancellationToken) ?? [];
     }
 
 
     public async Task<TEntity?> FindAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _DbContext.Set<TEntity>().FindAsync(id, cancellationToken);
-
-        /*
-        Single Key: Use FindAsync(id) when the entity has a single primary key.
-        Composite Key: Use FindAsync(new object[] { key1, key2 }) when the entity has a composite primary key.
-
-
-        FindAsync([id])
-            •	Array Syntax: The square brackets [] create an array with a single element, id.
-            •	Parameter Type: This syntax is used when FindAsync expects an array of key values. It is useful when the primary key consists of multiple columns.
-            •	Usage: This is typically used in scenarios where the entity has a composite key.
-        FindAsync(id)
-            •	Single Parameter: Here, id is passed directly as a single parameter.
-            •	Parameter Type: This is used when FindAsync expects a single key value.
-            •	Usage: This is the common usage when the entity has a single-column primary key.
-         */
     }
 
 
-    public async Task<TEntity?> GetByPrimaryKeysAsync(
-        CancellationToken cancellationToken = default,
-        params object?[]? keyValues
-        )
+    public async Task<TEntity?> GetByPrimaryKeysAsync(CancellationToken cancellationToken = default, params object?[]? keyValues)
     {
         return await _DbContext.Set<TEntity>().FindAsync(keyValues, cancellationToken);
-
     }
-
-
-
 
 
 
@@ -94,8 +72,6 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
         var entityEntry = _DbContext.Set<TEntity>().Update(entity);
         return entityEntry.Entity;
     }
-
-
 
 
     public TEntity Delete(TEntity entity)
