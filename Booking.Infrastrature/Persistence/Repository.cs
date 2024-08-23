@@ -76,12 +76,6 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
 
     public TEntity Delete(TEntity entity)
     {
-        /*
-            Delete Method :-
-        •	Single Entity Deletion: This method is designed to delete a single entity.
-        •	Entity Tracking: The entity is tracked by the DbContext, which means it will be marked for deletion and the actual deletion will occur when SaveChanges is called.
-        •	Performance: Suitable for deleting individual entities. The overhead is minimal for single deletions but can be inefficient if you need to delete many entities in a loop.
-         */
         var entityEntry = _DbContext.Set<TEntity>().Remove(entity);
         return entityEntry.Entity;
     }
@@ -92,12 +86,6 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
         CancellationToken cancellationToken = default
         )
     {
-        /*
-            BulkDeleteAsync Method:-
-        •	Bulk Deletion: This method is designed to delete multiple entities that match a given condition.
-        •	Direct Database Operation: Uses ExecuteDeleteAsync, which translates to a direct SQL DELETE operation. This is generally more efficient for bulk deletions as it minimizes the overhead of tracking each entity.
-        •	Performance: Much faster for deleting multiple entities because it reduces the number of database round-trips and avoids the overhead of entity tracking.
-         */
         return await _DbContext.Set<TEntity>().Where(filterCondition).ExecuteDeleteAsync(cancellationToken: cancellationToken);
     }
 
@@ -112,20 +100,7 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
         return await _DbContext.Set<TEntity>()
             .Where(filterCondition)
             .ExecuteUpdateAsync(updateExpression, cancellationToken);
-
-        /*
-         example usage :-
-
-        await repository.BulkUpdateAsync(
-            user => !user.IsActive,
-            updates => updates
-                .SetProperty(user => user.IsActive, true)
-                .SetProperty(user => user.LastUpdated, DateTime.UtcNow)
-                        );
-         */
     }
-
-
 
 
 
