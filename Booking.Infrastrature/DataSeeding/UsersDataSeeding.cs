@@ -20,12 +20,10 @@ public static class UsersDataSeeding
 
 
 
-        if (!await roleManager.Roles.AnyAsync())
+        if (!await roleManager.Roles.AnyAsync() ||
+            await userManager.FindByEmailAsync("Manager@gmail.com") is { })
             return;
 
-
-        if (await userManager.FindByEmailAsync("Manager@gmail.com") is { })
-            return;
 
         var user = new ApplicationUser
         {
@@ -47,9 +45,8 @@ public static class UsersDataSeeding
             await userManager.AddToRoleAsync(user, ApplicationRoles.Manager);
         else
         {
-            foreach (var error in result.Errors)
-                Console.WriteLine(error.Description);
-            throw new Exception("Failed to create the manager user");
+            var errors = result.Errors.Aggregate("", (acc, error) => acc + error.Description + "\n");
+            throw new Exception($"Failed to create the manager user\n {errors}");
         }
 
 

@@ -1,10 +1,10 @@
 ﻿
 
 using Booking.Domain.Entities;
-using Booking.Domain;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Booking.Infrastrature.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Booking.Infrastrature.DataSeeding;
 public static class AmenityDataSeeding
@@ -15,7 +15,7 @@ public static class AmenityDataSeeding
         using var serviceScope = applicationBuilder.ApplicationServices.CreateScope();
         var DbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-        if (DbContext.Set<Amenity>().Any())
+        if (await DbContext.Set<Amenity>().AnyAsync())
             return;
 
         var dataSeed = SeedingAmenities();

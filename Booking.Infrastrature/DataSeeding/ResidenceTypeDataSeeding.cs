@@ -1,6 +1,7 @@
 ﻿using Booking.Domain.Entities;
 using Booking.Infrastrature.Data;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Booking.Infrastrature.DataSeeding;
@@ -12,7 +13,7 @@ public static class ResidenceTypeDataSeeding
         using var serviceScope = applicationBuilder.ApplicationServices.CreateScope();
         var DbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-        if (DbContext.Set<ResidenceType>().Any())
+        if (await DbContext.Set<ResidenceType>().AnyAsync())
             return;
 
         var dataSeed = SeedingResidenceType();

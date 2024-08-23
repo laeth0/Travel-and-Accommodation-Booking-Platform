@@ -4,6 +4,7 @@
 using Booking.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -17,7 +18,8 @@ public static class RolesDataSeeding
         var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
 
-        if (roleManager.Roles.Any())
+
+        if (await roleManager.Roles.AnyAsync())
             return;
 
 
@@ -27,8 +29,12 @@ public static class RolesDataSeeding
         var roles = fields.Select(x => x.GetValue(null).ToString());
 
 
-        foreach (var role in roles)
-            await roleManager.CreateAsync(new IdentityRole(role!));
+        //foreach (var role in roles)
+        //    await roleManager.CreateAsync(new IdentityRole(role!));
+
+        var roleCreationTasks = roles.Select(role => roleManager.CreateAsync(new IdentityRole(role!)));
+
+        await Task.WhenAll(roleCreationTasks);
 
         return;
 
