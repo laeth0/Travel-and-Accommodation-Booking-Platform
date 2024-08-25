@@ -1,5 +1,7 @@
 ﻿using Booking.Core.Interfaces.Persistence;
+using Booking.Domain.Models;
 using Booking.Infrastrature.Data;
+using Booking.Infrastrature.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
@@ -11,8 +13,7 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
 
     private readonly ApplicationDbContext _DbContext = Context;
 
-    public async Task<IReadOnlyList<TEntity>> GetAllAsync(int PageSize = 0,
-        int PageNumber = 0,
+    public async Task<IReadOnlyList<TEntity>> GetAllAsync(
         Expression<Func<TEntity, bool>>? filterCondition = null,
         List<string>? includeProperty = null,
         CancellationToken cancellationToken = default
@@ -30,12 +31,37 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
             query.AsSplitQuery();
         }
 
-
-        if (PageSize > 0 && PageNumber > 0)
-            query = query.Skip((PageNumber - 1) * PageSize).Take(PageSize);
-
-
         return await query.ToListAsync(cancellationToken) ?? [];
+    }
+
+    public async Task<PaginatedList<TEntity>> GetPageAsync(
+    int PageSize = 0,
+    int PageNumber = 0,
+    Expression<Func<TEntity, bool>>? filterCondition = null,
+    List<string>? includeProperty = null,
+    CancellationToken cancellationToken = default
+    )
+    {
+        IQueryable<TEntity> query = _DbContext.Set<TEntity>().AsNoTracking();
+
+        if (filterCondition is { })
+            query = query.Where(filterCondition);
+
+        if (includeProperty is { })
+        {
+            foreach (var include in includeProperty)
+                query = query.Include(include);
+            query.AsSplitQuery();
+        }
+
+
+        query = query.GetPage(PageNumber, PageSize);
+
+        var items = await query.ToListAsync(cancellationToken) ?? [];
+
+        var pagenationMetadata = await query.GetPaginationMetadataAsync(PageSize, cancellationToken);
+
+        return new PaginatedList<TEntity>(items, pagenationMetadata);
     }
 
 
