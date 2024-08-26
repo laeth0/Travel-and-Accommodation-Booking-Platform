@@ -24,7 +24,7 @@ public class Program
             .AddApplication();
 
 
-
+        
 
         var app = builder.Build();
         // any thing that start with app.Use is a middleware(او بتضل مسكرة request واما هاي البوابة بتفتح امام  request عبارة عن بوابة يمر فيها ال middleware ال )

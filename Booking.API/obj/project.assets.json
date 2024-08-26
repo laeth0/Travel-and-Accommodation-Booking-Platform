@@ -8093,11 +8093,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.API\\Booking.API.csproj",
+      "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.API\\Booking.API.csproj",
       "projectName": "Booking.API",
-      "projectPath": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.API\\Booking.API.csproj",
+      "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.API\\Booking.API.csproj",
       "packagesPath": "C:\\Users\\BisanCo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.API\\obj\\",
+      "outputPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -8118,8 +8118,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Infrastrature\\Booking.Infrastrature.csproj": {
-              "projectPath": "C:\\Users\\BisanCo\\Desktop\\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Infrastrature\\Booking.Infrastrature.csproj"
+            "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Infrastrature\\Booking.Infrastrature.csproj": {
+              "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.Infrastrature\\Booking.Infrastrature.csproj"
             }
           }
         }

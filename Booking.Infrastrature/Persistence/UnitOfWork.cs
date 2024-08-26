@@ -1,7 +1,6 @@
 ﻿
 
 using Booking.Core.Interfaces.Persistence;
-using Booking.Domain.Entities;
 using Booking.Domain.Interfaces.Persistence.Repositories;
 using Booking.Infrastrature.Data;
 using Booking.Infrastrature.Persistence.Repositories;
@@ -89,23 +88,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     }
 
 
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        _DbContext.ChangeTracker.DetectChanges();
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+         await _DbContext.SaveChangesAsync(cancellationToken);
 
-        foreach (var entry in _DbContext.ChangeTracker.Entries<IAuditableEntity>())
-            switch (entry.State)
-            {
-                case EntityState.Added:
-                    entry.Entity.CreatedAtUtc = DateTime.UtcNow;
-                    break;
-                case EntityState.Modified:
-                    entry.Entity.ModifiedAtUtc = DateTime.UtcNow;
-                    break;
-            }
-
-        return await _DbContext.SaveChangesAsync(cancellationToken);
-    }
 
 
     // disposing : true (dispose managed + unmanaged)      
@@ -142,6 +127,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         Dispose(false);  // Only dispose unmanaged resources in finalizer
     }
 
-   
+
 }
 
