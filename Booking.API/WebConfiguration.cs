@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
-using System.Net;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
@@ -17,7 +16,6 @@ namespace Booking.API
 
             var assembly = Assembly.GetExecutingAssembly();
             services.AddSwaggerAuthorizeOption();
-            services.AddCustomizingForInvalidResponse();
             services.AddConfigCORS();
             services.AddCacheProfileService();
             services.AddEndpointsApiExplorer(); // Adds the default API explorer service just for minimal api.(EndPoint for minimal api يعني بضفلي سيرفيس انو يبحث جوا المشروع تاعي على )
@@ -149,38 +147,7 @@ namespace Booking.API
 
 
 
-        public static IServiceCollection AddCustomizingForInvalidResponse(this IServiceCollection services)
-        {
 
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.InvalidModelStateResponseFactory = EndPointcontext =>
-                {
-                    var errors = EndPointcontext.ModelState.Where(p => p.Value.Errors.Count() > 0)
-                        .SelectMany(p => p.Value.Errors)
-                        .Select(p => p.ErrorMessage)
-                        .ToArray();
-
-                    var errorResponse = new
-                    {
-                        Status = (int)HttpStatusCode.BadRequest,
-                        Error = errors.Aggregate((i, j) => i + ", " + j)
-                    };
-
-                    var result = new BadRequestObjectResult(errorResponse)
-                    {
-                        ContentTypes = { "application/json" } // Ensure the content type is set to JSON
-                    };
-
-                    return result;
-                };
-
-
-
-            });
-
-            return services;
-        }
 
 
 

@@ -29,12 +29,8 @@ public static class RolesDataSeeding
         var roles = fields.Select(x => x.GetValue(null).ToString());
 
 
-        //foreach (var role in roles)
-        //    await roleManager.CreateAsync(new IdentityRole(role!));
-
-        var roleCreationTasks = roles.Select(role => roleManager.CreateAsync(new IdentityRole(role!)));
-
-        await Task.WhenAll(roleCreationTasks);
+        foreach (var role in roles)
+            await roleManager.CreateAsync(new IdentityRole(role!));
 
         return;
 
