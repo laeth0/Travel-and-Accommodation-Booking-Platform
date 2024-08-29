@@ -14,7 +14,9 @@ public static class ContextConfiguration
 
     internal static IServiceCollection AddBookingContext(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = configuration.GetConnectionString("DefaultConnection")
+                            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 
         if (connectionString is null)
         {

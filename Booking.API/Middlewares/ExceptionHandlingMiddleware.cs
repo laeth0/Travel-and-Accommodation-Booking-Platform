@@ -48,12 +48,8 @@ public class ExceptionHandlingMiddleware
 
 
         await Results.Problem(exception.Message,
-            statusCode: StatusCode,
-            instance: $"{context.Request.Method} {context.Request.Path}"
-            ).ExecuteAsync(context);
-
-
+                                statusCode: StatusCode,
+                                instance: $"{context.Request.Method} {context.Request.Path}"
+                                ).ExecuteAsync(context);
     }
-
-
 }
