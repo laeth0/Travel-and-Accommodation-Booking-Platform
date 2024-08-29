@@ -32,7 +32,5 @@ public static class RolesDataSeeding
         foreach (var role in roles)
             await roleManager.CreateAsync(new IdentityRole(role!));
 
-        return;
-
     }
 }

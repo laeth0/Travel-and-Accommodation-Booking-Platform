@@ -29,11 +29,9 @@ namespace Booking.API.Controllers
         //[ResponseCache(CacheProfileName = "Default60Sec")] //[ResponseCache(Duration =60,Location =ResponseCacheLocation.Client)]
         public async Task<ActionResult> Index(CancellationToken cancellationToken = default)
         {
+            var data = await _mediator.Send(new GetAllAmenityQuery(), cancellationToken);
 
-            var response = new SuccessResponse
-            {
-                data = await _mediator.Send(new GetAllAmenityQuery(), cancellationToken)
-            };
+            var response = new SuccessResponse { data = data };
 
             return Ok(response);
 
