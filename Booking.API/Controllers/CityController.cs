@@ -126,9 +126,11 @@ public class CityController : BaseController
         var command = _mapper.Map<UpdateCityCommand>(model,
             opts => opts.AfterMap((src, dest) => dest.Id = id));
 
+        var data = await _mediator.Send(command, cancellationToken);
+
         var response = new SuccessResponse
         {
-            data = await _mediator.Send(command, cancellationToken),
+            data = data,
             Message = CityMessages.CityUpdated
         };
 

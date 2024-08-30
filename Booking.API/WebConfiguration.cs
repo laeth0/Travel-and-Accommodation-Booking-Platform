@@ -15,6 +15,7 @@ namespace Booking.API
         {
 
             var assembly = Assembly.GetExecutingAssembly();
+
             services.AddSwaggerAuthorizeOption();
             services.AddConfigCORS();
             services.AddCacheProfileService();
@@ -29,17 +30,10 @@ namespace Booking.API
 
 
 
-
-
-
-
             services.Configure<DataProtectionTokenProviderOptions>(options =>
             {
                 options.TokenLifespan = TimeSpan.FromHours(3);
             });
-
-
-
 
 
             services.AddProblemDetails(options =>
@@ -51,14 +45,6 @@ namespace Booking.API
                 };
             });
 
-
-            /*
-            // Register the IExceptionHandler service with dependency injection
-            services.AddExceptionHandler<GlobalExceptionHandler>(); //  It's registered with a singleton lifetime. 
-            services.AddExceptionHandler<BadRequestExceptionHandler>();
-            services.AddExceptionHandler<NotFoundExceptionHandler>(); // The BadRequestExceptionHandler will execute first and try to handle the exception. If the exception isn't handled, NotFoundExceptionHandler will execute next and attempt to handle the exception.
-            services.AddProblemDetails();
-            */
 
             return services;
         }
@@ -149,9 +135,6 @@ namespace Booking.API
 
 
 
-
-
-
         public static IServiceCollection AddConfigCORS(this IServiceCollection services)
         {
             services.AddCors(options =>
@@ -201,17 +184,12 @@ namespace Booking.API
 
 
 
-
         public static ILoggingBuilder AddDefaultLoggingService(this ILoggingBuilder services)
         {
-            // watch this vedio https://www.youtube.com/watch?v=JUHJZhbIloM
-            // and watch this vedio https://www.youtube.com/watch?v=99YFw2Qb2Ho
             services.ClearProviders(); // Clear all providers => the logging provider is Console, Debug, EventSource, EventLog ( Windows only )
             services.AddConsole(); // Add Console provider
             return services;
         }
-
-
 
 
 
