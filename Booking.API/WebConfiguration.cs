@@ -155,16 +155,6 @@ namespace Booking.API
 
         public static IServiceCollection AddCacheProfileService(this IServiceCollection services)
         {
-            /*
-             the service AddControllers :-
-             1.	Controller Support: Registers the necessary services to support controllers
-             2.	Routing: Adds routing services that allow you to define URL patterns and map them to specific controller actions.
-             3.	Model Binding: Enables model binding, which automatically maps data from HTTP requests (such as query strings, form data, and JSON payloads) to action method parameters.
-             4.	Validation: Integrates model validation, ensuring that incoming data meets specified validation rules before it reaches your controller actions.
-             5.	Formatters: Adds support for input and output formatters, allowing your API to handle different data formats like JSON and XML.
-
-             it call a method AddApiExplorer() that Adds the default API explorer service just for Controllers api.(EndPoint for Controllers api يعني بضفلي سيرفيس انو يبحث جوا المشروع تاعي على )
-             */
             services.AddControllers(options =>
             {
                 options.CacheProfiles.Add("Default60Sec", new CacheProfile
