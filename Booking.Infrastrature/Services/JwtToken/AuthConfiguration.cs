@@ -3,16 +3,16 @@
 
 
 using Booking.Domain.Interfaces.Services;
+using Booking.Shared.OptionsValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Booking.Shared.OptionsValidation;
 
 
 namespace Booking.Infrastrature.Services;
-public static class AuthConfiguration // Extension methods must be created in a non-generic static class
+public static class AuthConfiguration
 {
     // to learn more about this topic, visit => https://www.linkedin.com/posts/anton-martyniuk-93980994_csharp-dotnet-programming-activity-7220699033999208448-W80r?utm_source=share&utm_medium=member_desktop
 
@@ -24,18 +24,12 @@ public static class AuthConfiguration // Extension methods must be created in a 
         services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
 
 
-
         // AddJwtAuthenticationSchemeService :- 
-
         // watch this vedio https://www.youtube.com/watch?v=yEQoDNHWzlE&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=74
 
 
         //   على هاي التوكن Validate وكيف يعمل jwt هون انا بقول للسستم تاعي انو يدعم ال 
         // اما عملية انشاء التوكن والتحقق منها بتكون في الكلاس اللي بعمل فيه السيرفس
-
-        //var jwtSettings = config.GetSection("JWT").Get<JWT>();
-
-
         services.AddAuthentication(options =>
         {
             // here i put JwtBearer as the default authentication scheme
@@ -70,8 +64,6 @@ public static class AuthConfiguration // Extension methods must be created in a 
                 ValidateLifetime = true,
             };
         });
-
-
 
 
         return services;
