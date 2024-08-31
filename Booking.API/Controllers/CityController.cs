@@ -92,8 +92,6 @@ public class CityController : BaseController
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<ActionResult> Create([FromForm] CityCreateRequest model, CancellationToken cancellationToken = default)
     {
-        // show this vedio https://www.youtube.com/watch?v=pDtDEVbEDdQ&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=16
-
         var cityCommand = _mapper.Map<CreateCityCommand>(model);
 
         var CityResponse = await _mediator.Send(cityCommand, cancellationToken);

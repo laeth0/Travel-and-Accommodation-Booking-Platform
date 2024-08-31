@@ -21,9 +21,5 @@ namespace Booking.API.Controllers
             _mediator = mediator;
         }
 
-        //for delete action method => mean when we want to delete a category we should delete all products that belong to this category
-        //[ProducesResponseType(StatusCodes.Status409Conflict)]// if the resource has any dependencies that would cause a conflict if deleted
-
-
     }
 }

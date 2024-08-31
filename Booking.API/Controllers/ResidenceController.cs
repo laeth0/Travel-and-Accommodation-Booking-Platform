@@ -111,8 +111,6 @@ public class ResidenceController : BaseController
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<ActionResult> Create([FromForm] ResidenceCreateRequest model, CancellationToken cancellationToken = default)
     {
-        // show this vedio https://www.youtube.com/watch?v=pDtDEVbEDdQ&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=16
-
         var ResidenceCommand = _mapper.Map<CreateResidenceCommand>(model);
 
         var ResidenceResponse = await _mediator.Send(ResidenceCommand, cancellationToken);

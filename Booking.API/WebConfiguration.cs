@@ -58,7 +58,6 @@ namespace Booking.API
 
             // this configuration is for swagger to use JWT token for authorization
             // enable swagger authorize option
-            // watch this vedio https://www.youtube.com/watch?v=aHR_E-nwGPs&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=78
 
 
             /*
@@ -102,9 +101,6 @@ namespace Booking.API
                         new List<string>()
                     }
                 });
-
-
-
 
                 // show this vedio  https://www.youtube.com/watch?v=lml_j5ujjeQ
                 options.SwaggerDoc("v1", new OpenApiInfo

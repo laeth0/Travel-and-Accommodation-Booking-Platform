@@ -12,10 +12,8 @@ using System.Text;
 
 
 namespace Booking.Infrastrature.Services;
-public static class AuthConfiguration
+public static class AuthConfiguration  // Extension methods must be created in a non-generic static class
 {
-    // to learn more about this topic, visit => https://www.linkedin.com/posts/anton-martyniuk-93980994_csharp-dotnet-programming-activity-7220699033999208448-W80r?utm_source=share&utm_medium=member_desktop
-
     public static IServiceCollection AddJwtAuthServices(this IServiceCollection services)
     {
 
@@ -24,9 +22,7 @@ public static class AuthConfiguration
         services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
 
 
-        // AddJwtAuthenticationSchemeService :- 
-        // watch this vedio https://www.youtube.com/watch?v=yEQoDNHWzlE&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=74
-
+        // Add Jwt Authentication Scheme Service :- 
 
         //   على هاي التوكن Validate وكيف يعمل jwt هون انا بقول للسستم تاعي انو يدعم ال 
         // اما عملية انشاء التوكن والتحقق منها بتكون في الكلاس اللي بعمل فيه السيرفس

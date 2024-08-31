@@ -86,8 +86,6 @@ public class CountryController : BaseController
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<ActionResult> Create([FromForm] CountryCreateRequest model, CancellationToken cancellationToken = default)
     {
-        // show this vedio https://www.youtube.com/watch?v=pDtDEVbEDdQ&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=16
-
         var countryCommand = _mapper.Map<CreateCountryCommand>(model);
 
         var ContryResponse = await _mediator.Send(countryCommand, cancellationToken);

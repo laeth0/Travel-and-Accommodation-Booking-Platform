@@ -16,38 +16,6 @@ public class AuthController : BaseController
     public AuthController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
         : base(mapper, logger, mediator)
     {
-        //i am using Role based authorization System 
-
-        // this ( User.Identity.Name ) return the User Name
-
-        //var claimsIdentity = User.Identity as ClaimsIdentity;
-        //var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        //var userId = userIdClaim?.Value;
-        //return Ok(userId);
-        //-------------------------------------------------------------------------------------
-        //var claimsIdentity = User.Claims.FirstOrDefault(x=>x.Type== ClaimTypes.NameIdentifier);
-        //var userId = claimsIdentity?.Value;
-        //return Ok(userId);
-
-
-        /*
-          dependency يعني الاعتمادية يعني اي كلاس بعتمد على كلاس ثاني فهو بالنسبة الو dependency مصطلح 
-          يعني الحقن زي كاني اعطيت الابجكت لهاد الكلاس عن طريق الحقن injection مصطلح 
-        Show this vedio https://www.youtube.com/watch?v=6j3Nzr84dqo&list=PLsV97AQt78NQ8E7cEqovH0zLYRJgJahGh&index=3
-         */
-
-
-        /*
-        when putting
-        [Authorize(Roles ="Manager")]
-        [Authorize(Roles = "Admin")]
-        this mean that the user should have the two roles to access this method (كانو اند)
-
-        but when putting
-        [Authorize(Roles = "Manager,Admin")]
-        this mean that the user should have one of the two roles to access this method (كانو اور)
-         */
-
     }
 
 
@@ -87,7 +55,6 @@ public class AuthController : BaseController
         var response = new SuccessResponse { data = UserData, Message = "User Logged in Successfully" };
 
         return Ok(response);
-
     }
 
 

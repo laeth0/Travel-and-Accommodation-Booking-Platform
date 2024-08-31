@@ -16,19 +16,6 @@ public class RoomController : BaseController
     public RoomController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator)
      : base(mapper, logger, mediator)
     {
-
-
-        /*
-        if (!ModelState.IsValid)
-            return BadRequest(new ErrorResponse
-            {
-                StatusCode = HttpStatusCode.BadRequest,
-                Errors = ModelState.Values
-                            .SelectMany(x => x.Errors)
-                            .Select(x => x.ErrorMessage)
-                            .ToList()
-            });
-        */
     }
 
 
@@ -117,8 +104,6 @@ public class RoomController : BaseController
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<ActionResult> Create([FromForm] RoomCreateRequest model, CancellationToken cancellationToken = default)
     {
-        // show this vedio https://www.youtube.com/watch?v=pDtDEVbEDdQ&list=PL3ewn8T-zRWgO-GAdXjVRh-6thRog6ddg&index=16
-
         var RoomCommand = _mapper.Map<CreateRoomCommand>(model);
 
         var RoomResponse = await _mediator.Send(RoomCommand, cancellationToken);

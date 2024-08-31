@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "wKFOG7nyTQ8x9pQqIQIrcKTWeynE596co8ARj+2ydO4=",
+  "Hash": "6MA8P6ZOAlON/MzSxOVp87gJRo81V2BvOr3g0Z0D2cE=",
   "Source": "Booking.API",
   "BasePath": "_content/Booking.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Booking.API\\wwwroot",
+      "Source": "Booking.API",
+      "ContentRoot": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\\Booking.API\\wwwroot\\",
+      "BasePath": "_content/Booking.API",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }
