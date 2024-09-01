@@ -341,3 +341,5 @@ C:\Users\BisanCo\Desktop\travel-and-Accommodation-Booking-Platform-Palsoft-Trani
 C:\Users\BisanCo\Desktop\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\Booking.API\obj\Debug\net8.0\Booking.API.genruntimeconfig.cache
 C:\Users\BisanCo\Desktop\travel-and-Accommodation-Booking-Platform-Palsoft-Traning\Booking.API\obj\Debug\net8.0\ref\Booking.API.dll
 C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\Booking.API\bin\Debug\net8.0\Scrutor.dll
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\Booking.API\obj\Debug\net8.0\Booking.API.csproj.Fody.CopyLocal.cache
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform-Palsoft-Traning\Booking.API\obj\Debug\net8.0\Booking.API.csproj.Fody.RuntimeCopyLocal.cache

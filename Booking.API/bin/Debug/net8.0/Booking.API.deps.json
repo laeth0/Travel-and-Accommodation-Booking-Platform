@@ -9,6 +9,8 @@
       "Booking.API/1.0.0": {
         "dependencies": {
           "Booking.Infrastrature": "1.0.0",
+          "Fody": "6.8.1",
+          "MethodTimer.Fody": "3.2.2",
           "Microsoft.EntityFrameworkCore.Design": "8.0.8",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.19.5",
           "Swashbuckle.AspNetCore": "6.4.0"
@@ -114,6 +116,7 @@
           }
         }
       },
+      "Fody/6.8.1": {},
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
@@ -152,6 +155,11 @@
             "assemblyVersion": "2.0.1.0",
             "fileVersion": "2.0.1.0"
           }
+        }
+      },
+      "MethodTimer.Fody/3.2.2": {
+        "dependencies": {
+          "Fody": "6.8.1"
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.8": {
@@ -1619,6 +1627,13 @@
       "path": "fluentvalidation.dependencyinjectionextensions/11.9.2",
       "hashPath": "fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512"
     },
+    "Fody/6.8.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pwk2/No1kL1ft+zMT2y0MvzB6W5cpkdOTj+0+T2u7LGJMTw37qtlnHzCSCyvwRiZVoJ/V/DE78eQ/WEcutUVDw==",
+      "path": "fody/6.8.1",
+      "hashPath": "fody.6.8.1.nupkg.sha512"
+    },
     "Humanizer.Core/2.14.1": {
       "type": "package",
       "serviceable": true,
@@ -1646,6 +1661,13 @@
       "sha512": "sha512-FYv95bNT4UwcNA+G/J1oX5OpRiSUxteXaUt2BJbRSdRNiIUNbggJF69wy6mnk2wYToaanpdXZdCwVylt96MpwQ==",
       "path": "mediatr.contracts/2.0.1",
       "hashPath": "mediatr.contracts.2.0.1.nupkg.sha512"
+    },
+    "MethodTimer.Fody/3.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-l5yOeCM6O3dw1VgqaZdkEGeD3iByAPTkryqRlmHau5nRmQpNmNLVGI5NvMvr+Gmfq4jpmUZYIzOhDnGw5TLtbw==",
+      "path": "methodtimer.fody/3.2.2",
+      "hashPath": "methodtimer.fody.3.2.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.8": {
       "type": "package",

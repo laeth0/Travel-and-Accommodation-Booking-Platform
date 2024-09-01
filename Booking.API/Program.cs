@@ -1,6 +1,7 @@
 ﻿
 
 
+using Booking.API.MethodTimer;
 using Booking.API.Middlewares;
 using Booking.Application;
 using Booking.Infrastrature;
@@ -27,6 +28,8 @@ public class Program
 
 
         var app = builder.Build();
+
+        MethodTimeLogger.logger = app.Logger;
 
         app.UseMiddleware<ExceptionHandlingMiddleware>();
 

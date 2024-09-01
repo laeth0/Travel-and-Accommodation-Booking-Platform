@@ -19,7 +19,7 @@ namespace Booking.API
             services.AddSwaggerAuthorizeOption();
             services.AddConfigCORS();
             services.AddCacheProfileService();
-            services.AddEndpointsApiExplorer(); // Adds the default API explorer service just for minimal api.(EndPoint for minimal api يعني بضفلي سيرفيس انو يبحث جوا المشروع تاعي على )
+            services.AddEndpointsApiExplorer();
 
 
             services.AddAutoMapper(assembly);
@@ -51,21 +51,8 @@ namespace Booking.API
 
 
 
-
-
         public static IServiceCollection AddSwaggerAuthorizeOption(this IServiceCollection services)
         {
-
-            // this configuration is for swagger to use JWT token for authorization
-            // enable swagger authorize option
-
-
-            /*
-            AddSwaggerGen :-
-            1.	Swagger Document Generation: Adds services required to generate Swagger documents.
-            2.	UI Integration: Integrates the Swagger UI, which is a web-based interface that allows you to explore and test your API endpoints interactively. This is particularly useful for developers and testers.
-            3.	Customization: Provides options to customize the generated Swagger document and UI. You can add descriptions, summaries, and other metadata to enhance the documentation.
-            */
             services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -102,7 +89,6 @@ namespace Booking.API
                     }
                 });
 
-                // show this vedio  https://www.youtube.com/watch?v=lml_j5ujjeQ
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
@@ -128,9 +114,6 @@ namespace Booking.API
 
 
 
-
-
-
         public static IServiceCollection AddConfigCORS(this IServiceCollection services)
         {
             services.AddCors(options =>
@@ -145,7 +128,6 @@ namespace Booking.API
 
             return services;
         }
-
 
 
 
@@ -166,7 +148,6 @@ namespace Booking.API
 
             return services;
         }
-
 
 
 

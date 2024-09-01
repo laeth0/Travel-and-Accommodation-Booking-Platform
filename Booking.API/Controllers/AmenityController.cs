@@ -7,6 +7,7 @@ using Booking.API.CustomizeResponses;
 using Booking.Application.Mediatr;
 using Booking.Domain.Interfaces.Services;
 using MediatR;
+using MethodTimer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Booking.API.Controllers
@@ -15,6 +16,7 @@ namespace Booking.API.Controllers
     public class AmenityController : BaseController
     {
 
+
         public AmenityController(IMapper mapper, ILogger<BaseController> logger, IMediator mediator, ICloudinaryService cloudinaryService)
             : base(mapper, logger, mediator)
         {
@@ -22,7 +24,7 @@ namespace Booking.API.Controllers
 
 
 
-
+        [Time("Here i put the Message")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessResponse))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]

@@ -139,6 +139,12 @@
           }
         }
       },
+      "Fody/6.8.1": {
+        "type": "package",
+        "build": {
+          "build/Fody.targets": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -197,6 +203,25 @@
           "lib/netstandard2.0/MediatR.Contracts.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "MethodTimer.Fody/3.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/MethodTimer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/MethodTimer.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/MethodTimer.Fody.props": {}
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.8": {
@@ -2927,6 +2952,40 @@
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.xml"
       ]
     },
+    "Fody/6.8.1": {
+      "sha512": "pwk2/No1kL1ft+zMT2y0MvzB6W5cpkdOTj+0+T2u7LGJMTw37qtlnHzCSCyvwRiZVoJ/V/DE78eQ/WEcutUVDw==",
+      "type": "package",
+      "path": "fody/6.8.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "build/Fody.targets",
+        "fody.6.8.1.nupkg.sha512",
+        "fody.nuspec",
+        "netclassictask/Fody.dll",
+        "netclassictask/FodyCommon.dll",
+        "netclassictask/FodyHelpers.dll",
+        "netclassictask/FodyIsolated.dll",
+        "netclassictask/Mono.Cecil.Pdb.dll",
+        "netclassictask/Mono.Cecil.Pdb.pdb",
+        "netclassictask/Mono.Cecil.Rocks.dll",
+        "netclassictask/Mono.Cecil.Rocks.pdb",
+        "netclassictask/Mono.Cecil.dll",
+        "netclassictask/Mono.Cecil.pdb",
+        "netstandardtask/Fody.dll",
+        "netstandardtask/FodyCommon.dll",
+        "netstandardtask/FodyHelpers.dll",
+        "netstandardtask/FodyIsolated.dll",
+        "netstandardtask/Mono.Cecil.Pdb.dll",
+        "netstandardtask/Mono.Cecil.Pdb.pdb",
+        "netstandardtask/Mono.Cecil.Rocks.dll",
+        "netstandardtask/Mono.Cecil.Rocks.pdb",
+        "netstandardtask/Mono.Cecil.dll",
+        "netstandardtask/Mono.Cecil.pdb",
+        "readme.md"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -3018,6 +3077,27 @@
         "lib/netstandard2.0/MediatR.Contracts.xml",
         "mediatr.contracts.2.0.1.nupkg.sha512",
         "mediatr.contracts.nuspec"
+      ]
+    },
+    "MethodTimer.Fody/3.2.2": {
+      "sha512": "l5yOeCM6O3dw1VgqaZdkEGeD3iByAPTkryqRlmHau5nRmQpNmNLVGI5NvMvr+Gmfq4jpmUZYIzOhDnGw5TLtbw==",
+      "type": "package",
+      "path": "methodtimer.fody/3.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/MethodTimer.Fody.props",
+        "lib/net452/MethodTimer.dll",
+        "lib/net452/MethodTimer.xml",
+        "lib/netstandard1.0/MethodTimer.dll",
+        "lib/netstandard1.0/MethodTimer.xml",
+        "lib/netstandard2.0/MethodTimer.dll",
+        "lib/netstandard2.0/MethodTimer.xml",
+        "lib/netstandard2.1/MethodTimer.dll",
+        "lib/netstandard2.1/MethodTimer.xml",
+        "methodtimer.fody.3.2.2.nupkg.sha512",
+        "methodtimer.fody.nuspec",
+        "weaver/MethodTimer.Fody.dll"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.8": {
@@ -8122,6 +8202,8 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Booking.Infrastrature >= 1.0.0",
+      "Fody >= 6.8.1",
+      "MethodTimer.Fody >= 3.2.2",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.19.5",
       "Swashbuckle.AspNetCore >= 6.4.0"
@@ -8175,6 +8257,16 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Fody": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[6.8.1, )"
+          },
+          "MethodTimer.Fody": {
+            "target": "Package",
+            "version": "[3.2.2, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
