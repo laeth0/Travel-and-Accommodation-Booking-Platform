@@ -34,6 +34,8 @@ public interface IRepository<TEntity> where TEntity : class
 
     TEntity Delete(TEntity entity);
 
+    TEntity Remove(TEntity entity);
+
     Task<int> BulkDeleteAsync(Expression<Func<TEntity, bool>> filterCondition, CancellationToken cancellationToken = default);
 
     Task<int> BulkUpdateAsync(

@@ -107,12 +107,26 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
     }
 
 
+    public TEntity Remove(TEntity entity)
+    {
+        var entityEntry = _DbContext.Set<TEntity>().Attach(entity);
 
-    public async Task<int> BulkDeleteAsync(Expression<Func<TEntity, bool>> filterCondition,
+        entityEntry.State = EntityState.Deleted;
+
+        return entityEntry.Entity;
+    }
+
+
+
+
+    public async Task<int> BulkDeleteAsync(
+        Expression<Func<TEntity, bool>> filterCondition,
         CancellationToken cancellationToken = default
         )
     {
-        return await _DbContext.Set<TEntity>().Where(filterCondition).ExecuteDeleteAsync(cancellationToken: cancellationToken);
+        return await _DbContext.Set<TEntity>()
+                        .Where(filterCondition)
+                        .ExecuteDeleteAsync(cancellationToken);
     }
 
 
