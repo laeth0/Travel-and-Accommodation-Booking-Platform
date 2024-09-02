@@ -31,7 +31,7 @@ public class UpdateResidenceCommandHandler : IRequestHandler<UpdateResidenceComm
         var Residence = await _unitOfWork.ResidenceRepository.FindAsync(request.Id, cancellationToken) ??
                          throw new NotFoundException(ResidenceMessages.NotFound);
 
-        if (await _unitOfWork.ResidenceRepository.IsExistAsync(c => c.Name == request.Name, cancellationToken))
+        if (!await _unitOfWork.ResidenceRepository.IsExistAsync(c => c.Name == request.Name, cancellationToken))
             throw new BadRequestException(ResidenceMessages.ResidenceExist(request.Name));
 
         _mapper.Map(request, Residence);

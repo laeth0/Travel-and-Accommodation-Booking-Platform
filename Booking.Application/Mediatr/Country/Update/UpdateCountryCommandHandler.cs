@@ -28,7 +28,7 @@ public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand,
         var Country = await _unitOfWork.CountryRepository.FindAsync(request.Id, cancellationToken) ??
                          throw new NotFoundException(CityMessages.NotFound);
 
-        if (await _unitOfWork.CountryRepository.IsExistAsync(c => c.Name == request.Name, cancellationToken))
+        if (!await _unitOfWork.CountryRepository.IsExistAsync(c => c.Name == request.Name, cancellationToken))
         {
             throw new BadRequestException(CountryMessages.CountryExist(request.Name));
         }

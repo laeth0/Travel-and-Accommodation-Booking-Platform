@@ -70,7 +70,7 @@ public class Repository<TEntity>(ApplicationDbContext Context) : IRepository<TEn
         return await _DbContext.Set<TEntity>().FindAsync(id, cancellationToken);
     }
 
-
+    
     public async Task<TEntity?> GetByPrimaryKeysAsync(CancellationToken cancellationToken = default, params object?[]? keyValues)
     {
         return await _DbContext.Set<TEntity>().FindAsync(keyValues, cancellationToken);

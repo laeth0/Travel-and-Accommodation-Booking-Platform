@@ -28,7 +28,7 @@ public class UpdateCityCommandHandler : IRequestHandler<UpdateCityCommand, CityR
         var City = await _unitOfWork.CityRepository.FindAsync(request.Id, cancellationToken) ??
                          throw new NotFoundException(CityMessages.NotFound);
 
-        if (await _unitOfWork.CityRepository.IsExistAsync(c => c.Name == request.Name, cancellationToken))
+        if (!await _unitOfWork.CityRepository.IsExistAsync(c => c.Name == request.Name, cancellationToken))
             throw new BadRequestException(CityMessages.CityExist(request.Name));
 
 
