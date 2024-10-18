@@ -8,5 +8,5 @@ namespace Projects;
 public class TravelAccommodationBookingPlatform_AppHost
 {
     private TravelAccommodationBookingPlatform_AppHost() { }
-    public static string ProjectPath => """C:\Users\BisanCo\Desktop\TravelAccommodationBookingPlatform\TravelAccommodationBookingPlatform.AppHost""";
+    public static string ProjectPath => """C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.AppHost""";
 }

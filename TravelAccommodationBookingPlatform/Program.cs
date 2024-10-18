@@ -1,29 +1,51 @@
+using Serilog;
+using TravelAccommodationBookingPlatform.Api.ServiceCollectionExtention;
+using TravelAccommodationBookingPlatform.Api.WebApplicationExtensions;
+
+
 var builder = WebApplication.CreateBuilder(args);
-
-builder.AddServiceDefaults();
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-app.MapDefaultEndpoints();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
+    builder.AddServiceDefaults();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+    builder.Services.InstallServices(builder.Configuration, typeof(IServiceInstaller).Assembly);
+    builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 }
 
-app.UseHttpsRedirection();
 
-app.UseAuthorization();
+var app = builder.Build();
+{
+    app.UseGlobalErrorHandling();
 
-app.MapControllers();
+    app.MapDefaultEndpoints();
 
-app.Run();
+    app.UseSwagger();
+
+    app.UseSwaggerUI();
+
+    app.UseHttpsRedirection();
+
+    app.UseSerilogRequestLogging();
+
+    app.UseStaticFiles();
+
+    app.UseRouting();
+
+    app.UseCors();
+
+    app.UseAuthentication();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    if (app.Environment.IsDevelopment())
+    {
+        await app.Migrate();
+    }
+
+    app.Run();
+}

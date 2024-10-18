@@ -2213,11 +2213,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.ServiceDefaults\\TravelAccommodationBookingPlatform.ServiceDefaults.csproj",
+      "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.ServiceDefaults\\TravelAccommodationBookingPlatform.ServiceDefaults.csproj",
       "projectName": "TravelAccommodationBookingPlatform.ServiceDefaults",
-      "projectPath": "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.ServiceDefaults\\TravelAccommodationBookingPlatform.ServiceDefaults.csproj",
+      "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.ServiceDefaults\\TravelAccommodationBookingPlatform.ServiceDefaults.csproj",
       "packagesPath": "C:\\Users\\BisanCo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.ServiceDefaults\\obj\\",
+      "outputPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.ServiceDefaults\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\BisanCo\\AppData\\Roaming\\NuGet\\NuGet.Config",

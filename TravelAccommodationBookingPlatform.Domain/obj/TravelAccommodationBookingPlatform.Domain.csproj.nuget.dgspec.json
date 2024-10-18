@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj": {}
+    "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj": {
+    "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj",
         "projectName": "TravelAccommodationBookingPlatform.Domain",
-        "projectPath": "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj",
+        "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj",
         "packagesPath": "C:\\Users\\BisanCo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Domain\\obj\\",
+        "outputPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\BisanCo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,6 +63,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

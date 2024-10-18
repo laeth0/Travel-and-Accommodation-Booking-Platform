@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "p+ksbXGZ/4E=",
+  "dgSpecHash": "lClZmwlCqDE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.AppHost\\TravelAccommodationBookingPlatform.AppHost.csproj",
+  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.AppHost\\TravelAccommodationBookingPlatform.AppHost.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BisanCo\\.nuget\\packages\\aspire.hosting\\8.1.0\\aspire.hosting.8.1.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\aspire.hosting.apphost\\8.1.0\\aspire.hosting.apphost.8.1.0.nupkg.sha512",

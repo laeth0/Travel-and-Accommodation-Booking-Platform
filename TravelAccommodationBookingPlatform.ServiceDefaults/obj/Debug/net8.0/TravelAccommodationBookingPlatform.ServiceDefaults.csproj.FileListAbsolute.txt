@@ -1,0 +1,13 @@
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\bin\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.deps.json
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\bin\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.dll
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\bin\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.pdb
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.csproj.AssemblyReference.cache
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.AssemblyInfoInputs.cache
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.AssemblyInfo.cs
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.sourcelink.json
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.dll
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\refint\TravelAccommodationBookingPlatform.ServiceDefaults.dll
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\TravelAccommodationBookingPlatform.ServiceDefaults.pdb
+C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.ServiceDefaults\obj\Debug\net8.0\ref\TravelAccommodationBookingPlatform.ServiceDefaults.dll
