@@ -10,4 +10,8 @@
     <ProjectReference Include="..\TravelAccommodationBookingPlatform.Application\TravelAccommodationBookingPlatform.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TypeConverters\" />
+  </ItemGroup>
+
 </Project>

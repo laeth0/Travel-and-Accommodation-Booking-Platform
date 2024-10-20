@@ -5,11 +5,11 @@ public class ApiResponse
 {
     public bool IsSuccess { get; set; } = true;
 
-    public string Message { get; set; } = "Data fetched successfully";
+    public string Message { get; set; } 
 
     public object Data { get; set; }
 
-    public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
+    public HttpStatusCode StatusCode { get; set; } 
 
 
 }

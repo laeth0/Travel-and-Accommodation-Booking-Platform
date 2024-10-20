@@ -1,5 +1,5 @@
 ﻿namespace TravelAccommodationBookingPlatform.Domain.Enums;
-public enum UserRole
+public enum UserRoles
 {
     User = 0,
     Admin = 1,

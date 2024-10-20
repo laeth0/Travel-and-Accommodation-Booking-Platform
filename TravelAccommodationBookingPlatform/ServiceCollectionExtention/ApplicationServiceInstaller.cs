@@ -1,7 +1,5 @@
 ﻿
 using FluentValidation;
-using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
-using TravelAccommodationBookingPlatform.Application.Interfaces;
 using TravelAccommodationBookingPlatform.Application.PipelineBehavior;
 
 namespace TravelAccommodationBookingPlatform.Api.ServiceCollectionExtention;
@@ -10,6 +8,8 @@ public class ApplicationServiceInstaller : IServiceInstaller
 {
     public IServiceCollection Install(IServiceCollection services, IConfiguration configuration)
     {
+        services.AddAutoMapper(Application.AssemblyReference.Assembly);
+
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(Application.AssemblyReference.Assembly);
@@ -18,32 +18,12 @@ public class ApplicationServiceInstaller : IServiceInstaller
             config.AddOpenBehavior(typeof(TransactionBehaviour<,>));
         });
 
+        services.AddValidatorsFromAssembly(Infrastructure.AssemblyReference.Assembly);
+        services.AddValidatorsFromAssembly(Api.AssemblyReference.Assembly);
+
+        //services.AddFluentValidationAutoValidation(); 
         services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);
-        services.AddValidatorsFromAssembly(Infrastructure.AssemblyReference.Assembly, ServiceLifetime.Transient);
-
-        services.AddFluentValidationAutoValidation();
-
-        services.AddAutoMapper(Application.AssemblyReference.Assembly);
-
-        services.Scan(scan => scan
-            .FromAssemblies(Application.AssemblyReference.Assembly, Infrastructure.AssemblyReference.Assembly, Persistence.AssemblyReference.Assembly)
-            .AddClasses(classes => classes.AssignableTo<ITransientService>())
-            .AsImplementedInterfaces()
-            .WithTransientLifetime());
-
-        services.Scan(scan => scan
-            .FromAssemblies(Application.AssemblyReference.Assembly, Infrastructure.AssemblyReference.Assembly, Persistence.AssemblyReference.Assembly)
-            .AddClasses(classes => classes.AssignableTo<IScopedService>())
-            .AsImplementedInterfaces()
-            .WithScopedLifetime());
-
-        services.Scan(scan => scan
-            .FromAssemblies(Application.AssemblyReference.Assembly, Infrastructure.AssemblyReference.Assembly, Persistence.AssemblyReference.Assembly)
-            .AddClasses(classes => classes.AssignableTo<ISingletonService>())
-            .AsImplementedInterfaces()
-            .WithSingletonLifetime());
 
         return services;
-
     }
 }

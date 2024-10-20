@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
+using TravelAccommodationBookingPlatform.Domain.Exceptions;
 
 namespace TravelAccommodationBookingPlatform.Api.WebApplicationExtensions;
 
@@ -12,9 +13,16 @@ public static class ErrorHandlingMiddleware
         {
             var exceptionHandlerPathFeature = httpContext.Features.Get<IExceptionHandlerPathFeature>()?.Error;
 
-            var StatusCode = StatusCodes.Status500InternalServerError;
+            var statusCode = exceptionHandlerPathFeature switch
+            {
+                DomainException => StatusCodes.Status400BadRequest,
+                _ => StatusCodes.Status500InternalServerError
+            };
 
-            return Results.Problem(exceptionHandlerPathFeature?.Message, statusCode: StatusCode, instance: $"{httpContext.Request.Method} {httpContext.Request.Path}");
+            return Results.Problem(
+                exceptionHandlerPathFeature?.Message,
+                "{httpContext.Request.Method} {httpContext.Request.Path}",
+                statusCode);
         });
 
         return app;

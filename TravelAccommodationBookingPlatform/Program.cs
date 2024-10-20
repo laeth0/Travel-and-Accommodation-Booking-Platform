@@ -11,8 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddSwaggerGen();
     builder.Services.InstallServices(builder.Configuration, typeof(IServiceInstaller).Assembly);
     builder.Host.UseSerilog((context, configuration) =>
-    configuration.ReadFrom.Configuration(context.Configuration));
-
+            configuration.ReadFrom.Configuration(context.Configuration));
 }
 
 
@@ -39,6 +38,8 @@ var app = builder.Build();
     app.UseAuthentication();
 
     app.UseAuthorization();
+
+    app.UseRateLimiter();
 
     app.MapControllers();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using TravelAccommodationBookingPlatform.Persistence;
 using TravelAccommodationBookingPlatform.Persistence.DataSeed;
 
@@ -8,10 +9,21 @@ public static class DatabaseAppExtensions
 {
     public static async Task Migrate(this WebApplication app)
     {
-        using var scope = app.Services.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        if (context.Database.GetPendingMigrations().Any())
-            await context.Database.MigrateAsync();
-        await DataSeeder.SeedAsync(context);
+        using var serviceScope = app.Services.CreateScope();
+        var dbContext = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+        await RolesDataSeeding.SeedRoles(roleManager);
+
+        if (app.Environment.IsDevelopment())
+        {
+            if (dbContext.Database.GetPendingMigrations().Any())
+                await dbContext.Database.MigrateAsync();
+
+            await DataSeeder.SeedAsync(dbContext);
+        }
     }
+
+
 }
+

@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|c:\\users\\bisanco\\desktop\\travel-and-accommodation-booking-platform\\travelaccommodationbookingplatform.presentation\\constants\\presentationerrors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|solutionrelative:travelaccommodationbookingplatform.presentation\\constants\\presentationerrors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|c:\\users\\bisanco\\desktop\\travel-and-accommodation-booking-platform\\travelaccommodationbookingplatform.presentation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|solutionrelative:travelaccommodationbookingplatform.presentation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PresentationErrors.cs",
-              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\Constants\\PresentationErrors.cs",
-              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Presentation\\Constants\\PresentationErrors.cs",
-              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\Constants\\PresentationErrors.cs",
-              "RelativeToolTip": "TravelAccommodationBookingPlatform.Presentation\\Constants\\PresentationErrors.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs*",
+              "RelativeToolTip": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs*",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAgwFIAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T17:21:03.874Z",
+              "WhenOpened": "2024-10-20T05:48:45.681Z",
               "EditorCaption": ""
             }
           ]

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class First : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,9 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ActivationCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActivationCodeExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
@@ -181,6 +184,27 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tokens",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsRevoked = table.Column<bool>(type: "bit", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tokens_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -536,6 +560,17 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                 name: "IX_Rooms_HotelId",
                 table: "Rooms",
                 column: "HotelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tokens_AppUserId",
+                table: "Tokens",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tokens_Value",
+                table: "Tokens",
+                column: "Value",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -572,16 +607,19 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                 name: "RoomImageAssociations");
 
             migrationBuilder.DropTable(
+                name: "Tokens");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Payments");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Hotel");

@@ -7,8 +7,7 @@ using TravelAccommodationBookingPlatform.Domain.Shared.ValidationResult;
 
 namespace TravelAccommodationBookingPlatform.Application.PipelineBehavior;
 
-public class ValidationPipelineBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse>
+public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
     where TResponse : Result
 {
@@ -53,8 +52,7 @@ public class ValidationPipelineBehavior<TRequest, TResponse>
 
     }
 
-    private static TResult CreateValidationResult<TResult>(Error[] errors)
-        where TResult : Result
+    private static TResult CreateValidationResult<TResult>(Error[] errors) where TResult : Result
     {
         if (typeof(TResult) == typeof(Result))
         {

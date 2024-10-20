@@ -13,8 +13,8 @@ using TravelAccommodationBookingPlatform.Persistence;
 namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241017073442_first")]
-    partial class first
+    [Migration("20241019172554_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -180,6 +180,9 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -575,6 +578,36 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Token", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("Value")
+                        .IsUnique();
+
+                    b.ToTable("Tokens");
+                });
+
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Persistence.Configurations.Associations.HotelImageAssociation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -665,6 +698,34 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.AppUser", b =>
+                {
+                    b.OwnsOne("TravelAccommodationBookingPlatform.Domain.ValueObjects.ActivationCode", "ActivationCode", b1 =>
+                        {
+                            b1.Property<string>("AppUserId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<DateTime>("ExpiresAtUtc")
+                                .HasColumnType("datetime2")
+                                .HasColumnName("ActivationCodeExpiresAt");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("ActivationCode");
+
+                            b1.HasKey("AppUserId");
+
+                            b1.ToTable("AspNetUsers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AppUserId");
+                        });
+
+                    b.Navigation("ActivationCode")
                         .IsRequired();
                 });
 
@@ -775,6 +836,17 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Token", b =>
+                {
+                    b.HasOne("TravelAccommodationBookingPlatform.Domain.Entities.AppUser", "AppUser")
+                        .WithMany("Tokens")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Persistence.Configurations.Associations.HotelImageAssociation", b =>
                 {
                     b.HasOne("TravelAccommodationBookingPlatform.Domain.Entities.Hotel", null)
@@ -814,6 +886,8 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                     b.Navigation("Bookings");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("Tokens");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.City", b =>

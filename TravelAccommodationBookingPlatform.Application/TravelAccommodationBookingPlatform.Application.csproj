@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EndPointCommandAndQuery\Country\CreateCountry\" />
+    <Folder Include="Features\Country\CreateCountry\" />
   </ItemGroup>
 
 </Project>

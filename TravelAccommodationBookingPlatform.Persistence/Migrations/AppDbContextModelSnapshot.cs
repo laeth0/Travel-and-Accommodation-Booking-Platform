@@ -179,6 +179,9 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -294,7 +297,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("Bookings", (string)null);
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.City", b =>
@@ -327,7 +330,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[ImageId] IS NOT NULL");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Country", b =>
@@ -355,7 +358,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[ImageId] IS NOT NULL");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Discount", b =>
@@ -390,7 +393,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("Discounts", (string)null);
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Hotel", b =>
@@ -436,7 +439,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Hotel", (string)null);
+                    b.ToTable("Hotel");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Image", b =>
@@ -454,7 +457,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images", (string)null);
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Payment", b =>
@@ -486,7 +489,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Payments", (string)null);
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Review", b =>
@@ -522,7 +525,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Room", b =>
@@ -569,7 +572,37 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Token", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("Value")
+                        .IsUnique();
+
+                    b.ToTable("Tokens");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Persistence.Configurations.Associations.HotelImageAssociation", b =>
@@ -590,7 +623,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("HotelImageAssociations", (string)null);
+                    b.ToTable("HotelImageAssociations");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Persistence.Configurations.Associations.RoomImageAssociation", b =>
@@ -611,7 +644,7 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("RoomImageAssociations", (string)null);
+                    b.ToTable("RoomImageAssociations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -662,6 +695,34 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.AppUser", b =>
+                {
+                    b.OwnsOne("TravelAccommodationBookingPlatform.Domain.ValueObjects.ActivationCode", "ActivationCode", b1 =>
+                        {
+                            b1.Property<string>("AppUserId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<DateTime>("ExpiresAtUtc")
+                                .HasColumnType("datetime2")
+                                .HasColumnName("ActivationCodeExpiresAt");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("ActivationCode");
+
+                            b1.HasKey("AppUserId");
+
+                            b1.ToTable("AspNetUsers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AppUserId");
+                        });
+
+                    b.Navigation("ActivationCode")
                         .IsRequired();
                 });
 
@@ -772,6 +833,17 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.Token", b =>
+                {
+                    b.HasOne("TravelAccommodationBookingPlatform.Domain.Entities.AppUser", "AppUser")
+                        .WithMany("Tokens")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Persistence.Configurations.Associations.HotelImageAssociation", b =>
                 {
                     b.HasOne("TravelAccommodationBookingPlatform.Domain.Entities.Hotel", null)
@@ -811,6 +883,8 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                     b.Navigation("Bookings");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("Tokens");
                 });
 
             modelBuilder.Entity("TravelAccommodationBookingPlatform.Domain.Entities.City", b =>

@@ -1,4 +1,5 @@
-﻿using TravelAccommodationBookingPlatform.Domain.Enums;
+﻿using Microsoft.AspNetCore.Identity;
+using TravelAccommodationBookingPlatform.Domain.Enums;
 
 namespace TravelAccommodationBookingPlatform.Domain.Shared;
 
@@ -14,6 +15,9 @@ public class Error : IEquatable<Error>
     public string Code { get; }
     public string Message { get; }
     public DateTime Timestamp { get; } = DateTime.Now;
+
+    public Error WithMessage(string message) => new(Type, Code, message);
+
 
     public static implicit operator string(Error error) => error.Code;
 
@@ -47,5 +51,7 @@ public class Error : IEquatable<Error>
     public override int GetHashCode() => HashCode.Combine(Code, Message);
 
     public override string ToString() => Code;
+
+    public static implicit operator Error(IdentityError error) => new(ErrorType.BadRequest, error.Code, error.Description);
 }
 

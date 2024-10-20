@@ -1,7 +1,7 @@
 ﻿using TravelAccommodationBookingPlatform.Domain.Entities;
 
 namespace TravelAccommodationBookingPlatform.Application.Interfaces;
-public interface IJwtTokenGenerator : IScopedService
+public interface IJwtTokenGenerator : ITransientService
 {
     Task<(string, DateTime)> GenerateToken(AppUser user);
 

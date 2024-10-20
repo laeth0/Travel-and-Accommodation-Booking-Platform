@@ -26,7 +26,7 @@ public class CloudinaryService : ICloudinaryService
     public async Task<Result<string>> UploadeAsync(IFormFile file, CancellationToken cancellationToken = default)
     {
         if (IsNullOrWrongSize(file))
-            Result.Failure<string>(ApplicationErrors.File.UploadFailed());
+            Result<string>.Failure(ApplicationErrors.File.UploadFailed());
 
         using var stream = file.OpenReadStream();
 

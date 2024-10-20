@@ -8,7 +8,9 @@ public static class DataSeeder
     {
         if (!await context.Countries.AnyAsync())
         {
-            await context.Countries.AddRangeAsync(CountryDataGenerator.GenerateCountries());
+            var countries = CountryDataGenerator.GenerateCountries();
+            await context.Countries.AddRangeAsync(countries);
+            await context.SaveChangesAsync();
         }
 
     }

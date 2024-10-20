@@ -28,8 +28,6 @@ public class AppDbContext : IdentityDbContext<AppUser>
     public DbSet<Room> Rooms { get; set; }
     public DbSet<HotelImageAssociation> HotelImageAssociations { get; set; }
     public DbSet<RoomImageAssociation> RoomImageAssociations { get; set; }
-
-
-
+    public DbSet<Token> Tokens { get; set; }
 
 }

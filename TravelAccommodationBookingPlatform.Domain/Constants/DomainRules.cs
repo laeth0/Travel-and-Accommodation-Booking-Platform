@@ -6,6 +6,8 @@ public static class DomainRules
     {
         public const int UsernameMaxLength = 50;
         public const int EmailMaxLength = 256;
+        public const int PasswordMaxLength = 100;
+
     }
 
     public static class Booking

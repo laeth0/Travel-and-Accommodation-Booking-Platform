@@ -16,6 +16,29 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
             .HasMaxLength(DomainRules.Users.EmailMaxLength)
             .IsRequired();
 
+        builder.Property(x => x.IsActive)
+            .IsRequired();
+
+
+        builder.OwnsOne(
+            user => user.ActivationCode,
+            activationCode =>
+            {
+                activationCode.WithOwner();
+
+                activationCode.Property(x => x.Value)
+                    .HasColumnName("ActivationCode");
+
+                activationCode.Property(x => x.ExpiresAtUtc)
+                    .HasColumnName("ActivationCodeExpiresAt");
+            }
+        );
+
+        builder.HasMany(u => u.Tokens)
+        .WithOne(t => t.AppUser)
+        .HasForeignKey(t => t.AppUserId)
+        .OnDelete(DeleteBehavior.Cascade);
+
         builder.HasMany(user => user.Reviews)
             .WithOne(review => review.AppUser)
             .HasForeignKey(review => review.AppUserId)

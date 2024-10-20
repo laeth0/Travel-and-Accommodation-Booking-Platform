@@ -5,8 +5,48 @@ namespace TravelAccommodationBookingPlatform.Domain.Constants;
 
 public static class DomainErrors
 {
+    public static class General
+    {
+        public static Error ServerError => new(ErrorType.BadRequest, "General.ServerError", "The server encountered an unrecoverable error.");
+        public static Error NotNull => new(ErrorType.BadRequest, "General.NotNull", "The value is not null.");
+        public static Error NotEmpty => new(ErrorType.BadRequest, "General.NotEmpty", "The value is not empty.");
+        public static Error NotDefault => new(ErrorType.BadRequest, "General.NotDefault", "The value is not default.");
+        public static Error NotFuture => new(ErrorType.BadRequest, "General.NotFuture", "The value is not in the future.");
+        public static Error NotPast => new(ErrorType.BadRequest, "General.NotPast", "The value is not in the past.");
+        public static Error UnProcessableRequest => new(ErrorType.BadRequest, "General.UnProcessableRequest", "The request is unprocessable.");
+        public static Error Unauthorized => new(ErrorType.BadRequest, "General.Unauthorized", "Unauthorized.");
+        public static Error Of => new(ErrorType.BadRequest, "General.Of", "The value is of the wrong type.");
+        public static Error Between => new(ErrorType.BadRequest, "General.Between", "The value is not between the specified range.");
+        public static Error IsTrue => new(ErrorType.BadRequest, "General.IsTrue", "The value is not true.");
+        public static Error LessThan => new(ErrorType.BadRequest, "General.LessThan", "The value is not less than the specified value.");
+        public static Error GreaterThan => new(ErrorType.BadRequest, "General.GreaterThan", "The value is not greater than the specified value.");
+    }
+
     public static class User
     {
+        public static readonly Error InvalidToken = new(
+            ErrorType.BadRequest,
+            "User.InvalidToken",
+            "The token is invalid.");
+
+        public static readonly Error ActivationCodeExpired = new(
+            ErrorType.BadRequest,
+            "User.ActivationCodeExpired",
+            "The activation code has expired.");
+
+
+        public static readonly Error UserNotFound = new(
+            ErrorType.NotFound,
+            "User.NotFound",
+            "User not found.");
+
+
+        public static readonly Error EmailOrPasswordIncorrect = new(
+            ErrorType.NotAuthorized,
+            "User.EmailOrPasswordIncorrect",
+            "The email or password is incorrect.");
+
+
         public static readonly Error UsernameNotFound = new(
             ErrorType.NotAuthorized,
             "User.UsernameNotFound",
@@ -41,6 +81,23 @@ public static class DomainErrors
             ErrorType.Conflict,
             "User.CannotDeleteUserWithBookings",
             "Cannot delete user as they have existing bookings");
+
+        public static readonly Error UserNotActivated = new(
+            ErrorType.BadRequest,
+            "User.NotActivated",
+            "The user account is not activated.");
+
+        public static Error UserAlreadyExists = new(
+            ErrorType.BadRequest,
+            "User.AlreadyExist",
+            "User already exists.");
+
+        public static Error UserAlreadyActive = new(
+            ErrorType.BadRequest,
+            "User.AlreadyActive",
+            "User is already active.");
+
+
     }
 
     public static class Hotel

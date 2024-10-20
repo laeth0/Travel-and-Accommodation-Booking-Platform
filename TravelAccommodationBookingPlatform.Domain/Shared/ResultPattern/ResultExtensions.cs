@@ -3,13 +3,13 @@ public static class ResultExtensions
 {
 
     public static Result<TOut> Map<TIn, TOut>(this Result<TIn> result, Func<TIn, TOut> func)
-        => result.IsSuccess ? func(result.Value) : Result<TOut>.Failure(result.Error);
+        => result.IsSuccess ? func(result.Value) : Result.Failure<TOut>(result.Error);
 
     public static async Task<Result> Bind<TIn>(this Result<TIn> result, Func<TIn, Task<Result>> func)
         => result.IsSuccess ? await func(result.Value) : Result.Failure(result.Error);
 
     public static async Task<Result<TOut>> Bind<TIn, TOut>(this Result<TIn> result, Func<TIn, Task<Result<TOut>>> func)
-        => result.IsSuccess ? await func(result.Value) : Result<TOut>.Failure(result.Error);
+        => result.IsSuccess ? await func(result.Value) : Result.Failure<TOut>(result.Error);
 
     public static Result<T> Tap<T>(this Result<T> result, Action<T> action)
     {

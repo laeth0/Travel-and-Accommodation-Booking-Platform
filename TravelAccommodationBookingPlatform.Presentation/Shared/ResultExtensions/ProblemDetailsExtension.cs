@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TravelAccommodationBookingPlatform.Domain.Enums;
 using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
+using TravelAccommodationBookingPlatform.Domain.Shared.ValidationResult;
 
 namespace TravelAccommodationBookingPlatform.Presentation.Shared.ResultExtensions;
 
@@ -85,7 +86,7 @@ public static class ProblemDetailsExtension
         var errorResponse = new ProblemDetails()
         {
             Status = statusCode,
-            Detail = result.Error.Code + result.Error.Message
+            Detail = $"{result.Error.Code} , {result.Error.Message}"
         };
 
         var problemHttpResult = TypedResults.Problem(errorResponse);

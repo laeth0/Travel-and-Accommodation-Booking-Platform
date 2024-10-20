@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using TravelAccommodationBookingPlatform.Application.Interfaces;
+using TravelAccommodationBookingPlatform.Application.Interfaces.Persistence.Repositories;
 
 namespace TravelAccommodationBookingPlatform.Persistence.Repositories;
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
+
     private bool _disposed = false;
     private readonly AppDbContext _dbContext;
     private readonly Lazy<IAppUserRepository> _appUserRepository;
@@ -18,7 +20,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private readonly Lazy<IPaymentRepository> _paymentRepository;
     private readonly Lazy<IReviewRepository> _reviewRepository;
     private readonly Lazy<IRoomRepository> _roomRepository;
-
+    private readonly Lazy<ITokenRepository> _tokenRepository;
 
     public IAppUserRepository AppUserRepository => _appUserRepository.Value;
     public IBookingRepository BookingRepository => _bookingRepository.Value;
@@ -30,6 +32,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     public IPaymentRepository PaymentRepository => _paymentRepository.Value;
     public IReviewRepository ReviewRepository => _reviewRepository.Value;
     public IRoomRepository RoomRepository => _roomRepository.Value;
+    public ITokenRepository TokenRepository => _tokenRepository.Value;
 
 
     public UnitOfWork(AppDbContext dbContext)
@@ -45,6 +48,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         _paymentRepository = new Lazy<IPaymentRepository>(() => new PaymentRepository(_dbContext));
         _reviewRepository = new Lazy<IReviewRepository>(() => new ReviewRepository(_dbContext));
         _roomRepository = new Lazy<IRoomRepository>(() => new RoomRepository(_dbContext));
+        _tokenRepository = new Lazy<ITokenRepository>(() => new TokenRepository(_dbContext));
     }
 
     public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
@@ -78,6 +82,12 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
         //_DbContext.Database.CurrentTransaction.Dispose(); //The Dispose method is already called on the transaction object when you call RollbackTransactionAsync, so you don't need to call it again.
     }
+
+    public IExecutionStrategy CreateExecutionStrategy()
+    {
+        return _dbContext.Database.CreateExecutionStrategy();
+    }
+
 
 
 
