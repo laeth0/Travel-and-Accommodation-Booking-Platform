@@ -20,22 +20,6 @@ public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand>
 
     public async Task<Result> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var userNameExists = await _unitOfWork.AppUserRepository
-               .GetAsync(u => u.UserName == request.Username, cancellationToken);
-
-        if (userNameExists.HasValue)
-        {
-            return DomainErrors.User.UsernameAlreadyExists;
-        }
-
-        var emailExists = await _unitOfWork.AppUserRepository
-                       .GetAsync(u => u.Email == request.Email, cancellationToken);
-
-        if (emailExists.HasValue)
-        {
-            return DomainErrors.User.EmailAlreadyExists;
-        }
-
 
         var activationCode = ActivationCode.Create(
             Guid.NewGuid().ToString().Replace("-", string.Empty),
@@ -57,7 +41,6 @@ public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand>
             return Result.Failure(createUserResult.Errors.First());
         }
 
-        // add user to role
         var addToRoleResult = await _userManager.AddToRoleAsync(user, UserRoles.User);
 
         if (!addToRoleResult.Succeeded)

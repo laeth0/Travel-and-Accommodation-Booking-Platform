@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KeSlo01UGGA=",
+  "dgSpecHash": "tOcC5wt+Ut8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Api.csproj",
+  "projectFilePath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BisanCo\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
@@ -11,6 +11,8 @@
     "C:\\Users\\BisanCo\\.nuget\\packages\\bouncycastle.cryptography\\2.4.0\\bouncycastle.cryptography.2.4.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\cloudinarydotnet\\1.26.2\\cloudinarydotnet.1.26.2.nupkg.sha512",
+    "C:\\Users\\BisanCo\\.nuget\\packages\\entityframeworkcore.exceptions.common\\8.1.3\\entityframeworkcore.exceptions.common.8.1.3.nupkg.sha512",
+    "C:\\Users\\BisanCo\\.nuget\\packages\\entityframeworkcore.exceptions.sqlserver\\8.1.3\\entityframeworkcore.exceptions.sqlserver.8.1.3.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.10.0\\fluentvalidation.dependencyinjectionextensions.11.10.0.nupkg.sha512",
     "C:\\Users\\BisanCo\\.nuget\\packages\\google.protobuf\\3.22.5\\google.protobuf.3.22.5.nupkg.sha512",

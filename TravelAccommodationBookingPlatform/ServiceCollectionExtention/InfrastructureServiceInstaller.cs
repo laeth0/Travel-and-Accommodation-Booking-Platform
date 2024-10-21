@@ -9,7 +9,7 @@ using TravelAccommodationBookingPlatform.Infrastructure.Cloudinary;
 using TravelAccommodationBookingPlatform.Infrastructure.Email;
 using TravelAccommodationBookingPlatform.Infrastructure.JwtToken;
 using TravelAccommodationBookingPlatform.Presentation.Constants;
-using TravelAccommodationBookingPlatform.Presentation.Shared.ResultExtensions;
+using TravelAccommodationBookingPlatform.Presentation.Extensions;
 
 namespace TravelAccommodationBookingPlatform.Api.ServiceCollectionExtention;
 
@@ -51,6 +51,7 @@ public class InfrastructureServiceInstaller : IServiceInstaller
                 ValidIssuer = jwtAuthConfig.Issuer,
                 ValidAudience = jwtAuthConfig.Audience,
                 IssuerSigningKey = new SymmetricSecurityKey(key),// SymmetricSecurityKey is accept only byte array, so we need to convert the key to byte array
+                ClockSkew = TimeSpan.Zero // remove delay of token when expire
             };
 
             jwtBearerOptions.Events = new JwtBearerEvents

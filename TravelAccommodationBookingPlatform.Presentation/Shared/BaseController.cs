@@ -30,14 +30,7 @@ public abstract class BaseController : ControllerBase
     /// <param name="message">The message to include in the response.</param>
     /// <returns>An OK response.</returns>
     protected IActionResult Ok(object value, string? message) =>
-        base.Ok(
-            new ApiResponse
-            {
-                Data = value,
-                Message = message ?? "data fetched successfully",
-                StatusCode = HttpStatusCode.OK
-            }
-        );
+        base.Ok(new ApiResponse(value, HttpStatusCode.OK, message));
 
 
 

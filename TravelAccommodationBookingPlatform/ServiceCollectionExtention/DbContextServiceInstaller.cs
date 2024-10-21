@@ -1,4 +1,5 @@
 ﻿
+using EntityFramework.Exceptions.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using TravelAccommodationBookingPlatform.Api.Options;
@@ -26,7 +27,7 @@ public class DbContextServiceInstaller : IServiceInstaller
             dbContextOptionsBuilder.EnableDetailedErrors(databaseOptions.EnableDetailedErrors);
             dbContextOptionsBuilder.EnableSensitiveDataLogging(databaseOptions.EnableSensitiveDataLogging);
             dbContextOptionsBuilder.AddInterceptors(new UpdateAuditableEntitiesInterceptor());
-
+            dbContextOptionsBuilder.UseExceptionProcessor();
         });
 
         return services;

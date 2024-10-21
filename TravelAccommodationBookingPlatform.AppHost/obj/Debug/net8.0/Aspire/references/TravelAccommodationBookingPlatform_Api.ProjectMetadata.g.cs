@@ -7,5 +7,5 @@ namespace Projects;
 [global::System.Diagnostics.DebuggerDisplay("Type = {GetType().Name,nq}, ProjectPath = {ProjectPath}")]
 public class TravelAccommodationBookingPlatform_Api : global::Aspire.Hosting.IProjectMetadata
 {
-    public string ProjectPath => """C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform\TravelAccommodationBookingPlatform.Api.csproj""";
+    public string ProjectPath => """C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform\TravelAccommodationBookingPlatform.Api.csproj""";
 }

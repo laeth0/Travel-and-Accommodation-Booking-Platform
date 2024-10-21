@@ -9,7 +9,11 @@ public class PresentationServiceInstaller : IServiceInstaller
     {
         services.AddControllers()
             .AddApplicationPart(Presentation.AssemblyReference.Assembly)
-            .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
         return services;
     }

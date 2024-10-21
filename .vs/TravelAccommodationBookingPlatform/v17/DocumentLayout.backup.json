@@ -1,10 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\",
+  "WorkspaceRootPath": "C:\\Users\\BisanCo\\Desktop\\me\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|c:\\users\\bisanco\\desktop\\travel-and-accommodation-booking-platform\\travelaccommodationbookingplatform.presentation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|solutionrelative:travelaccommodationbookingplatform.presentation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform.application\\features\\auth\\register\\registerusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|solutionrelative:travelaccommodationbookingplatform.application\\features\\auth\\register\\registerusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform.application\\features\\auth\\register\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|solutionrelative:travelaccommodationbookingplatform.application\\features\\auth\\register\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs*",
-              "RelativeToolTip": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs*",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAgwFIAAAA5AAAAAAAAAA==",
+              "Title": "RegisterUserCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Auth\\Register\\RegisterUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Application\\Features\\Auth\\Register\\RegisterUserCommandValidator.cs",
+              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Auth\\Register\\RegisterUserCommandValidator.cs",
+              "RelativeToolTip": "TravelAccommodationBookingPlatform.Application\\Features\\Auth\\Register\\RegisterUserCommandValidator.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwCkAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T05:48:45.681Z",
+              "WhenOpened": "2024-10-21T15:45:43.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegisterUserCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Auth\\Register\\RegisterUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Application\\Features\\Auth\\Register\\RegisterUserCommandHandler.cs",
+              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Auth\\Register\\RegisterUserCommandHandler.cs",
+              "RelativeToolTip": "TravelAccommodationBookingPlatform.Application\\Features\\Auth\\Register\\RegisterUserCommandHandler.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAA+wDoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T15:43:13.112Z",
               "EditorCaption": ""
             }
           ]

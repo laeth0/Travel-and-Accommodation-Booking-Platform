@@ -7,4 +7,6 @@ public class TokenRepository : Repository<Token>, ITokenRepository
     public TokenRepository(AppDbContext context) : base(context)
     {
     }
+
+
 }

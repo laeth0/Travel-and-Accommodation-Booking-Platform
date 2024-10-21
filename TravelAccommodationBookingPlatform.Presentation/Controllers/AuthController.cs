@@ -8,8 +8,8 @@ using TravelAccommodationBookingPlatform.Application.Features.Auth.Login;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.Logout;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.Register;
 using TravelAccommodationBookingPlatform.Presentation.Attributes;
+using TravelAccommodationBookingPlatform.Presentation.Extensions;
 using TravelAccommodationBookingPlatform.Presentation.Shared;
-using TravelAccommodationBookingPlatform.Presentation.Shared.ResultExtensions;
 
 namespace TravelAccommodationBookingPlatform.Presentation.Controllers;
 
@@ -111,10 +111,6 @@ public class AuthController : BaseController
             ? Ok("Logged out successfully.", "User Logged Out Successfully")
             : result.ToProblemDetails();
     }
-
-
-
-
 
 
 }

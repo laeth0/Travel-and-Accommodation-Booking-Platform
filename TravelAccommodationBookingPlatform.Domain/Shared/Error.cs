@@ -19,7 +19,7 @@ public class Error : IEquatable<Error>
     public Error WithMessage(string message) => new(Type, Code, message);
 
 
-    public static implicit operator string(Error error) => error.Code;
+    public static implicit operator string(Error error) => $"{error.Code} , {error.Message}";
 
     public static bool operator ==(Error? a, Error? b)
     {

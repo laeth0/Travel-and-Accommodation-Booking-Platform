@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj": {}
+    "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj": {
+    "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj",
+        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj",
         "projectName": "TravelAccommodationBookingPlatform.Application",
-        "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj",
+        "projectPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj",
         "packagesPath": "C:\\Users\\BisanCo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Application\\obj\\",
+        "outputPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\BisanCo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj": {
-                "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj"
+              "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj": {
+                "projectPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj"
               }
             }
           }
@@ -53,6 +53,10 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "EntityFrameworkCore.Exceptions.SqlServer": {
+              "target": "Package",
+              "version": "[8.1.3, )"
             },
             "FluentValidation.DependencyInjectionExtensions": {
               "target": "Package",
@@ -95,14 +99,14 @@
         }
       }
     },
-    "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj": {
+    "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj",
         "projectName": "TravelAccommodationBookingPlatform.Domain",
-        "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj",
+        "projectPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Domain\\TravelAccommodationBookingPlatform.Domain.csproj",
         "packagesPath": "C:\\Users\\BisanCo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Domain\\obj\\",
+        "outputPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\BisanCo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -165,14 +169,14 @@
         }
       }
     },
-    "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj": {
+    "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj",
+        "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj",
         "projectName": "TravelAccommodationBookingPlatform.Presentation",
-        "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj",
+        "projectPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj",
         "packagesPath": "C:\\Users\\BisanCo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Presentation\\obj\\",
+        "outputPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\BisanCo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -190,8 +194,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj": {
-                "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj"
+              "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj": {
+                "projectPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj"
               }
             }
           }

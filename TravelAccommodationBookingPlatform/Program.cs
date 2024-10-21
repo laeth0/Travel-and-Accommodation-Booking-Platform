@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.AddServiceDefaults();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.AddHttpContextAccessor();
     builder.Services.InstallServices(builder.Configuration, typeof(IServiceInstaller).Assembly);
     builder.Host.UseSerilog((context, configuration) =>
             configuration.ReadFrom.Configuration(context.Configuration));
@@ -23,7 +24,13 @@ var app = builder.Build();
 
     app.UseSwagger();
 
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.DocumentTitle = "Booking Platform";
+        // Swagger æÈÍæáæ ááæÇÌåÉ ÇáãÚÑæÝÉ ÊÇÚÊ Json file ÑÍ íæÎÐ Swagger ÈÊÇÚ UI æÞÊåÇ app.UseSwaggerUI  æáãÇ ÇäÇ ÈäÇÏí Úáì json file ÑÍ íØáÚ Swagger Ýí ÇáäåÇíÉ 
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Platform");
+
+    });
 
     app.UseHttpsRedirection();
 
@@ -47,6 +54,8 @@ var app = builder.Build();
     {
         await app.Migrate();
     }
+
+    app.MapGet("/", () => Results.Content("<h1 style='text-align: center;'>Hello, World!</h1>", "text/html"));
 
     app.Run();
 }

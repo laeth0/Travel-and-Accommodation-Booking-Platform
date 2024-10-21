@@ -18,14 +18,13 @@ using System.Reflection;
     "t\\")]
 [assembly: System.Reflection.AssemblyMetadata("dcpbinpath", "C:\\Program Files\\dotnet\\packs\\Aspire.Hosting.Orchestration.win-x64\\8.1.0\\tools\\ex" +
     "t\\bin\\")]
-[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommod" +
-    "ationBookingPlatform.AppHost")]
+[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.AppHost")]
 [assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "C:\\Program Files\\dotnet\\packs\\Aspire.Dashboard.Sdk.win-x64\\8.1.0\\tools\\Aspire.Das" +
     "hboard.exe")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("TravelAccommodationBookingPlatform.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3791e29d3c4c1a4ab811bce30e530bef07dfd643")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f87197a8958a6e802db12759e49f81bc0fd6fa2")]
 [assembly: System.Reflection.AssemblyProductAttribute("TravelAccommodationBookingPlatform.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TravelAccommodationBookingPlatform.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

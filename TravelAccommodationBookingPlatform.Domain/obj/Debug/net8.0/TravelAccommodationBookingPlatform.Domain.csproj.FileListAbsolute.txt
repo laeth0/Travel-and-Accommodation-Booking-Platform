@@ -11,3 +11,16 @@ C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommo
 C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\refint\TravelAccommodationBookingPlatform.Domain.dll
 C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.pdb
 C:\Users\BisanCo\Desktop\Travel-and-Accommodation-Booking-Platform\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\ref\TravelAccommodationBookingPlatform.Domain.dll
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\bin\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.deps.json
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\bin\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.dll
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\bin\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.pdb
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.csproj.AssemblyReference.cache
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.AssemblyInfoInputs.cache
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.AssemblyInfo.cs
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.csproj.CoreCompileInputs.cache
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.sourcelink.json
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.dll
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\refint\TravelAccommodationBookingPlatform.Domain.dll
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\TravelAccommodationBookingPlatform.Domain.pdb
+C:\Users\BisanCo\Desktop\me\TravelAccommodationBookingPlatform.Domain\obj\Debug\net8.0\ref\TravelAccommodationBookingPlatform.Domain.dll

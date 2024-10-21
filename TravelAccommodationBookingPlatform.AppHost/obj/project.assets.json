@@ -2702,11 +2702,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.AppHost\\TravelAccommodationBookingPlatform.AppHost.csproj",
+      "projectUniqueName": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.AppHost\\TravelAccommodationBookingPlatform.AppHost.csproj",
       "projectName": "TravelAccommodationBookingPlatform.AppHost",
-      "projectPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.AppHost\\TravelAccommodationBookingPlatform.AppHost.csproj",
+      "projectPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.AppHost\\TravelAccommodationBookingPlatform.AppHost.csproj",
       "packagesPath": "C:\\Users\\BisanCo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\BisanCo\\Desktop\\Travel-and-Accommodation-Booking-Platform\\TravelAccommodationBookingPlatform.AppHost\\obj\\",
+      "outputPath": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.AppHost\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\BisanCo\\AppData\\Roaming\\NuGet\\NuGet.Config",
