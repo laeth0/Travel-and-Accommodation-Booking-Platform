@@ -15,6 +15,9 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
            .IsRequired()
            .HasMaxLength(DomainRules.Countries.NameMaxLength);
 
+        builder.HasIndex(c => c.Name)
+            .IsUnique();
+
         builder.Property(c => c.Description)
             .HasMaxLength(DomainRules.Countries.DescriptionMaxLength);
 

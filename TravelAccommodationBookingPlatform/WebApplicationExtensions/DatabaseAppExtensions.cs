@@ -13,8 +13,6 @@ public static class DatabaseAppExtensions
         var dbContext = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
         var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        await RolesDataSeeding.SeedRoles(roleManager);
-
         if (app.Environment.IsDevelopment())
         {
             if (dbContext.Database.GetPendingMigrations().Any())
@@ -22,6 +20,10 @@ public static class DatabaseAppExtensions
 
             await DataSeeder.SeedAsync(dbContext);
         }
+
+        await RolesDataSeeding.SeedRoles(roleManager);
+
+
     }
 
 

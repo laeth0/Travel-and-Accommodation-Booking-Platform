@@ -330,6 +330,9 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[ImageId] IS NOT NULL");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Cities");
                 });
 
@@ -357,6 +360,9 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                     b.HasIndex("ImageId")
                         .IsUnique()
                         .HasFilter("[ImageId] IS NOT NULL");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Countries");
                 });
@@ -448,8 +454,9 @@ namespace TravelAccommodationBookingPlatform.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
                         .IsRequired()

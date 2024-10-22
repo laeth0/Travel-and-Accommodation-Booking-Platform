@@ -94,7 +94,7 @@ public class TransactionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequ
                     }
                     return response;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     await transaction.RollbackAsync(ct);
                     throw;

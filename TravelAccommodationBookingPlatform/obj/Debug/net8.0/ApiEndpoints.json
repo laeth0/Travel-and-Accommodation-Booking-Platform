@@ -124,5 +124,40 @@
         "StatusCode": 409
       }
     ]
+  },
+  {
+    "ContainingType": "TravelAccommodationBookingPlatform.Presentation.Controllers.CountryController",
+    "Method": "CreateCountry",
+    "RelativePath": "Country/CreateCountry",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "TravelAccommodationBookingPlatform.Application.Features.Country.Create.CountryCreateCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "TravelAccommodationBookingPlatform.Application.Features.Country.Create.CountryResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 422
+      }
+    ]
   }
 ]

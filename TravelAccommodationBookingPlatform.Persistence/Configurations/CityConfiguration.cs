@@ -14,6 +14,10 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
            .IsRequired()
            .HasMaxLength(DomainRules.Cities.NameMaxLength);
 
+        builder.HasIndex(c => c.Name)
+            .IsUnique();
+
+
         builder.Property(c => c.Description)
             .HasMaxLength(DomainRules.Cities.DescriptionMaxLength);
 
