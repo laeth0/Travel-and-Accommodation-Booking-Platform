@@ -1,2 +1,2 @@
 ﻿namespace TravelAccommodationBookingPlatform.Application.Features.Auth.Login;
-public record LoginUserResponse(string Token);
+public record LoginUserResponse(string Token, string RefreshToken);

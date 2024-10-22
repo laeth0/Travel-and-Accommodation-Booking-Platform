@@ -1,8 +1,9 @@
 ﻿using TravelAccommodationBookingPlatform.Domain.Entities;
+using TravelAccommodationBookingPlatform.Domain.Models;
 
 namespace TravelAccommodationBookingPlatform.Application.Interfaces;
 public interface IJwtTokenGenerator : ITransientService
 {
-    Task<(string, DateTime)> GenerateToken(AppUser user);
+    Task<Jwt> GenerateToken(AppUser user);
 
 }

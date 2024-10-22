@@ -35,8 +35,10 @@ public class LoginUserCommandHandler : ICommandHandler<LoginUserCommand, LoginUs
         if (!user.IsActive)
             return DomainErrors.User.UserNotActivated;
 
-        var (token, _) = await _jwtTokenGenerator.GenerateToken(user);
+        var token = await _jwtTokenGenerator.GenerateToken(user);
 
-        return Result<LoginUserResponse>.Success(new LoginUserResponse(token));
+        var refreshToken = user.AddToken(token.Id);
+
+        return new LoginUserResponse(token.Value, refreshToken);
     }
 }

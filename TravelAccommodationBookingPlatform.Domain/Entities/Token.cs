@@ -8,11 +8,13 @@ public class Token : BaseEntity
 
     public DateTime ExpiresAt { get; set; }
 
+    public DateTime CreatedAy { get; set; } = DateTime.UtcNow;
+
     public string AppUserId { get; set; }
 
     public virtual AppUser AppUser { get; set; }
 
-
+    public Guid JwtId { get; set; }
 
 
 

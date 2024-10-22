@@ -6,17 +6,17 @@ public class JwtAuthConfigValidator : AbstractValidator<JwtAuthConfig>
     public JwtAuthConfigValidator()
     {
         RuleFor(x => x.Key)
-          .NotEmpty();
+            .NotEmpty();
 
         RuleFor(x => x.Issuer)
-          .NotEmpty();
+            .NotEmpty();
 
         RuleFor(x => x.Audience)
-          .NotEmpty();
+            .NotEmpty();
 
-        RuleFor(x => x.DurationInDays)
-          .NotEmpty()
-          .GreaterThan(0);
+        RuleFor(x => x.ExpiryTimeFrame)
+            .NotEmpty();
+
 
     }
 }

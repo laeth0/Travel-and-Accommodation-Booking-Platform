@@ -17,6 +17,14 @@ public class AppDbContext : IdentityDbContext<AppUser>
         base.OnModelCreating(modelBuilder);
     }
 
+
+    // this make a compile time error 
+    //public new DbSet<TEntity> Set<TEntity>()
+    //    where TEntity : Entity => base.Set<TEntity>();
+
+
+
+
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<Country> Countries { get; set; }

@@ -23,10 +23,25 @@ public class InfrastructureServiceInstaller : IServiceInstaller
 
 
 
-        // Add Jwt Authentication Scheme Service :- 
+        using var scope = services.BuildServiceProvider().CreateScope();
+        var jwtAuthConfig = scope.ServiceProvider.GetRequiredService<IOptions<JwtAuthConfig>>().Value;
 
-        //   على هاي التوكن Validate وكيف يعمل jwt هون انا بقول للسستم تاعي انو يدعم ال 
-        // اما عملية انشاء التوكن والتحقق منها بتكون في الكلاس اللي بعمل فيه السيرفس
+        var key = System.Text.Encoding.ASCII.GetBytes(jwtAuthConfig.Key);
+
+        var tokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtAuthConfig.Issuer,
+            ValidAudience = jwtAuthConfig.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ClockSkew = TimeSpan.Zero
+        };
+
+        services.AddSingleton(tokenValidationParameters);
+
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -34,45 +49,13 @@ public class InfrastructureServiceInstaller : IServiceInstaller
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(jwtBearerOptions =>
         {
-            using var scope = services.BuildServiceProvider().CreateScope();
-
-            var jwtAuthConfig = scope.ServiceProvider.GetRequiredService<IOptions<JwtAuthConfig>>().Value;
-
-            var key = System.Text.Encoding.ASCII.GetBytes(jwtAuthConfig.Key);
-
             jwtBearerOptions.RequireHttpsMetadata = false;
             jwtBearerOptions.SaveToken = true;
-            jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtAuthConfig.Issuer,
-                ValidAudience = jwtAuthConfig.Audience,
-                IssuerSigningKey = new SymmetricSecurityKey(key),// SymmetricSecurityKey is accept only byte array, so we need to convert the key to byte array
-                ClockSkew = TimeSpan.Zero // remove delay of token when expire
-            };
+            jwtBearerOptions.TokenValidationParameters = tokenValidationParameters;
 
             jwtBearerOptions.Events = new JwtBearerEvents
             {
-                // Custom authorization failure to return ProblemDetails response
-                OnAuthenticationFailed = authenticationFailedContext =>
-                {
-                    authenticationFailedContext.NoResult();
-
-                    authenticationFailedContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    authenticationFailedContext.Response.ContentType = PresentationRules.ContentTypes.ProblemJson;
-
-                    var error = PresentationErrors.AuthenticationFailed(authenticationFailedContext.Exception.Message);
-
-                    var problemDetails = Result
-                        .Failure(error)
-                        .ToProblemDetails()
-                        .Value as ProblemDetails;
-
-                    return authenticationFailedContext.Response.WriteAsJsonAsync(problemDetails);
-                }
+                OnAuthenticationFailed = GetEventWhenAuthenticationFailed
             };
 
         });
@@ -80,4 +63,25 @@ public class InfrastructureServiceInstaller : IServiceInstaller
 
         return services;
     }
+
+    private static Task GetEventWhenAuthenticationFailed(AuthenticationFailedContext authenticationFailedContext)
+    {
+
+        authenticationFailedContext.NoResult();
+
+        authenticationFailedContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        authenticationFailedContext.Response.ContentType = PresentationRules.ContentTypes.ProblemJson;
+
+        var error = PresentationErrors.AuthenticationFailed(authenticationFailedContext.Exception.Message);
+
+        var problemDetails = Result
+            .Failure(error)
+            .ToProblemDetails()
+            .Value as ProblemDetails;
+
+        return authenticationFailedContext.Response.WriteAsJsonAsync(problemDetails);
+    }
+
+
+
 }

@@ -9,7 +9,7 @@ using TravelAccommodationBookingPlatform.Persistence.Specifications;
 namespace TravelAccommodationBookingPlatform.Persistence.Repositories;
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {
-    private readonly AppDbContext _dbContext;
+    protected readonly AppDbContext _dbContext;
 
     public Repository(AppDbContext dbContext) => _dbContext = dbContext;
 

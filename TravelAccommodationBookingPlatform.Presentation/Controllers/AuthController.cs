@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.Activation;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.Login;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.Logout;
+using TravelAccommodationBookingPlatform.Application.Features.Auth.RefreshTokens;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.Register;
 using TravelAccommodationBookingPlatform.Presentation.Attributes;
 using TravelAccommodationBookingPlatform.Presentation.Extensions;
@@ -21,7 +22,8 @@ public class AuthController : BaseController
 {
 
     public AuthController(IMapper mapper, IMediator mediator) : base(mapper, mediator)
-    { }
+    {
+    }
 
 
 
@@ -72,6 +74,13 @@ public class AuthController : BaseController
     }
 
 
+    public async Task<IActionResult> RefreshTokens(string token, string RefreshToken)
+    {
+        var result = await _mediator.Send(new RefreshTokensCommand(token, RefreshToken));
+        return result.IsSuccess
+            ? Ok(result.Value, "Token Refreshed Successfully")
+            : result.ToProblemDetails();
+    }
 
 
     /// <summary>
@@ -104,13 +113,18 @@ public class AuthController : BaseController
     [Authorize]
     public async Task<IActionResult> Logout()
     {
-        var token = HttpContext.Request.Headers["Authorization"].ToString();
+        var token = HttpContext.Request.Headers.Authorization.ToString();
+        // how to check if the token is expired or not
+
+
 
         var result = await _mediator.Send(new LogoutUserCommand(token));
         return result.IsSuccess
             ? Ok("Logged out successfully.", "User Logged Out Successfully")
             : result.ToProblemDetails();
+
     }
+
 
 
 }

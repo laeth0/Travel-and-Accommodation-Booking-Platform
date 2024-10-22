@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TravelAccommodationBookingPlatform.Application\TravelAccommodationBookingPlatform.Application.csproj" />
+    <Compile Remove="TypeConverters\**" />
+    <EmbeddedResource Remove="TypeConverters\**" />
+    <None Remove="TypeConverters\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TypeConverters\" />
+    <ProjectReference Include="..\TravelAccommodationBookingPlatform.Application\TravelAccommodationBookingPlatform.Application.csproj" />
   </ItemGroup>
 
 </Project>

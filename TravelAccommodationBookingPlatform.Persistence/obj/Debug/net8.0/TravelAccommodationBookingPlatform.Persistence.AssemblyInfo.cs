@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TravelAccommodationBookingPlatform.Persistence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5044ad1bfbe17d24a5b9d680d47bf4458a9a40a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3788e2729a2b6531ae800c00b202ada3bf7f0e1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("TravelAccommodationBookingPlatform.Persistence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TravelAccommodationBookingPlatform.Persistence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

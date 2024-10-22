@@ -33,19 +33,26 @@ public class AppUser : IdentityUser
         return Result.Success();
     }
 
-    public void AddToken(string tokenValue, DateTime expiresAt)
+    public string AddToken(Guid jwtId, string? tokenValue = null, DateTime? expiresAt = null)
     {
+        tokenValue ??= Guid.NewGuid().ToString();
+        expiresAt ??= DateTime.UtcNow.AddMonths(1);
+
         var token = new Token
         {
             Value = tokenValue,
-            ExpiresAt = expiresAt,
-            AppUserId = Id
+            ExpiresAt = (DateTime)expiresAt,
+            AppUserId = Id,
+            JwtId = jwtId
         };
 
+
         _tokens.Add(token);
+        return token.Value;
+
     }
 
-    public void ClearToken(string tokenValue)
+    public void RemoveToken(string tokenValue)
     {
         var token = _tokens.FirstOrDefault(t => t.Value == tokenValue);
 

@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
-	<FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <Compile Remove="Primitives\**" />
+    <EmbeddedResource Remove="Primitives\**" />
+    <None Remove="Primitives\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Primitives\" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
+	<FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>

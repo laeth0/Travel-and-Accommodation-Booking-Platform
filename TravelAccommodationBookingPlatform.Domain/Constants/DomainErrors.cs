@@ -5,6 +5,7 @@ namespace TravelAccommodationBookingPlatform.Domain.Constants;
 
 public static class DomainErrors
 {
+
     public static class General
     {
         public static Error ServerError => new(ErrorType.BadRequest, "General.ServerError", "The server encountered an unrecoverable error.");
@@ -99,6 +100,45 @@ public static class DomainErrors
 
 
     }
+
+    public static class Token
+    {
+        public static readonly Error TokenhasntExpiredYet = new(
+            ErrorType.BadRequest,
+            "Token.TokenhasntExpiredYet",
+            "This Token hasn't expired yet.");
+
+
+        public static readonly Error CannotGetPrincipalFromToken = new(
+            ErrorType.BadRequest,
+            "Token.CannotGetPrincipalFromToken",
+            "Cannot get principal from token.");
+
+
+        public static readonly Error RefreshTokenNotFound = new(
+            ErrorType.NotFound,
+            "Token.RefreshTokenNotFound",
+            "This Refresh token does not exist");
+
+
+        public static readonly Error RefreshTokenExpired = new(
+            ErrorType.BadRequest,
+            "Token.RefreshTokenExpired",
+            "This Refresh token has expired");
+
+
+        public static readonly Error RefreshTokenRevoked = new(
+            ErrorType.BadRequest,
+            "Token.RefreshTokenRevoked",
+            "This Refresh token has been revoked");
+
+        public static readonly Error RefreshTokenDoesNotMatchJti = new(
+            ErrorType.BadRequest,
+            "Token.RefreshTokenDoesNotMatchJti",
+            "This Refresh token does not match the Jwt Token");
+
+    }
+
 
     public static class Hotel
     {

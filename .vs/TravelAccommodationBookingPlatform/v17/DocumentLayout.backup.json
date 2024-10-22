@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\BisanCo\\Desktop\\me\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{08D2D4BB-79AE-47D7-A26E-70A2536D4818}|TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Api.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform\\webapplicationextensions\\errorhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08D2D4BB-79AE-47D7-A26E-70A2536D4818}|TravelAccommodationBookingPlatform\\TravelAccommodationBookingPlatform.Api.csproj|solutionrelative:travelaccommodationbookingplatform\\webapplicationextensions\\errorhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform.application\\features\\auth\\refreshtokens\\refreshtokenscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|solutionrelative:travelaccommodationbookingplatform.application\\features\\auth\\refreshtokens\\refreshtokenscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform.application\\features\\country\\create\\countrycreatecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|solutionrelative:travelaccommodationbookingplatform.application\\features\\country\\create\\countrycreatecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform.presentation\\controllers\\countrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|solutionrelative:travelaccommodationbookingplatform.presentation\\controllers\\countrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform.presentation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|solutionrelative:travelaccommodationbookingplatform.presentation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +18,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ErrorHandlingMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform\\WebApplicationExtensions\\ErrorHandlingMiddleware.cs",
-              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform\\WebApplicationExtensions\\ErrorHandlingMiddleware.cs",
-              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform\\WebApplicationExtensions\\ErrorHandlingMiddleware.cs",
-              "RelativeToolTip": "TravelAccommodationBookingPlatform\\WebApplicationExtensions\\ErrorHandlingMiddleware.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAAB4AAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T07:11:27.179Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CountryController.cs",
-              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\CountryController.cs",
-              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\CountryController.cs",
-              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\CountryController.cs",
-              "RelativeToolTip": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\CountryController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "RefreshTokensCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Auth\\RefreshTokens\\RefreshTokensCommandHandler.cs",
+              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Application\\Features\\Auth\\RefreshTokens\\RefreshTokensCommandHandler.cs",
+              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Auth\\RefreshTokens\\RefreshTokensCommandHandler.cs",
+              "RelativeToolTip": "TravelAccommodationBookingPlatform.Application\\Features\\Auth\\RefreshTokens\\RefreshTokensCommandHandler.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAYwFkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T07:06:16.692Z",
+              "WhenOpened": "2024-10-22T17:25:04.222Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CountryCreateCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Country\\Create\\CountryCreateCommandHandler.cs",
-              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Application\\Features\\Country\\Create\\CountryCreateCommandHandler.cs",
-              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Country\\Create\\CountryCreateCommandHandler.cs",
-              "RelativeToolTip": "TravelAccommodationBookingPlatform.Application\\Features\\Country\\Create\\CountryCreateCommandHandler.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAA9wBUAAAAIAAAAAAAAAA==",
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs*",
+              "RelativeToolTip": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs*",
+              "ViewState": "AgIAADQAAAAAAAAAAAAcwEwAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T06:54:07.578Z",
+              "WhenOpened": "2024-10-22T09:38:36.589Z",
               "EditorCaption": ""
             }
           ]
