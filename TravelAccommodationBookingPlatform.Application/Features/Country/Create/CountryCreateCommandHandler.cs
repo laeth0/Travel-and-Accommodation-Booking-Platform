@@ -7,19 +7,18 @@ using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
 namespace TravelAccommodationBookingPlatform.Application.Features.Country.Create;
 internal sealed class CountryCreateCommandHandler : ICommandHandler<CountryCreateCommand, CountryResponse>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICountryRepository _countryRepository;
     private readonly IMapper _mapper;
-    public CountryCreateCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public CountryCreateCommandHandler(IMapper mapper, ICountryRepository countryRepository)
     {
-        _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _countryRepository = countryRepository;
     }
 
     public async Task<Result<CountryResponse>> Handle(CountryCreateCommand request, CancellationToken cancellationToken)
     {
         var country = _mapper.Map<Domain.Entities.Country>(request);
-        var countryCreated = await _unitOfWork.CountryRepository.AddAsync(country, cancellationToken);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        var countryCreated = await _countryRepository.AddAsync(country, cancellationToken);
         return _mapper.Map<CountryResponse>(countryCreated);
     }
 }

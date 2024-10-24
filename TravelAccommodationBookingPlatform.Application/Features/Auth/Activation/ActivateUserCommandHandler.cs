@@ -6,16 +6,17 @@ using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
 namespace TravelAccommodationBookingPlatform.Application.Features.Auth.Activation;
 public class ActivateUserCommandHandler : ICommandHandler<ActivateUserCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IAppUserRepository _appUserRepository;
 
-    public ActivateUserCommandHandler(IUnitOfWork unitOfWork)
+
+    public ActivateUserCommandHandler(IAppUserRepository appUserRepository)
     {
-        _unitOfWork = unitOfWork;
+        _appUserRepository = appUserRepository;
     }
 
     public async Task<Result> Handle(ActivateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _unitOfWork.AppUserRepository.GetAsync(
+        var user = await _appUserRepository.GetAsync(
             user => user.ActivationCode.Value == request.Token,
             cancellationToken);
 

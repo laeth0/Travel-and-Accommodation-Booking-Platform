@@ -18,12 +18,24 @@ public class AppDbContext : IdentityDbContext<AppUser>
     }
 
 
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        // 𝐆𝐥𝐨𝐛𝐚𝐥 𝐜𝐨𝐧𝐟𝐢𝐠𝐮𝐫𝐚𝐭𝐢𝐨𝐧 𝐟𝐨𝐫 𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜 𝐭𝐲𝐩𝐞𝐬
+        base.ConfigureConventions(configurationBuilder);
+
+        configurationBuilder.Properties<string>()
+            .HaveMaxLength(1000);
+
+        configurationBuilder.Properties<DateTime>()
+            .HaveColumnType("datetime");
+    }
+
+
+
     // this make a compile time error 
     //public new DbSet<TEntity> Set<TEntity>()
     //    where TEntity : Entity => base.Set<TEntity>();
-
-
-
 
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<City> Cities { get; set; }
@@ -36,6 +48,6 @@ public class AppDbContext : IdentityDbContext<AppUser>
     public DbSet<Room> Rooms { get; set; }
     public DbSet<HotelImageAssociation> HotelImageAssociations { get; set; }
     public DbSet<RoomImageAssociation> RoomImageAssociations { get; set; }
-    public DbSet<Token> Tokens { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 
 }

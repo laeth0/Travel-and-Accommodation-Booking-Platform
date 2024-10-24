@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using TravelAccommodationBookingPlatform.Domain.Models;
 
-namespace TravelAccommodationBookingPlatform.Presentation.Extensions;
+namespace TravelAccommodationBookingPlatform.Application.Shared.Extensions;
 public static class ResponseHeadersExtensions
 {
     public static void AddPaginationMetadata(this IHeaderDictionary headers, PaginationMetadata paginationMetadata)

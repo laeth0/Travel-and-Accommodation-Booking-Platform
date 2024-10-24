@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace TravelAccommodationBookingPlatform.Application.Shared;
+namespace TravelAccommodationBookingPlatform.Application.Shared.Extensions;
 /// <summary>
 ///   Provides extension methods for <see cref="Expression" /> objects.
 /// </summary>

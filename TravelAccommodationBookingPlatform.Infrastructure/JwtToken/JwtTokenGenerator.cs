@@ -18,7 +18,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     public JwtTokenGenerator(IOptionsMonitor<JwtAuthConfig> jwt, UserManager<AppUser> userManager)
     {
 
-        _jwt = jwt.CurrentValue ?? throw new ArgumentException(nameof(JwtAuthConfig) + " not found");
+        _jwt = jwt.CurrentValue;
         _userManager = userManager;
     }
 
@@ -44,7 +44,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     }
 
 
-    public async Task<Jwt> GenerateToken(AppUser user)
+    public async Task<JwtAccessToken> GenerateToken(AppUser user)
     {
         Guid TokenId = Guid.NewGuid();
 
@@ -67,7 +67,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 
         var securityToken = tokenHandler.CreateToken(tokenDescriptor);
 
-        var token = new Jwt
+        var token = new JwtAccessToken
         {
             Id = TokenId,
             Value = tokenHandler.WriteToken(securityToken),

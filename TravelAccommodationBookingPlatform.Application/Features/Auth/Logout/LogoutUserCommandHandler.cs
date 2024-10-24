@@ -1,29 +1,29 @@
-﻿using TravelAccommodationBookingPlatform.Application.Interfaces;
-using TravelAccommodationBookingPlatform.Application.Interfaces.Messaging;
+﻿using TravelAccommodationBookingPlatform.Application.Interfaces.Messaging;
+using TravelAccommodationBookingPlatform.Application.Interfaces.Persistence.Repositories;
 using TravelAccommodationBookingPlatform.Domain.Constants;
 using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
 
 namespace TravelAccommodationBookingPlatform.Application.Features.Auth.Logout;
 public class LogoutUserCommandHandler : ICommandHandler<LogoutUserCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IRefreshTokenRepository _refreshTokenRepository;
 
-    public LogoutUserCommandHandler(IUnitOfWork unitOfWork)
+    public LogoutUserCommandHandler(IRefreshTokenRepository refreshTokenRepository)
     {
-        _unitOfWork = unitOfWork;
+        _refreshTokenRepository = refreshTokenRepository;
     }
 
     public async Task<Result> Handle(LogoutUserCommand request, CancellationToken cancellationToken)
     {
 
-        var token = await _unitOfWork.TokenRepository.GetAsync(t => t.Value == request.Token, cancellationToken);
+        var token = await _refreshTokenRepository.GetAsync(t => t.Value == request.Token, cancellationToken);
 
         if (token.HasNoValue)
         {
             return DomainErrors.User.InvalidToken;
         }
 
-        _unitOfWork.TokenRepository.Delete(token);
+        _refreshTokenRepository.Delete(token);
 
         return Result.Success();
     }

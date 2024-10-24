@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
+using TravelAccommodationBookingPlatform.Application.Shared.Extensions;
 using TravelAccommodationBookingPlatform.Domain.Constants;
 using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
-using TravelAccommodationBookingPlatform.Presentation.Extensions;
 using UserRoles = TravelAccommodationBookingPlatform.Domain.Enums.UserRoles;
 
 namespace TravelAccommodationBookingPlatform.Presentation.Attributes;

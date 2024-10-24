@@ -8,8 +8,8 @@ using TravelAccommodationBookingPlatform.Application.Features.Auth.Login;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.Logout;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.RefreshTokens;
 using TravelAccommodationBookingPlatform.Application.Features.Auth.Register;
+using TravelAccommodationBookingPlatform.Application.Shared.Extensions;
 using TravelAccommodationBookingPlatform.Presentation.Attributes;
-using TravelAccommodationBookingPlatform.Presentation.Extensions;
 using TravelAccommodationBookingPlatform.Presentation.Shared;
 
 namespace TravelAccommodationBookingPlatform.Presentation.Controllers;
@@ -74,6 +74,7 @@ public class AuthController : BaseController
     }
 
 
+    [HttpPost("[action]")]
     public async Task<IActionResult> RefreshTokens(string token, string RefreshToken)
     {
         var result = await _mediator.Send(new RefreshTokensCommand(token, RefreshToken));

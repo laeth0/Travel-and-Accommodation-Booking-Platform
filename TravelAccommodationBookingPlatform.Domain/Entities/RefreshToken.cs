@@ -1,6 +1,6 @@
 ﻿namespace TravelAccommodationBookingPlatform.Domain.Entities;
 
-public class Token : BaseEntity
+public class RefreshToken : BaseEntity
 {
     public string Value { get; set; }
 

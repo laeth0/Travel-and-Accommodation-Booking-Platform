@@ -4,7 +4,7 @@ using TravelAccommodationBookingPlatform.Domain.Enums;
 using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
 using TravelAccommodationBookingPlatform.Domain.Shared.ValidationResult;
 
-namespace TravelAccommodationBookingPlatform.Presentation.Extensions;
+namespace TravelAccommodationBookingPlatform.Application.Shared.Extensions;
 
 public static class ProblemDetailsExtension
 {

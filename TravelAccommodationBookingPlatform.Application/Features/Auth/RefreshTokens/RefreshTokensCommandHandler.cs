@@ -1,39 +1,36 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
 using TravelAccommodationBookingPlatform.Application.Interfaces;
 using TravelAccommodationBookingPlatform.Application.Interfaces.Messaging;
+using TravelAccommodationBookingPlatform.Application.Interfaces.Persistence.Repositories;
 using TravelAccommodationBookingPlatform.Domain.Constants;
 using TravelAccommodationBookingPlatform.Domain.Entities;
-using TravelAccommodationBookingPlatform.Domain.Shared.MaybePattern;
 using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
 
 namespace TravelAccommodationBookingPlatform.Application.Features.Auth.RefreshTokens;
 public class RefreshTokensCommandHandler : ICommandHandler<RefreshTokensCommand, RefreshTokensResponse>
 {
 
-    private readonly TokenValidationParameters _tokenValidationParameters;
     private readonly UserManager<AppUser> _userManager;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IRefreshTokenRepository _refreshTokenRepository;
 
-    public RefreshTokensCommandHandler(TokenValidationParameters tokenValidationParameters,
+    public RefreshTokensCommandHandler(
         UserManager<AppUser> userManager,
         IJwtTokenGenerator jwtTokenGenerator,
-        IUnitOfWork unitOfWork)
+        IRefreshTokenRepository refreshTokenRepository)
     {
-        _tokenValidationParameters = tokenValidationParameters;
         _userManager = userManager;
         _jwtTokenGenerator = jwtTokenGenerator;
-        _unitOfWork = unitOfWork;
+        _refreshTokenRepository = refreshTokenRepository;
     }
 
 
 
     public async Task<Result<RefreshTokensResponse>> Handle(RefreshTokensCommand request, CancellationToken cancellationToken)
     {
-        var principal = GetPrincipalFromToken(request.token);
+        var principal = _refreshTokenRepository.GetPrincipalFromToken(request.token);
         if (principal.HasNoValue)
         {
             return DomainErrors.Token.CannotGetPrincipalFromToken;
@@ -51,9 +48,7 @@ public class RefreshTokensCommandHandler : ICommandHandler<RefreshTokensCommand,
             return DomainErrors.Token.TokenhasntExpiredYet;
         }
 
-        var jti = principal.Value.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
-
-        var storedRefreshToken = await _unitOfWork.TokenRepository.GetAsync(x => x.Value == request.refreshToken);
+        var storedRefreshToken = await _refreshTokenRepository.GetAsync(x => x.Value == request.refreshToken);
 
         if (storedRefreshToken == null)
         {
@@ -70,51 +65,32 @@ public class RefreshTokensCommandHandler : ICommandHandler<RefreshTokensCommand,
             return DomainErrors.Token.RefreshTokenRevoked;
         }
 
-        if (storedRefreshToken.Value.JwtId.ToString() != jti)
+        var jwtId = principal.Value.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+
+
+        if (storedRefreshToken.Value.JwtId.ToString() != jwtId)
         {
             return DomainErrors.Token.RefreshTokenDoesNotMatchJti;
         }
 
         storedRefreshToken.Value.IsRevoked = true;
-        _unitOfWork.TokenRepository.Update(storedRefreshToken.Value);
-        await _unitOfWork.SaveChangesAsync();
+        _refreshTokenRepository.Update(storedRefreshToken.Value);
 
         var userId = principal.Value.Claims.Single(x => x.Type == ClaimTypes.NameIdentifier).Value;
 
         var user = await _userManager.FindByIdAsync(userId);
 
-        var tokenResult = await _jwtTokenGenerator.GenerateToken(user);
+        var jwtAccessToken = await _jwtTokenGenerator.GenerateToken(user);
 
-        var RefreshTokenResult = user.AddToken(tokenResult.Id);
+        var refreshTokenValue = _refreshTokenRepository.GenerateRefreshToken();
 
+        var RefreshTokenResult = user.AddToken(jwtAccessToken.Id, refreshTokenValue);
 
-        return new RefreshTokensResponse(tokenResult.Value, RefreshTokenResult);
+        return new RefreshTokensResponse(jwtAccessToken.Value, RefreshTokenResult);
     }
 
 
 
-    private Maybe<ClaimsPrincipal> GetPrincipalFromToken(string token)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        try
-        {
-            var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
-            if (!IsJwtWithValidSecurityAlgorithm(validatedToken))
-            {
-                return Maybe<ClaimsPrincipal>.None;
-            }
-            return principal;
-        }
-        catch
-        {
-            return Maybe<ClaimsPrincipal>.None;
-        }
-    }
-
-    private bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
-        => (validatedToken is JwtSecurityToken jwtSecurityToken) &&
-               jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
-                   StringComparison.InvariantCultureIgnoreCase);
 
 
 

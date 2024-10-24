@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TravelAccommodationBookingPlatform.Domain.Entities;
 
 namespace TravelAccommodationBookingPlatform.Persistence.Configurations;
-public class TokenConfiguration : IEntityTypeConfiguration<Token>
+public class TokenConfiguration : IEntityTypeConfiguration<RefreshToken>
 {
-    public void Configure(EntityTypeBuilder<Token> builder)
+    public void Configure(EntityTypeBuilder<RefreshToken> builder)
     {
 
         builder.HasKey(x => x.Id);

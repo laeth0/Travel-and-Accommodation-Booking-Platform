@@ -11,9 +11,9 @@ public class AppUser : IdentityUser
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
-    private readonly List<Token> _tokens = new();
+    private readonly List<RefreshToken> _tokens = new();
 
-    public virtual IReadOnlyCollection<Token> Tokens => _tokens.AsReadOnly();
+    public virtual IReadOnlyCollection<RefreshToken> Tokens => _tokens.AsReadOnly();
 
     public virtual ActivationCode ActivationCode { get; set; }
 
@@ -33,15 +33,14 @@ public class AppUser : IdentityUser
         return Result.Success();
     }
 
-    public string AddToken(Guid jwtId, string? tokenValue = null, DateTime? expiresAt = null)
+    public string AddToken(Guid jwtId, string? tokenValue = null)
     {
         tokenValue ??= Guid.NewGuid().ToString();
-        expiresAt ??= DateTime.UtcNow.AddMonths(1);
 
-        var token = new Token
+        var token = new RefreshToken
         {
             Value = tokenValue,
-            ExpiresAt = (DateTime)expiresAt,
+            ExpiresAt = DateTime.UtcNow.AddMonths(1),
             AppUserId = Id,
             JwtId = jwtId
         };

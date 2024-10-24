@@ -18,14 +18,10 @@ public static class DatabaseAppExtensions
             if (dbContext.Database.GetPendingMigrations().Any())
                 await dbContext.Database.MigrateAsync();
 
-            await DataSeeder.SeedAsync(dbContext);
+            //await DataSeeder.SeedAsync(dbContext);
         }
 
         await RolesDataSeeding.SeedRoles(roleManager);
-
-
     }
-
-
 }
 

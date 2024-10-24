@@ -4,10 +4,10 @@ using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using TravelAccommodationBookingPlatform.Api.RateLimiting;
+using TravelAccommodationBookingPlatform.Application.Shared.Extensions;
 using TravelAccommodationBookingPlatform.Application.Shared.OptionsValidation;
 using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
 using TravelAccommodationBookingPlatform.Presentation.Constants;
-using TravelAccommodationBookingPlatform.Presentation.Extensions;
 
 namespace TravelAccommodationBookingPlatform.Api.ServiceCollectionExtention;
 

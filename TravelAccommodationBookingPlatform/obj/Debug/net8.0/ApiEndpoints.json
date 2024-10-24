@@ -87,6 +87,27 @@
   },
   {
     "ContainingType": "TravelAccommodationBookingPlatform.Presentation.Controllers.AuthController",
+    "Method": "RefreshTokens",
+    "RelativePath": "Auth/RefreshTokens",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RefreshToken",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TravelAccommodationBookingPlatform.Presentation.Controllers.AuthController",
     "Method": "Register",
     "RelativePath": "Auth/Register",
     "HttpMethod": "POST",

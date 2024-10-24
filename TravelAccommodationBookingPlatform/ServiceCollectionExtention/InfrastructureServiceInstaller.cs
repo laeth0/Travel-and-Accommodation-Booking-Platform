@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using TravelAccommodationBookingPlatform.Application.Shared.Extensions;
 using TravelAccommodationBookingPlatform.Application.Shared.OptionsValidation;
 using TravelAccommodationBookingPlatform.Domain.Shared.ResultPattern;
 using TravelAccommodationBookingPlatform.Infrastructure.Cloudinary;
 using TravelAccommodationBookingPlatform.Infrastructure.Email;
 using TravelAccommodationBookingPlatform.Infrastructure.JwtToken;
 using TravelAccommodationBookingPlatform.Presentation.Constants;
-using TravelAccommodationBookingPlatform.Presentation.Extensions;
 
 namespace TravelAccommodationBookingPlatform.Api.ServiceCollectionExtention;
 

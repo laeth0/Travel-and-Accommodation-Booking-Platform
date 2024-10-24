@@ -6,7 +6,7 @@ using TravelAccommodationBookingPlatform.Domain.Constants;
 namespace TravelAccommodationBookingPlatform.Application.Features.Auth.Register;
 public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
 {
-    public RegisterUserCommandValidator(IUnitOfWork unitOfWork)
+    public RegisterUserCommandValidator(IAppUserRepository appUserRepository)
     {
 
         RuleFor(command => command.PhoneNumber)
@@ -29,7 +29,7 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
             .WithMessage($"Username cannot be more than {DomainRules.Users.UsernameMaxLength} characters long.")
             .MustAsync(async (username, cancellationToken) =>
             {
-                var user = await unitOfWork.AppUserRepository.GetAsync(u => u.UserName == username, cancellationToken);
+                var user = await appUserRepository.GetAsync(u => u.UserName == username, cancellationToken);
                 return user.HasNoValue;
             })
             .WithMessage(DomainErrors.User.UsernameAlreadyExists);
@@ -43,7 +43,7 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
             .EmailAddress()
             .MustAsync(async (email, cancellationToken) =>
             {
-                var user = await unitOfWork.AppUserRepository.GetAsync(u => u.Email == email, cancellationToken);
+                var user = await appUserRepository.GetAsync(u => u.Email == email, cancellationToken);
                 return user.HasNoValue;
             })
             .WithMessage(DomainErrors.User.EmailAlreadyExists);

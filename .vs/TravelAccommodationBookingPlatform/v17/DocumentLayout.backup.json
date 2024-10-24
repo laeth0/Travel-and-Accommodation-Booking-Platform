@@ -1,58 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\BisanCo\\Desktop\\me\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform.application\\features\\auth\\refreshtokens\\refreshtokenscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18255672-70B6-494D-969D-AF833FD0C33F}|TravelAccommodationBookingPlatform.Application\\TravelAccommodationBookingPlatform.Application.csproj|solutionrelative:travelaccommodationbookingplatform.application\\features\\auth\\refreshtokens\\refreshtokenscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|c:\\users\\bisanco\\desktop\\me\\travelaccommodationbookingplatform.presentation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86089342-FE5A-41B6-A8FA-8129A77448ED}|TravelAccommodationBookingPlatform.Presentation\\TravelAccommodationBookingPlatform.Presentation.csproj|solutionrelative:travelaccommodationbookingplatform.presentation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RefreshTokensCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Auth\\RefreshTokens\\RefreshTokensCommandHandler.cs",
-              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Application\\Features\\Auth\\RefreshTokens\\RefreshTokensCommandHandler.cs",
-              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Application\\Features\\Auth\\RefreshTokens\\RefreshTokensCommandHandler.cs",
-              "RelativeToolTip": "TravelAccommodationBookingPlatform.Application\\Features\\Auth\\RefreshTokens\\RefreshTokensCommandHandler.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAYwFkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T17:25:04.222Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\BisanCo\\Desktop\\me\\TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs*",
-              "RelativeToolTip": "TravelAccommodationBookingPlatform.Presentation\\Controllers\\AuthController.cs*",
-              "ViewState": "AgIAADQAAAAAAAAAAAAcwEwAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T09:38:36.589Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

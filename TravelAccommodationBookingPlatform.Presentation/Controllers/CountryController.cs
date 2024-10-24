@@ -3,8 +3,8 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelAccommodationBookingPlatform.Application.Features.Country.Create;
+using TravelAccommodationBookingPlatform.Application.Shared.Extensions;
 using TravelAccommodationBookingPlatform.Presentation.Attributes;
-using TravelAccommodationBookingPlatform.Presentation.Extensions;
 using TravelAccommodationBookingPlatform.Presentation.Shared;
 
 namespace TravelAccommodationBookingPlatform.Presentation.Controllers;
